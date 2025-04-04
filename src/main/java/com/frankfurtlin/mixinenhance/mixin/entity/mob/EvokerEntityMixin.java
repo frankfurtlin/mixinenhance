@@ -27,12 +27,9 @@ public abstract class EvokerEntityMixin extends SpellcastingIllagerEntity {
     // 根据难度系数修改唤魔者的血量
     @Inject(method = "<init>", at = @At("TAIL"))
     private void customHealth(EntityType<? extends EvokerEntity> entityType, World world, CallbackInfo ci) {
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        double health = (int) (24.0 * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        double health = 24.0 * index;
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
         this.setHealth((float) health);
     }
 }

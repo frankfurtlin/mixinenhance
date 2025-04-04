@@ -16,10 +16,7 @@ public abstract class ShulkerBulletEntityMixin {
     // 根据难度系数修改潜影壳的子弹伤害
     @ModifyConstant(method = "onEntityHit", constant = @Constant(floatValue = 4.0f))
     private float onEntityHit(float original) {
-        if(!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic){
-            return original;
-        }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        return (float) (original * Math.sqrt(index));
+        return original * index;
     }
 }

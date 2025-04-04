@@ -29,23 +29,17 @@ public abstract class PiglinEntityMixin extends AbstractPiglinEntity {
     // 根据难度系数修改疣猪兽的血量、攻击力
     @Inject(method = "<init>", at = @At("TAIL"))
     private void customHealthAndAttackDamage(EntityType<? extends PiglinEntity> entityType, World world, CallbackInfo ci){
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        double health = (int) (16.0 * Math.sqrt(index));
-        double attack = (int) (5.0 * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        double health = 16.0 * index;
+        double attack = 5.0 * index;
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
         this.setHealth((float) health);
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)).setBaseValue(attack);
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE)).setBaseValue(attack);
     }
 
     // 猪灵在生成时带有金质盔甲的概率
     @ModifyConstant(method = "equipAtChance", constant = @Constant(floatValue = 0.1f))
     private float piglinSpawnWithArmor(float constant){
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return constant;
-        }
-        return (float) MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.piglinSpawnWithArmor;
+        return MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.piglinSpawnWithArmor;
     }
 }

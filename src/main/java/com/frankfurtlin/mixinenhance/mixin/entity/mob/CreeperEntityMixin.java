@@ -1,8 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.mob;
 
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
-import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.CreeperEntity;
@@ -33,34 +31,15 @@ public abstract class CreeperEntityMixin extends HostileEntity {
     // 根据难度系数修改苦力怕的血量
     @Inject(method = "<init>", at = @At("TAIL"))
     private void customHealth(EntityType<? extends CreeperEntity> entityType, World world, CallbackInfo ci) {
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        double health = (int) (20.0 * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        double health = 20.0 * index;
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
         this.setHealth((float) health);
     }
 
     // 修改苦力怕爆炸半径
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void creeperExplodeRadius(EntityType<? extends CreeperEntity> entityType, World world, CallbackInfo ci) {
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
+    private void creeperExplodeRadius(CallbackInfo ci) {
         this.explosionRadius = MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.creeperExplodeRadius;
-    }
-
-    // 修改苦力怕爆炸生成的效果云
-    @Inject(method = "spawnEffectsCloud",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z",
-            shift = At.Shift.BEFORE))
-    private void creeperExplodeEffectCloud(CallbackInfo ci, @Local AreaEffectCloudEntity areaEffectCloudEntity) {
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
-        int explodeRadius = MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.creeperExplodeRadius;
-        areaEffectCloudEntity.setRadius(explodeRadius - 0.5f);
-        areaEffectCloudEntity.setRadiusOnUse(-explodeRadius / 5.0f);
     }
 }

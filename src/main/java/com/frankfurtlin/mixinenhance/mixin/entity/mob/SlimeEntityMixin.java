@@ -28,14 +28,11 @@ public abstract class SlimeEntityMixin extends MobEntity {
     // 根据难度系数修改史莱姆的血量、攻击力
     @Inject(method = "setSize", at = @At("TAIL"))
     private void customHealthAndAttackDamage(int size, boolean heal, CallbackInfo ci){
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
         int i = MathHelper.clamp(size, 1, 127);
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        double health = (int) (i * i * Math.sqrt(index));
-        double attack = (int) (i * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)).setBaseValue(attack);
+        double health = i * i * index;
+        double attack = i * index;
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE)).setBaseValue(attack);
     }
 }

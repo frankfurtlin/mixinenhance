@@ -27,12 +27,9 @@ public abstract class BoggedEntityMixin extends AbstractSkeletonEntity{
     // 根据难度系数修改沼骸的血量
     @Inject(method = "<init>", at = @At("TAIL"))
     private void customHealth(EntityType<? extends BoggedEntity> entityType, World world, CallbackInfo ci) {
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        double health = (int) (16.0 * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        double health = 16.0 * index;
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
         this.setHealth((float) health);
     }
 }

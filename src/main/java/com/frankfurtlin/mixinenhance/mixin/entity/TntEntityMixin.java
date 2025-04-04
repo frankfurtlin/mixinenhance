@@ -3,8 +3,10 @@ package com.frankfurtlin.mixinenhance.mixin.entity;
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
 import net.minecraft.entity.TntEntity;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 
@@ -15,15 +17,14 @@ import java.util.Random;
  */
 @Mixin(TntEntity.class)
 public abstract class TntEntityMixin{
-    // TNT爆炸强度修改
-    @ModifyConstant(method = "explode", constant = @Constant(floatValue = 4.0F))
-    private float explode(float constant){
-        if(!MixinEnhanceClient.getConfig().itemModuleConfig.tntConfig.enableRandomExplode){
-            return constant;
-        }
-        int value = new Random().nextInt(MixinEnhanceClient.getConfig().itemModuleConfig.tntConfig.minExplodeRadius,
-            MixinEnhanceClient.getConfig().itemModuleConfig.tntConfig.maxExplodeRadius);
-        return (float)value;
-    }
 
+    @Shadow
+    private float explosionPower;
+
+    // TNT爆炸强度修改
+    @Inject(method = "<init>*", at = @At("TAIL"))
+    private void onInit(CallbackInfo ci) {
+        this.explosionPower = new Random().nextInt(MixinEnhanceClient.getConfig().itemModuleConfig.tntConfig.minExplodeRadius,
+            MixinEnhanceClient.getConfig().itemModuleConfig.tntConfig.maxExplodeRadius);
+    }
 }

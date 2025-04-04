@@ -30,25 +30,19 @@ public abstract class PhantomEntityMixin extends FlyingEntity {
     // 根据难度系数修改幻翼的血量
     @Inject(method = "<init>", at = @At("TAIL"))
     private void customHealth(EntityType<? extends PhantomEntity> entityType, World world, CallbackInfo ci){
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        double health = (int) (20.0 * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        double health = 20.0 * index;
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
         this.setHealth((float) health);
     }
 
     // 根据难度系数修改幻翼的攻击力
-    @Inject(method = "onSizeChanged", cancellable = true, at = @At(value = "INVOKE", shift = At.Shift.BEFORE,
+    @Inject(method = "onSizeChanged", cancellable = true, at = @At(value = "INVOKE",
         target = "Lnet/minecraft/entity/mob/PhantomEntity;getAttributeInstance(Lnet/minecraft/registry/entry/RegistryEntry;)Lnet/minecraft/entity/attribute/EntityAttributeInstance;"))
     private void customAttackDamage(CallbackInfo ci){
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        double attack = (int) ((6 + this.getPhantomSize()) * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)).setBaseValue(attack);
+        double attack = (6 + this.getPhantomSize()) * index;
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE)).setBaseValue(attack);
         ci.cancel();
     }
 }

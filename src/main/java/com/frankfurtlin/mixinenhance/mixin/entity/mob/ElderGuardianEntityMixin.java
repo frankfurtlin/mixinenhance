@@ -27,14 +27,11 @@ public abstract class ElderGuardianEntityMixin extends GuardianEntity{
     // 根据难度系数修改远古守卫者的血量、攻击力
     @Inject(method = "<init>", at = @At("TAIL"))
     private void customHealthAndAttackDamage(EntityType<? extends ElderGuardianEntity> entityType, World world, CallbackInfo ci){
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        double health = (int) (80.0 * Math.sqrt(index));
-        double attack = (int) (8.0 * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        double health = 80.0 * index;
+        double attack = 8.0 * index;
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
         this.setHealth((float) health);
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)).setBaseValue(attack);
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE)).setBaseValue(attack);
     }
 }

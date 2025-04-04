@@ -27,14 +27,11 @@ public abstract class ZombifiedPiglinEntityMixin extends ZombieEntity {
     // 根据难度系数修改僵尸猪灵的血量、攻击力
     @Inject(method = "<init>", at = @At("TAIL"))
     private void customHealthAndAttackDamage(EntityType<? extends ZombifiedPiglinEntity> entityType, World world, CallbackInfo ci) {
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        double health = (int) (20.0 * Math.sqrt(index));
-        double attack = (int) (5.0 * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        double health = 20.0 * index;
+        double attack = 5.0 * index;
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
         this.setHealth((float) health);
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)).setBaseValue(attack);
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE)).setBaseValue(attack);
     }
 }

@@ -1,5 +1,6 @@
 package com.frankfurtlin.mixinenhance.config;
 
+import com.frankfurtlin.mixinenhance.config.modMenuMuduleConfig.BlockModuleConfig;
 import com.frankfurtlin.mixinenhance.config.modMenuMuduleConfig.DefaultModuleConfig;
 import com.frankfurtlin.mixinenhance.config.modMenuMuduleConfig.EntityModuleConfig;
 import com.frankfurtlin.mixinenhance.config.modMenuMuduleConfig.ItemModuleConfig;
@@ -23,6 +24,11 @@ public class ModMenuConfig implements ConfigData {
     @ConfigEntry.Category("item")
     @ConfigEntry.Gui.TransitiveObject
     public ItemModuleConfig itemModuleConfig = new ItemModuleConfig();
+
+    // 方块
+    @ConfigEntry.Category("block")
+    @ConfigEntry.Gui.TransitiveObject
+    public BlockModuleConfig blockModuleConfig = new BlockModuleConfig();
 
     // 实体
     @ConfigEntry.Category("entity")

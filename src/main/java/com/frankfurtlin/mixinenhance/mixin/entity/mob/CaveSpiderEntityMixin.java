@@ -27,12 +27,9 @@ public abstract class CaveSpiderEntityMixin extends SpiderEntity {
     // 根据难度系数修改洞穴蜘蛛的血量
     @Inject(method = "<init>", at = @At("TAIL"))
     private void customHealth(EntityType<? extends CaveSpiderEntity> entityType, World world, CallbackInfo ci) {
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        double health = (int) (12.0 * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        double health = 12.0 * index;
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
         this.setHealth((float) health);
     }
 }

@@ -10,24 +10,20 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 public class ItemModuleConfig {
     public static class TntConfig {
         @ConfigEntry.Gui.Tooltip
-        public boolean enableRandomExplode = false;         // 是否启用TNT随机爆炸强度
-        @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 1, max = 4)      // TNT最小爆炸强度
         public int minExplodeRadius = 4;
         @ConfigEntry.Gui.Tooltip
-        @ConfigEntry.BoundedDiscrete(min = 5, max = 128)    // TNT最大爆炸强度
-        public int maxExplodeRadius = 8;
+        @ConfigEntry.BoundedDiscrete(min = 4, max = 128)    // TNT最大爆炸强度
+        public int maxExplodeRadius = 4;
     }
 
     public static class EndCrystalConfig {
         @ConfigEntry.Gui.Tooltip
-        public boolean enableRandomExplode = false;         // 是否启用末影水晶随机爆炸强度
-        @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 1, max = 6)      // 末影水晶最小爆炸强度
         public int minExplodeRadius = 6;
         @ConfigEntry.Gui.Tooltip
-        @ConfigEntry.BoundedDiscrete(min = 7, max = 128)    // 末影水晶最大爆炸强度
-        public int maxExplodeRadius = 8;
+        @ConfigEntry.BoundedDiscrete(min = 6, max = 128)    // 末影水晶最大爆炸强度
+        public int maxExplodeRadius = 6;
     }
 
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
@@ -49,6 +45,6 @@ public class ItemModuleConfig {
     @ConfigEntry.BoundedDiscrete(min = 1, max = 20)         // 火球伤害（恶魂）
     public int fireballDamage = 6;
     @ConfigEntry.Gui.Tooltip
-    @ConfigEntry.BoundedDiscrete(min = 0, max = 10)         // 雪球伤害（对烈焰人三倍伤害）
+    @ConfigEntry.BoundedDiscrete(min = 0, max = 10)         // 雪球伤害
     public int snowballDamage = 0;
 }

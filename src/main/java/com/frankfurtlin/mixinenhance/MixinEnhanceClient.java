@@ -12,13 +12,20 @@ import net.fabricmc.api.ClientModInitializer;
  * @date 2024/6/10 13:44
  */
 public class MixinEnhanceClient implements ClientModInitializer {
-    private static ConfigHolder<ModMenuConfig> configHolder;
+    private static final ConfigHolder<ModMenuConfig> configHolder;
+
+    static {
+        configHolder = AutoConfig.register(ModMenuConfig.class, JanksonConfigSerializer::new);
+    }
+
 
     public static ModMenuConfig getConfig() {
+        if (configHolder == null) {
+            throw new IllegalStateException("ConfigHolder is not initialized");
+        }
         return configHolder.getConfig();
     }
     @Override
     public void onInitializeClient() {
-        configHolder = AutoConfig.register(ModMenuConfig.class, JanksonConfigSerializer::new);
     }
 }

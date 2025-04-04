@@ -29,22 +29,16 @@ public abstract class IllusionerEntityMixin extends SpellcastingIllagerEntity {
     // 根据难度系数修改幻术师的血量、攻击力
     @Inject(method = "<init>", at = @At("TAIL"))
     private void customHealthAndAttackDamage(EntityType<? extends IllusionerEntity> entityType, World world, CallbackInfo ci){
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        double health = (int) (40.0 * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        double health = 40.0 * index;
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
         this.setHealth((float) health);
     }
 
     // 根据难度系数修改幻术师的弓箭伤害
     @ModifyConstant(method = "shootAt", constant = @Constant(floatValue = 1.6f))
     private float shootAt(float original) {
-        if(!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic){
-            return original;
-        }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        return (float) (original * Math.sqrt(index));
+        return original * index;
     }
 }

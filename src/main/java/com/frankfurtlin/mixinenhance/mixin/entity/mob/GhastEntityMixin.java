@@ -32,12 +32,9 @@ public abstract class GhastEntityMixin extends FlyingEntity {
     // 根据难度系数修改恶魂的血量
     @Inject(method = "<init>", at = @At("TAIL"))
     private void customHealth(EntityType<? extends GhastEntity> entityType, World world, CallbackInfo ci) {
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        double health = (int) (10.0 * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        double health = 10.0 * index;
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
         this.setHealth((float) health);
     }
 
@@ -45,19 +42,12 @@ public abstract class GhastEntityMixin extends FlyingEntity {
     @Inject(method = "<init>", at = @At("TAIL"))
     private void fireballStrengthFactor(EntityType<? extends GhastEntity> entityType,
                                         World world, CallbackInfo ci){
-        if(!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic){
-            return;
-        }
-        int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        fireballStrength = (int) Math.sqrt(index);
+        fireballStrength = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
     }
 
     // 修改恶魂生成率
     @ModifyConstant(method = "canSpawn", constant = @Constant(intValue = 20))
     private static int spawnRate(int constant){
-        if(!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic){
-            return constant;
-        }
         return 20 / MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.ghastSpawnFactor;
     }
 }

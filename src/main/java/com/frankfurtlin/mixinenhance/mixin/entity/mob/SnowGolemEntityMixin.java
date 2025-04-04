@@ -5,15 +5,14 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.GolemEntity;
 import net.minecraft.entity.passive.SnowGolemEntity;
+import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Objects;
+import java.util.function.Consumer;
 
 /**
  * @author Frankfurtlin
@@ -28,23 +27,23 @@ public abstract class SnowGolemEntityMixin extends GolemEntity {
 
     // 根据难度系数修改雪傀儡的血量
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void customHealth(EntityType<? extends SnowGolemEntity> entityType, World world, CallbackInfo ci) {
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
+    private void customHealthAndAttackDamage(EntityType<? extends GolemEntity> entityType, World world, CallbackInfo ci){
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        double health = (int) (4.0 * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        double health = 4.0 * index;
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
         this.setHealth((float) health);
     }
 
     // 根据难度系数修改雪人的雪球伤害
-    @ModifyConstant(method = "shootAt", constant = @Constant(floatValue = 1.6f))
-    private float shootAt(float original) {
-        if(!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic){
-            return original;
-        }
-        int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        return (float) (original * Math.sqrt(index));
+    @ModifyArg(method = "shootAt", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/projectile/ProjectileEntity;spawn(Lnet/minecraft/entity/projectile/ProjectileEntity;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/item/ItemStack;Ljava/util/function/Consumer;)Lnet/minecraft/entity/projectile/ProjectileEntity;"), index = 3)
+    private Consumer<SnowballEntity> modifyDamageValue(Consumer<SnowballEntity> beforeSpawn) {
+        return entity -> {
+            double d = entity.getX() - this.getX();
+            double e = this.getEyeY() - 1.1F;
+            double f = entity.getZ() - this.getZ();
+            double g = Math.sqrt(d * d + f * f) * 0.2F;
+
+            entity.setVelocity(d, e + g - entity.getY(), f, 1.6F, 12.0F);
+        };
     }
 }

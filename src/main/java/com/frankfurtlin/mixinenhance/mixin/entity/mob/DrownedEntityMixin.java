@@ -16,46 +16,31 @@ public abstract class DrownedEntityMixin {
     // 修改溺尸生成时带有鹦鹉螺壳的概率
     @ModifyConstant(method = "initialize", constant = @Constant(floatValue = 0.03f))
     private float drownedSpawnWithShell(float constant){
-        if(!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic){
-            return constant;
-        }
-        return (float) MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.drownedSpawnWithShell;
+        return MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.drownedSpawnWithShell;
     }
 
     // 修改溺尸在河流群系的生成概率
     @ModifyConstant(method = "canSpawn(Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/ServerWorldAccess;Lnet/minecraft/entity/SpawnReason;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/random/Random;)Z", constant = @Constant(intValue = 15))
     private static int drownedSpawnInRiverFactor(int constant){
-        if(!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic){
-            return constant;
-        }
         return constant / MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.drownedSpawnFactor;
     }
 
     // 修改溺尸在海洋群系的生成概率
     @ModifyConstant(method = "canSpawn(Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/ServerWorldAccess;Lnet/minecraft/entity/SpawnReason;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/random/Random;)Z", constant = @Constant(intValue = 40))
     private static int drownedSpawnInOceanFactor(int constant){
-        if(!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic){
-            return constant;
-        }
         return constant / MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.drownedSpawnFactor;
     }
 
     // 修改溺尸生成时带有工具的概率
     @ModifyConstant(method = "initEquipment", constant = @Constant(doubleValue = 0.9D))
     private double drownedSpawnWithTool(double constant){
-        if(!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic){
-            return constant;
-        }
         return 1 - MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.drownedSpawnWithTool;
     }
 
     // 根据难度系数修改溺尸的三叉戟伤害
     @ModifyConstant(method = "shootAt", constant = @Constant(floatValue = 1.6f))
     private float shootAt(float original) {
-        if(!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic){
-            return original;
-        }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        return (float) (original * Math.sqrt(index));
+        return original * index;
     }
 }

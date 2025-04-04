@@ -29,22 +29,16 @@ public abstract class SpiderEntityMixin extends HostileEntity{
     // 根据难度系数修改蜘蛛的血量
     @Inject(method = "<init>", at = @At("TAIL"))
     private void customHealth(EntityType<? extends SpiderEntity> entityType, World world, CallbackInfo ci) {
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return;
-        }
         int index = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex;
-        double health = (int) (16.0 * Math.sqrt(index));
-        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(health);
+        double health = 16.0 * index;
+        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MAX_HEALTH)).setBaseValue(health);
         this.setHealth((float) health);
     }
 
     // 修改蜘蛛生成时带有药水效果的概率
     @ModifyConstant(method = "initialize", constant = @Constant(floatValue = 0.1f))
     private float spiderSpawnWithEffect(float original) {
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableCustomMobLogic) {
-            return original;
-        }
-        return (float) MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.spiderSpawnWithEffect;
+        return MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.spiderSpawnWithEffect;
     }
 
 }

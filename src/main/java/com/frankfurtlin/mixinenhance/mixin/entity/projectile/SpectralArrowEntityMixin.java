@@ -18,13 +18,13 @@ public abstract class SpectralArrowEntityMixin {
     @Redirect(method = "onHit",
         at = @At(value = "FIELD", target = "Lnet/minecraft/entity/projectile/SpectralArrowEntity;duration:I", opcode = Opcodes.GETFIELD))
     private int spectralArrowDurationOnHit(SpectralArrowEntity instance){
-        return MixinEnhanceClient.getConfig().itemModuleConfig.spectralArrowDuration;
+        return MixinEnhanceClient.getConfig().itemModuleConfig.spectralArrowDuration * 20;
     }
 
     // 光灵箭荧光持续时间修改
     @Redirect(method = "writeCustomDataToNbt",
         at = @At(value = "FIELD", target = "Lnet/minecraft/entity/projectile/SpectralArrowEntity;duration:I", opcode = Opcodes.GETFIELD))
     private int spectralArrowDurationToNBT(SpectralArrowEntity instance){
-        return MixinEnhanceClient.getConfig().itemModuleConfig.spectralArrowDuration;
+        return MixinEnhanceClient.getConfig().itemModuleConfig.spectralArrowDuration * 20;
     }
 }
