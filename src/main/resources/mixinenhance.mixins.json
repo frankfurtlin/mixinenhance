@@ -50,7 +50,8 @@
         "entity.projectile.ShulkerBulletEntityMixin",
         "entity.projectile.SmallFireballEntityMixin",
         "entity.projectile.SnowballEntityMixin",
-        "entity.projectile.SpectralArrowEntityMixin"
+        "entity.projectile.SpectralArrowEntityMixin",
+        "item.BlockItemMixin"
     ],
     "client": [
     ],
