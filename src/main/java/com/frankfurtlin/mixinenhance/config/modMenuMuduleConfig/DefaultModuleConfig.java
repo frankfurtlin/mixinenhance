@@ -12,4 +12,6 @@ public class DefaultModuleConfig {
     public boolean enableAutoFishing = false;                   // 是否启用自动钓鱼
     @ConfigEntry.Gui.Tooltip
     public boolean enablePlayerExpPickUpNoDelay = false;        // 是否启用玩家吸收经验无冷却
+    @ConfigEntry.Gui.Tooltip
+    public boolean enableJoinWithItems = false;                 // 是否启用玩家首次进入世界时赠送初始物资
 }

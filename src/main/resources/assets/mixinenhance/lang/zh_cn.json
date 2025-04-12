@@ -9,6 +9,8 @@
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableAutoFishing.@Tooltip": "是否启用自动钓鱼",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enablePlayerExpPickUpNoDelay": "启用玩家吸收经验无冷却",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enablePlayerExpPickUpNoDelay.@Tooltip": "是否启用玩家吸收经验无冷却",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableJoinWithItems": "启用玩家首次进入世界时赠送初始物资",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableJoinWithItems.@Tooltip": "是否启用玩家首次进入世界时赠送初始物资（鞘翅等）",
 
     "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig": "TNT",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.minExplodeRadius": "最小爆炸范围",

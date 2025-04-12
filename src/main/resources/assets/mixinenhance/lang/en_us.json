@@ -9,6 +9,8 @@
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableAutoFishing.@Tooltip": "enableAutoFishing",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enablePlayerExpPickUpNoDelay": "enablePlayerExpPickUpNoDelay",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enablePlayerExpPickUpNoDelay.@Tooltip": "enablePlayerExpPickUpNoDelay",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableJoinWithItems": "enableJoinWithItems",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableJoinWithItems.@Tooltip": "enableJoinWithItems",
 
     "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig": "tnt",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.minExplodeRadius": "minExplodeRadius",

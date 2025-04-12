@@ -1,8 +1,7 @@
 package com.frankfurtlin.mixinenhance;
 
-import com.frankfurtlin.mixinenhance.event.BlockEvents;
+import com.frankfurtlin.mixinenhance.event.Events;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 
 /**
  * @author Frankfurtlin
@@ -12,6 +11,6 @@ import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 public class MixinEnhance implements ModInitializer {
     @Override
     public void onInitialize() {
-        PlayerBlockBreakEvents.BEFORE.register(BlockEvents::onBlockBreak);
+        Events.initialize();
     }
 }
