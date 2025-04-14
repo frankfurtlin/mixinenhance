@@ -45,6 +45,10 @@
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enablePlayerNoSlowInWater.@Tooltip": "是否启用玩家水中移速不变",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enablePlayerNoSlowInLava": "启用玩家岩浆中移速不变",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enablePlayerNoSlowInLava.@Tooltip": "是否启用玩家岩浆中移速不变",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.fluidVisible": "启用玩家在水中/熔岩清澈的观察",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.fluidVisible.@Tooltip": "是否启用玩家在水中/熔岩清澈的观察",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.noOverlay": "启用玩家画面无遮挡",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.noOverlay.@Tooltip": "是否启用玩家画面无遮挡（取消火焰效果等）",
 
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig": "怪物",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.difficultyIndex": "额外难度系数（1-10）",

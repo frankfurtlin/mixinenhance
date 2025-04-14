@@ -54,6 +54,8 @@
         "item.BlockItemMixin"
     ],
     "client": [
+        "render.BackgroundRendererMixin",
+        "render.InGameOverlayRendererMixin"
     ],
     "injectors": {
         "defaultRequire": 1

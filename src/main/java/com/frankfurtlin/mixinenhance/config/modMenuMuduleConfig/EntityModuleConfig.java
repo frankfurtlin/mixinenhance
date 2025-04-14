@@ -13,6 +13,10 @@ public class EntityModuleConfig {
         public boolean enablePlayerNoSlowInWater = false;   // 是否允许玩家在水中不减速
         @ConfigEntry.Gui.Tooltip
         public boolean enablePlayerNoSlowInLava = false;    // 是否允许玩家在熔岩中不减速
+        @ConfigEntry.Gui.Tooltip
+        public boolean fluidVisible = false;                // 是否启用玩家在水中/熔岩清澈的观察
+        @ConfigEntry.Gui.Tooltip
+        public boolean noOverlay = false;                   // 是否启用玩家视野无遮挡
     }
     public static class MobConfig {
         @ConfigEntry.Gui.Tooltip

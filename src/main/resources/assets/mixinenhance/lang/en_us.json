@@ -45,6 +45,10 @@
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enablePlayerNoSlowInWater.@Tooltip": "enablePlayerNoSlowInWater",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enablePlayerNoSlowInLava": "enablePlayerNoSlowInLava",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enablePlayerNoSlowInLava.@Tooltip": "enablePlayerNoSlowInLava",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.fluidVisible": "fluidVisible",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.fluidVisible.@Tooltip": "fluidVisible",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.noOverlay": "noOverlay",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.noOverlay.@Tooltip": "noOverlay",
 
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig": "mob",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.difficultyIndex": "difficultyIndex",
