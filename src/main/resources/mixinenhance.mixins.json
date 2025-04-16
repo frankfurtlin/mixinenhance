@@ -4,6 +4,7 @@
     "package": "com.frankfurtlin.mixinenhance.mixin",
     "compatibilityLevel": "JAVA_21",
     "mixins": [
+        "enchantment.ReplaceDiskEnchantmentEffectMixin",
         "entity.EndCrystalEntityMixin",
         "entity.EvokerFangsEntityMixin",
         "entity.ExperienceOrbEntityMixin",
