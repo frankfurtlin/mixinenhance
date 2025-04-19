@@ -16,4 +16,6 @@ public class DefaultModuleConfig {
     public boolean enableJoinWithItems = false;                 // 是否启用玩家首次进入世界时赠送初始物资
     @ConfigEntry.Gui.Tooltip
     public boolean enableFrostWalkerWorkOnLava = false;         // 是否启用冰霜行者将熔岩变成霜冰
+    @ConfigEntry.Gui.Tooltip
+    public boolean enableSpawnerFarm = false;                   // 是否启用刷怪笼农场
 }

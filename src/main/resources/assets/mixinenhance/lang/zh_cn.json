@@ -13,6 +13,8 @@
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableJoinWithItems.@Tooltip": "是否启用玩家首次进入世界时赠送初始物资（鞘翅等）",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableFrostWalkerWorkOnLava": "启用冰霜行者将熔岩变成霜冰",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableFrostWalkerWorkOnLava.@Tooltip": "是否启用冰霜行者将熔岩变成霜冰",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableSpawnerFarm": "启用刷怪笼秒变刷怪塔",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableSpawnerFarm.@Tooltip": "是否启用刷怪笼秒变刷怪塔（刷怪笼下放置红石块）",
 
     "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig": "TNT",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.minExplodeRadius": "最小爆炸范围",

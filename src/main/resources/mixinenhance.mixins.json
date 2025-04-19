@@ -9,6 +9,7 @@
         "entity.EvokerFangsEntityMixin",
         "entity.ExperienceOrbEntityMixin",
         "entity.LivingEntityMixin",
+        "entity.MobSpawnerLogicMixin",
         "entity.TntEntityMixin",
         "entity.animal.BeeEntityMixin",
         "entity.animal.HoglinMixin",
