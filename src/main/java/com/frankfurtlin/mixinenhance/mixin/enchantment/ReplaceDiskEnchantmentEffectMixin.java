@@ -54,6 +54,7 @@ public abstract class ReplaceDiskEnchantmentEffectMixin {
     @Final
     private Optional<RegistryEntry<GameEvent>> triggerGameEvent;
 
+    // 冰霜行者可以在熔岩上行走
     @Inject(method = "apply", at = @At("HEAD"))
     private void changeEnchantments(ServerWorld world, int level, EnchantmentEffectContext context, Entity user, Vec3d pos, CallbackInfo ci) {
         if (MixinEnhanceClient.getConfig().defaultModuleConfig.enableFrostWalkerWorkOnLava) {

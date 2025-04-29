@@ -8,6 +8,19 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
  * @date 2024/6/12 7:09
  */
 public class DefaultModuleConfig {
+    public static class EnchantmentConfig{
+        @ConfigEntry.Gui.Tooltip
+        public boolean removeDamageEnchantmentConflict = true;       // 是否允许锋利、亡灵杀手、节肢杀手、破甲、致密不冲突
+        @ConfigEntry.Gui.Tooltip
+        public boolean removeProtectionEnchantmentConflict = true;   // 是否允许保护、爆炸保护、弹射物保护、火焰保护不冲突
+        @ConfigEntry.Gui.Tooltip
+        public boolean removeBowEnchantmentConflict = true;          // 是否允许弓经验修补、无限不冲突
+        @ConfigEntry.Gui.Tooltip
+        public boolean removeCrossbowEnchantmentConflict = true;     // 是否允许弩多重射击、穿透不冲突
+        @ConfigEntry.Gui.Tooltip
+        public boolean removeBootEnchantmentConflict = true;         // 是否允许靴子深海探索者、冰霜行者不冲突
+    }
+
     @ConfigEntry.Gui.Tooltip
     public boolean enableAutoFishing = false;                   // 是否启用自动钓鱼
     @ConfigEntry.Gui.Tooltip
@@ -18,4 +31,9 @@ public class DefaultModuleConfig {
     public boolean enableFrostWalkerWorkOnLava = false;         // 是否启用冰霜行者将熔岩变成霜冰
     @ConfigEntry.Gui.Tooltip
     public boolean enableSpawnerFarm = false;                   // 是否启用刷怪笼农场
+    @ConfigEntry.Gui.Tooltip
+    public boolean removeExperimentalWarning = true;           // 是否消除加载世界时的实验性特性弹窗
+    @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
+    public DefaultModuleConfig.EnchantmentConfig enchantmentConfig = new DefaultModuleConfig.EnchantmentConfig();
+
 }
