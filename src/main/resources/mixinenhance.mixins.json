@@ -57,6 +57,7 @@
         "item.BlockItemMixin"
     ],
     "client": [
+        "IntegratedServerLoaderMixin",
         "render.BackgroundRendererMixin",
         "render.InGameOverlayRendererMixin"
     ],
