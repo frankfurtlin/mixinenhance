@@ -24,6 +24,13 @@ public class DefaultModuleConfig {
     @ConfigEntry.Gui.Tooltip
     public boolean enableAutoFishing = false;                   // 是否启用自动钓鱼
     @ConfigEntry.Gui.Tooltip
+    public boolean enableTickFishing = false;                   // 是否启用急速钓鱼
+    @ConfigEntry.Gui.Tooltip
+    public boolean unLockTrade = false;                         // 是否无限交易
+    @ConfigEntry.Gui.Tooltip
+    @ConfigEntry.BoundedDiscrete(min = 1, max = 20)
+    public int tradeCount = 2;                                  // 每一等级村民解锁的交易选项数
+    @ConfigEntry.Gui.Tooltip
     public boolean enablePlayerExpPickUpNoDelay = false;        // 是否启用玩家吸收经验无冷却
     @ConfigEntry.Gui.Tooltip
     public boolean enableJoinWithItems = false;                 // 是否启用玩家首次进入世界时赠送初始物资
@@ -32,7 +39,9 @@ public class DefaultModuleConfig {
     @ConfigEntry.Gui.Tooltip
     public boolean enableSpawnerFarm = false;                   // 是否启用刷怪笼农场
     @ConfigEntry.Gui.Tooltip
-    public boolean removeExperimentalWarning = true;           // 是否消除加载世界时的实验性特性弹窗
+    public boolean removeExperimentalWarning = true;            // 是否消除加载世界时的实验性特性弹窗
+    @ConfigEntry.Gui.Tooltip
+    public boolean canOpenGuiInPortal = false;                  // 玩家在地狱门中不强制关闭背包页面
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     public DefaultModuleConfig.EnchantmentConfig enchantmentConfig = new DefaultModuleConfig.EnchantmentConfig();
 

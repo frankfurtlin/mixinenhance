@@ -7,6 +7,12 @@
 
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableAutoFishing": "enableAutoFishing",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableAutoFishing.@Tooltip": "enableAutoFishing",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableTickFishing": "enableTickFishing",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableTickFishing.@Tooltip": "enableTickFishing",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.unLockTrade": "unLockTrade",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.unLockTrade.@Tooltip": "unLockTrade",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.tradeCount": "tradeCount",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.tradeCount.@Tooltip": "tradeCount",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enablePlayerExpPickUpNoDelay": "enablePlayerExpPickUpNoDelay",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enablePlayerExpPickUpNoDelay.@Tooltip": "enablePlayerExpPickUpNoDelay",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableJoinWithItems": "enableJoinWithItems",
@@ -17,6 +23,8 @@
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableSpawnerFarm.@Tooltip": "enableSpawnerFarm",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.removeExperimentalWarning": "removeExperimentalWarning",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.removeExperimentalWarning.@Tooltip": "removeExperimentalWarning",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.canOpenGuiInPortal": "canOpenGuiInPortal",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.canOpenGuiInPortal.@Tooltip": "canOpenGuiInPortal",
 
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig": "enchantmentConfig",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeDamageEnchantmentConflict": "removeDamageEnchantmentConflict",
@@ -29,6 +37,14 @@
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeCrossbowEnchantmentConflict.@Tooltip": "removeCrossbowEnchantmentConflict",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeBootEnchantmentConflict": "removeBootEnchantmentConflict",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeBootEnchantmentConflict.@Tooltip": "removeBootEnchantmentConflict",
+
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.spongeConfig": "sponge",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.spongeConfig.canAbsorbLava": "canAbsorbLava",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.spongeConfig.canAbsorbLava.@Tooltip": "canAbsorbLava",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.spongeConfig.maxDepth": "maxDepth",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.spongeConfig.maxDepth.@Tooltip": "maxDepth",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.spongeConfig.maxIterations": "maxIterations",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.spongeConfig.maxIterations.@Tooltip": "maxIterations",
 
     "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig": "tnt",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.minExplodeRadius": "minExplodeRadius",

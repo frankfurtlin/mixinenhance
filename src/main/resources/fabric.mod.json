@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "mixinenhance",
   "version": "${version}",
-  "name": "mixinEnhance",
+  "name": "AAAMixinenhance",
   "description": "原版游戏增强",
   "authors": [
     "Frankfurtlin"

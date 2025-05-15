@@ -4,7 +4,9 @@
     "package": "com.frankfurtlin.mixinenhance.mixin",
     "compatibilityLevel": "JAVA_21",
     "mixins": [
+        "TradeOfferMixin",
         "block.FrostedIceBlockMixin",
+        "block.SpongeBlockMixin",
         "enchantment.EnchantmentMixin",
         "enchantment.ReplaceDiskEnchantmentEffectMixin",
         "entity.EndCrystalEntityMixin",
@@ -13,6 +15,7 @@
         "entity.LivingEntityMixin",
         "entity.MobSpawnerLogicMixin",
         "entity.TntEntityMixin",
+        "entity.VillagerEntityMixin",
         "entity.animal.BeeEntityMixin",
         "entity.animal.HoglinMixin",
         "entity.mob.AbstractSkeletonEntityMixin",
@@ -59,6 +62,7 @@
     ],
     "client": [
         "IntegratedServerLoaderMixin",
+        "entity.ClientPlayerEntityMixin",
         "render.BackgroundRendererMixin",
         "render.InGameOverlayRendererMixin"
     ],

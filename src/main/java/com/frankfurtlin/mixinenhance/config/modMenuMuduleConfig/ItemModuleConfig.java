@@ -8,6 +8,17 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
  * @date 2024/6/12 7:10
  */
 public class ItemModuleConfig {
+    public static class SpongeConfig {
+        @ConfigEntry.Gui.Tooltip
+        public boolean canAbsorbLava = false;                   // 海绵可吸附岩浆
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 32)         // 海绵最大吸附深度
+        public int maxDepth = 6;
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 32, max = 32768)     // 海绵最大吸附方块数量
+        public int maxIterations = 65;
+    }
+
     public static class TntConfig {
         @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 1, max = 4)      // TNT最小爆炸强度
@@ -26,6 +37,8 @@ public class ItemModuleConfig {
         public int maxExplodeRadius = 6;
     }
 
+    @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
+    public SpongeConfig spongeConfig = new SpongeConfig();
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     public TntConfig tntConfig = new TntConfig();
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
