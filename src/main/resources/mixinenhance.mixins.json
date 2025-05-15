@@ -4,6 +4,7 @@
     "package": "com.frankfurtlin.mixinenhance.mixin",
     "compatibilityLevel": "JAVA_21",
     "mixins": [
+        "block.FrostedIceBlockMixin",
         "enchantment.EnchantmentMixin",
         "enchantment.ReplaceDiskEnchantmentEffectMixin",
         "entity.EndCrystalEntityMixin",
