@@ -5,6 +5,8 @@
     "text.autoconfig.mixinenhance.category.block": "block",
     "text.autoconfig.mixinenhance.category.entity": "entity",
 
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.keepInventory": "keepInventory",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.keepInventory.@Tooltip": "keepInventory",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableAutoFishing": "enableAutoFishing",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableAutoFishing.@Tooltip": "enableAutoFishing",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableTickFishing": "enableTickFishing",

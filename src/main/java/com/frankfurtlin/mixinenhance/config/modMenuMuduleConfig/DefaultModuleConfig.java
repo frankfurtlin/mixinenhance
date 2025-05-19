@@ -22,6 +22,8 @@ public class DefaultModuleConfig {
     }
 
     @ConfigEntry.Gui.Tooltip
+    public boolean keepInventory = true;                        // 是否启用死亡不掉落
+    @ConfigEntry.Gui.Tooltip
     public boolean enableAutoFishing = false;                   // 是否启用自动钓鱼
     @ConfigEntry.Gui.Tooltip
     public boolean enableTickFishing = false;                   // 是否启用急速钓鱼

@@ -37,6 +37,8 @@ public class ItemModuleConfig {
         public int maxExplodeRadius = 6;
     }
 
+    @ConfigEntry.Gui.Tooltip
+    public boolean canStackTo64 = false;                    // 启用部分物品堆叠至64
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     public SpongeConfig spongeConfig = new SpongeConfig();
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)

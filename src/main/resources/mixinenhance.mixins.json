@@ -14,6 +14,8 @@
         "entity.ExperienceOrbEntityMixin",
         "entity.LivingEntityMixin",
         "entity.MobSpawnerLogicMixin",
+        "entity.PlayerEntityMixin",
+        "entity.ServerPlayerEntityMixin",
         "entity.TntEntityMixin",
         "entity.VillagerEntityMixin",
         "entity.animal.BeeEntityMixin",

@@ -5,6 +5,8 @@
     "text.autoconfig.mixinenhance.category.block": "方块",
     "text.autoconfig.mixinenhance.category.entity": "实体",
 
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.keepInventory": "启用死亡不掉落",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.keepInventory.@Tooltip": "是否启用死亡不掉落",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableAutoFishing": "启用自动钓鱼",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableAutoFishing.@Tooltip": "是否启用自动钓鱼",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableTickFishing": "启用急速钓鱼",
