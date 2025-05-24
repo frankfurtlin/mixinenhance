@@ -31,6 +31,8 @@
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.canOpenGuiInPortal.@Tooltip": "玩家在地狱门中不强制关闭背包页面",
 
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig": "附魔配置",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeAnvilLimit": "消除附魔经验上限",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeAnvilLimit.@Tooltip": "消除附魔经验上限",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeDamageEnchantmentConflict": "是否允许锋利、亡灵杀手、节肢杀手、破甲、致密不冲突",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeDamageEnchantmentConflict.@Tooltip": "允许锋利、亡灵杀手、节肢杀手、破甲、致密不冲突",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeProtectionEnchantmentConflict": "是否允许保护、爆炸保护、弹射物保护、火焰保护不冲突",

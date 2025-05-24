@@ -31,6 +31,8 @@
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.canOpenGuiInPortal.@Tooltip": "canOpenGuiInPortal",
 
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig": "enchantmentConfig",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeAnvilLimit": "removeAnvilLimit",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeAnvilLimit.@Tooltip": "removeAnvilLimit",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeDamageEnchantmentConflict": "removeDamageEnchantmentConflict",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeDamageEnchantmentConflict.@Tooltip": "removeDamageEnchantmentConflict",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeProtectionEnchantmentConflict": "removeProtectionEnchantmentConflict",

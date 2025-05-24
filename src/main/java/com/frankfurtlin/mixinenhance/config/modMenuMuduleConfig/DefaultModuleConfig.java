@@ -10,6 +10,8 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 public class DefaultModuleConfig {
     public static class EnchantmentConfig{
         @ConfigEntry.Gui.Tooltip
+        public boolean removeAnvilLimit = false;                     // 消除附魔经验上限
+        @ConfigEntry.Gui.Tooltip
         public boolean removeDamageEnchantmentConflict = true;       // 是否允许锋利、亡灵杀手、节肢杀手、破甲、致密不冲突
         @ConfigEntry.Gui.Tooltip
         public boolean removeProtectionEnchantmentConflict = true;   // 是否允许保护、爆炸保护、弹射物保护、火焰保护不冲突
