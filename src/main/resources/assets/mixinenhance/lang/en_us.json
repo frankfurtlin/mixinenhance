@@ -62,6 +62,8 @@
     "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig.maxExplodeRadius": "maxExplodeRadius",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig.maxExplodeRadius.@Tooltip": "maxExplodeRadius",
 
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.canStackTo64": "canStackTo64",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.canStackTo64.@Tooltip": "canStackTo64",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.inventoryTotemEnabled": "inventoryTotemEnabled",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.inventoryTotemEnabled.@Tooltip": "inventoryTotemEnabled",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.spectralArrowDuration": "spectralArrowDuration",

@@ -60,7 +60,8 @@
         "entity.projectile.SmallFireballEntityMixin",
         "entity.projectile.SnowballEntityMixin",
         "entity.projectile.SpectralArrowEntityMixin",
-        "item.BlockItemMixin"
+        "item.BlockItemMixin",
+        "item.ItemStackMixin"
     ],
     "client": [
         "IntegratedServerLoaderMixin",
