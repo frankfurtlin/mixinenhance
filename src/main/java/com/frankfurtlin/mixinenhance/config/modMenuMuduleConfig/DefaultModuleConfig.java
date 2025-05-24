@@ -41,6 +41,9 @@ public class DefaultModuleConfig {
     @ConfigEntry.Gui.Tooltip
     public boolean enableSpawnerFarm = false;                   // 是否启用刷怪笼农场
     @ConfigEntry.Gui.Tooltip
+    @ConfigEntry.BoundedDiscrete(min = 1, max = 8)
+    public int spawnerFarmRate = 1;                             // 刷怪笼农场倍率
+    @ConfigEntry.Gui.Tooltip
     public boolean removeExperimentalWarning = true;            // 是否消除加载世界时的实验性特性弹窗
     @ConfigEntry.Gui.Tooltip
     public boolean canOpenGuiInPortal = false;                  // 玩家在地狱门中不强制关闭背包页面

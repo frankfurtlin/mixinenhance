@@ -23,6 +23,8 @@
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableFrostWalkerWorkOnLava.@Tooltip": "enableFrostWalkerWorkOnLava",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableSpawnerFarm": "enableSpawnerFarm",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableSpawnerFarm.@Tooltip": "enableSpawnerFarm",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.spawnerFarmRate": "spawnerFarmRate",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.spawnerFarmRate.@Tooltip": "spawnerFarmRate",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.removeExperimentalWarning": "removeExperimentalWarning",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.removeExperimentalWarning.@Tooltip": "removeExperimentalWarning",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.canOpenGuiInPortal": "canOpenGuiInPortal",

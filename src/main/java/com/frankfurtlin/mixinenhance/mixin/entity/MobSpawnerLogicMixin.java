@@ -36,17 +36,17 @@ public abstract class MobSpawnerLogicMixin {
     protected abstract MobSpawnerEntry getSpawnEntry(@Nullable World world, Random random, BlockPos pos);
 
 
-    // 刷怪笼改造成刷怪塔(刷怪笼下面方块需要是红石块)
+    // 刷怪笼改造成刷怪塔(刷怪笼上面方块需要是红石块)
     @Inject(method = "serverTick", at = @At("HEAD"), cancellable = true)
     private void enableSpawnerFarm(ServerWorld world, BlockPos pos, CallbackInfo ci) {
         if (MixinEnhanceClient.getConfig().defaultModuleConfig.enableSpawnerFarm) {
-            // 刷怪笼下面方块需要是红石块
-            if (!(world.getBlockState(pos.down()).getBlock() == Blocks.REDSTONE_BLOCK)) {
+            // 刷怪笼上面方块需要是红石块
+            if (!(world.getBlockState(pos.up()).getBlock() == Blocks.REDSTONE_BLOCK)) {
                 return;
             }
 
             Random random = world.getRandom();
-            if (random.nextInt(20) >= 1) {
+            if (random.nextInt(20 * 8 / MixinEnhanceClient.getConfig().defaultModuleConfig.spawnerFarmRate) >= 1) {
                 ci.cancel();
                 return;
             }
@@ -68,9 +68,9 @@ public abstract class MobSpawnerLogicMixin {
                 // 在刷怪笼位置喷出掉落物
                 for (ItemStack stack : drops) {
                     double d = MathHelper.nextBetween(random, -0.2F, 0.2F);
-                    double e = MathHelper.nextBetween(random, 0.2F, 0.4F);
+                    double e = MathHelper.nextBetween(random, -1F, -2F);
                     double f = MathHelper.nextBetween(random, -0.2F, 0.2F);
-                    world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ()+ 0.5, stack, d, e, f));
+                    world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() - 1.0, pos.getZ()+ 0.5, stack, d, e, f));
                 }
             }
 
