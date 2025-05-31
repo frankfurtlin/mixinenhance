@@ -65,7 +65,8 @@
         "entity.projectile.SnowballEntityMixin",
         "entity.projectile.SpectralArrowEntityMixin",
         "item.BlockItemMixin",
-        "item.ItemStackMixin"
+        "item.ItemStackMixin",
+        "item.PotionItemMixin"
     ],
     "client": [
         "IntegratedServerLoaderMixin",
