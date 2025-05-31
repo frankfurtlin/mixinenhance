@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
+import net.minecraft.block.entity.TrialSpawnerBlockEntity;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.NbtComponent;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -41,9 +42,9 @@ public class BlockEvents {
         }
 
         ItemStack handStack = player.getStackInHand(Hand.MAIN_HAND);
-        if (hasSilkTouch(world, handStack)) {
+        if (!hasSilkTouch(world, handStack)) {
             handStack = player.getStackInHand(Hand.OFF_HAND);
-            if (hasSilkTouch(world, handStack)) {
+            if (!hasSilkTouch(world, handStack)) {
                 return true;
             }
         }
@@ -53,7 +54,9 @@ public class BlockEvents {
         Block block = blockState.getBlock();
 
         ItemStack outStack = null;
-        if (MixinEnhanceClient.getConfig().blockModuleConfig.enableSpawnerDropWithSilkTouch && block.equals(Blocks.SPAWNER) && isPickaxe) {
+        if (((MixinEnhanceClient.getConfig().blockModuleConfig.silkTouchConfig.enableSpawnerDropWithSilkTouch && block.equals(Blocks.SPAWNER)) ||
+            (MixinEnhanceClient.getConfig().blockModuleConfig.silkTouchConfig.enableTrialSpawnerDropWithSilkTouch && block.equals(Blocks.TRIAL_SPAWNER))) &&
+            isPickaxe) {
             if (blockEntity == null) {
                 blockEntity = world.getBlockEntity(blockPos);
             }
@@ -64,6 +67,8 @@ public class BlockEvents {
             if (blockEntity instanceof MobSpawnerBlockEntity mobSpawnerBlockEntity) {
                 spawnerDisplayEntity = mobSpawnerBlockEntity.getLogic().getRenderedEntity(world, blockPos);
                 spawnerData = mobSpawnerBlockEntity.createNbtWithIdentifyingData(world.getRegistryManager());
+            } else if (blockEntity instanceof TrialSpawnerBlockEntity trialSpawnerBlockEntity) {
+                spawnerData = trialSpawnerBlockEntity.createNbtWithIdentifyingData(world.getRegistryManager());
             }
 
             outStack = blockState.getPickStack(world, blockPos, true);
@@ -76,6 +81,12 @@ public class BlockEvents {
                     outStack.set(DataComponentTypes.CUSTOM_NAME, spawnerDisplayEntity.getName().copy().append(Text.literal(" ").append(block.getName())));
                 }
             }
+        } else if ((MixinEnhanceClient.getConfig().blockModuleConfig.silkTouchConfig.enableVaultDropWithSilkTouch && block.equals(Blocks.VAULT)) ||
+            (MixinEnhanceClient.getConfig().blockModuleConfig.silkTouchConfig.enableBuddingAmethystDropWithSilkTouch && block.equals(Blocks.BUDDING_AMETHYST)) ||
+            (MixinEnhanceClient.getConfig().blockModuleConfig.silkTouchConfig.enableFarmlandDropWithSilkTouch && block.equals(Blocks.FARMLAND)) ||
+            (MixinEnhanceClient.getConfig().blockModuleConfig.silkTouchConfig.enableSuspiciousSandDropWithSilkTouch && block.equals(Blocks.SUSPICIOUS_SAND)) ||
+            (MixinEnhanceClient.getConfig().blockModuleConfig.silkTouchConfig.enableSuspiciousGravelDropWithSilkTouch && block.equals(Blocks.SUSPICIOUS_GRAVEL))) {
+            outStack = blockState.getPickStack(world, blockPos, true);
         }
 
         if (outStack != null) {
@@ -91,7 +102,7 @@ public class BlockEvents {
     }
 
     public static boolean hasSilkTouch(World world, ItemStack itemStack) {
-        return EnchantmentHelper.getLevel(world.getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(Enchantments.SILK_TOUCH), itemStack) < 1;
+        return EnchantmentHelper.getLevel(world.getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(Enchantments.SILK_TOUCH), itemStack) >= 1;
     }
 
 }

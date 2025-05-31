@@ -3,6 +3,7 @@ package com.frankfurtlin.mixinenhance.mixin.item;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
+import net.minecraft.block.entity.TrialSpawnerBlockEntity;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.NbtComponent;
 import net.minecraft.item.BlockItem;
@@ -46,7 +47,7 @@ public abstract class BlockItemMixin {
         ItemStack itemStack = itemPlacementContext.getStack();
         World world = itemPlacementContext.getWorld();
         // 刷怪笼放置的时候带上nbt标签
-        if (itemStack.isOf(Items.SPAWNER)) {
+        if (itemStack.isOf(Items.SPAWNER) || itemStack.isOf(Items.TRIAL_SPAWNER)) {
             NbtComponent nbtComponent = itemStack.get(DataComponentTypes.CUSTOM_DATA);
             if (nbtComponent != null) {
                 NbtCompound nbtCompound = nbtComponent.copyNbt();
@@ -54,6 +55,9 @@ public abstract class BlockItemMixin {
                     NbtCompound spawnerData = (NbtCompound)nbtCompound.get("spawnerData");
                     BlockEntity blockEntity = world.getBlockEntity(blockPos);
                     if (blockEntity instanceof MobSpawnerBlockEntity spawnerBlockEntity && spawnerData != null) {
+                        spawnerBlockEntity.read(spawnerData, world.getRegistryManager());
+                    }
+                    if (blockEntity instanceof TrialSpawnerBlockEntity spawnerBlockEntity && spawnerData != null) {
                         spawnerBlockEntity.read(spawnerData, world.getRegistryManager());
                     }
                 }
