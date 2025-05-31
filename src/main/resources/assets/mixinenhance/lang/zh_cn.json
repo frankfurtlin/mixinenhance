@@ -79,7 +79,7 @@
     "text.autoconfig.mixinenhance.option.itemModuleConfig.snowballDamage": "雪球伤害",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.snowballDamage.@Tooltip": "雪球伤害",
 
-    "text.autoconfig.mixinenhance.option.blockModuleConfig.silkTouchConfig": "player",
+    "text.autoconfig.mixinenhance.option.blockModuleConfig.silkTouchConfig": "精准采集",
     "text.autoconfig.mixinenhance.option.blockModuleConfig.silkTouchConfig.enableSpawnerDropWithSilkTouch": "启用精准采集可破坏刷怪笼",
     "text.autoconfig.mixinenhance.option.blockModuleConfig.silkTouchConfig.enableSpawnerDropWithSilkTouch.@Tooltip": "是否启用精准采集可破坏刷怪笼",
     "text.autoconfig.mixinenhance.option.blockModuleConfig.silkTouchConfig.enableTrialSpawnerDropWithSilkTouch": "启用精准采集可破坏试炼刷怪笼",

@@ -79,7 +79,7 @@
     "text.autoconfig.mixinenhance.option.itemModuleConfig.snowballDamage": "snowballDamage",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.snowballDamage.@Tooltip": "snowballDamage",
 
-    "text.autoconfig.mixinenhance.option.blockModuleConfig.silkTouchConfig": "player",
+    "text.autoconfig.mixinenhance.option.blockModuleConfig.silkTouchConfig": "silkTouch",
     "text.autoconfig.mixinenhance.option.blockModuleConfig.silkTouchConfig.enableSpawnerDropWithSilkTouch": "enableSpawnerDropWithSilkTouch",
     "text.autoconfig.mixinenhance.option.blockModuleConfig.silkTouchConfig.enableSpawnerDropWithSilkTouch.@Tooltip": "enableSpawnerDropWithSilkTouch",
     "text.autoconfig.mixinenhance.option.blockModuleConfig.silkTouchConfig.enableTrialSpawnerDropWithSilkTouch": "enableTrialSpawnerDropWithSilkTouch",
