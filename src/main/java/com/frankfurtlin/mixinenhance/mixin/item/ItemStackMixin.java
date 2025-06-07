@@ -47,6 +47,7 @@ public abstract class ItemStackMixin implements ComponentHolder  {
             this.getItem() == Items.BAMBOO_RAFT ||
             this.getItem() == Items.BAMBOO_CHEST_RAFT ||
             this.getItem() == Items.MUSHROOM_STEW ||
+            this.getItem() == Items.BUCKET ||
             this.getItem() == Items.WATER_BUCKET ||
             this.getItem() == Items.LAVA_BUCKET ||
             this.getItem() == Items.POWDER_SNOW_BUCKET ||
