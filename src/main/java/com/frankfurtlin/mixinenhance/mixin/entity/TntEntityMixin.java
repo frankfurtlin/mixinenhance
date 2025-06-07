@@ -8,8 +8,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Random;
-
 /**
  * @author Frankfurtlin
  * @version 1.0
@@ -24,7 +22,6 @@ public abstract class TntEntityMixin{
     // TNT爆炸强度修改
     @Inject(method = "<init>*", at = @At("TAIL"))
     private void onInit(CallbackInfo ci) {
-        this.explosionPower = new Random().nextInt(MixinEnhanceClient.getConfig().itemModuleConfig.tntConfig.minExplodeRadius,
-            MixinEnhanceClient.getConfig().itemModuleConfig.tntConfig.maxExplodeRadius);
+        this.explosionPower = MixinEnhanceClient.getConfig().itemModuleConfig.tntConfig.explodeRadius;
     }
 }

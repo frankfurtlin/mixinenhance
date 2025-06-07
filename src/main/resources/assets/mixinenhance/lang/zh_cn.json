@@ -53,16 +53,12 @@
     "text.autoconfig.mixinenhance.option.itemModuleConfig.spongeConfig.maxIterations.@Tooltip": "海绵最大吸附方块数量",
 
     "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig": "TNT",
-    "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.minExplodeRadius": "最小爆炸范围",
-    "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.minExplodeRadius.@Tooltip": "最小爆炸范围",
-    "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.maxExplodeRadius": "最大爆炸范围",
-    "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.maxExplodeRadius.@Tooltip": "最大爆炸范围",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.explodeRadius": "爆炸范围",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.explodeRadius.@Tooltip": "爆炸范围",
 
     "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig": "末地水晶",
-    "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig.minExplodeRadius": "最小爆炸范围",
-    "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig.minExplodeRadius.@Tooltip": "最小爆炸范围",
-    "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig.maxExplodeRadius": "最大爆炸范围",
-    "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig.maxExplodeRadius.@Tooltip": "最大爆炸范围",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig.explodeRadius": "爆炸范围",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig.explodeRadius.@Tooltip": "爆炸范围",
 
     "text.autoconfig.mixinenhance.option.itemModuleConfig.canStackTo64": "启用部分物品堆叠至64",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.canStackTo64.@Tooltip": "是否启用部分物品堆叠至64",

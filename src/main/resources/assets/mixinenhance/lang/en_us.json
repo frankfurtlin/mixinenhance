@@ -53,16 +53,12 @@
     "text.autoconfig.mixinenhance.option.itemModuleConfig.spongeConfig.maxIterations.@Tooltip": "maxIterations",
 
     "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig": "tnt",
-    "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.minExplodeRadius": "minExplodeRadius",
-    "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.minExplodeRadius.@Tooltip": "minExplodeRadius",
-    "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.maxExplodeRadius": "maxExplodeRadius",
-    "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.maxExplodeRadius.@Tooltip": "maxExplodeRadius",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.explodeRadius": "explodeRadius",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.tntConfig.explodeRadius.@Tooltip": "explodeRadius",
 
     "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig": "endCrystal",
-    "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig.minExplodeRadius": "minExplodeRadius",
-    "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig.minExplodeRadius.@Tooltip": "minExplodeRadius",
-    "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig.maxExplodeRadius": "maxExplodeRadius",
-    "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig.maxExplodeRadius.@Tooltip": "maxExplodeRadius",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig.explodeRadius": "explodeRadius",
+    "text.autoconfig.mixinenhance.option.itemModuleConfig.endCrystalConfig.explodeRadius.@Tooltip": "explodeRadius",
 
     "text.autoconfig.mixinenhance.option.itemModuleConfig.canStackTo64": "canStackTo64",
     "text.autoconfig.mixinenhance.option.itemModuleConfig.canStackTo64.@Tooltip": "canStackTo64",
