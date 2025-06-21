@@ -11,6 +11,8 @@
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableAutoFishing.@Tooltip": "是否启用自动钓鱼",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableTickFishing": "启用急速钓鱼",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableTickFishing.@Tooltip": "是否启用急速钓鱼",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableFarmlandNoLandToDirt": "启用耕地践踏不转化成泥土",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableFarmlandNoLandToDirt.@Tooltip": "是否启用耕地践踏不转化成泥土",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.unLockTrade": "无限交易",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.unLockTrade.@Tooltip": "村民&流浪商人无限交易",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.tradeCount": "每级村民解锁的交易数",

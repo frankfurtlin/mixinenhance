@@ -30,6 +30,8 @@ public class DefaultModuleConfig {
     @ConfigEntry.Gui.Tooltip
     public boolean enableTickFishing = false;                   // 是否启用急速钓鱼
     @ConfigEntry.Gui.Tooltip
+    public boolean enableFarmlandNoLandToDirt = false;          // 是否启用耕地践踏不转化成泥土
+    @ConfigEntry.Gui.Tooltip
     public boolean unLockTrade = false;                         // 是否无限交易
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.BoundedDiscrete(min = 1, max = 20)

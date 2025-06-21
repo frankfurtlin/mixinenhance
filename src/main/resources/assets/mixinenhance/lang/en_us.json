@@ -11,6 +11,8 @@
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableAutoFishing.@Tooltip": "enableAutoFishing",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableTickFishing": "enableTickFishing",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableTickFishing.@Tooltip": "enableTickFishing",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableFarmlandNoLandToDirt": "enableFarmlandNoLandToDirt",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableFarmlandNoLandToDirt.@Tooltip": "enableFarmlandNoLandToDirt",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.unLockTrade": "unLockTrade",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.unLockTrade.@Tooltip": "unLockTrade",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.tradeCount": "tradeCount",
