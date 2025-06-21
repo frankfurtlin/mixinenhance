@@ -75,6 +75,9 @@ public class EntityModuleConfig {
         @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
         public float spiderSpawnWithEffect = 0.1f;         // 蜘蛛生成时带有效果的概率
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
+        public float witherSkeletonSkullDropRate = 0.01f;    // 凋零骷髅死亡时掉落头颅的概率
     }
 
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)

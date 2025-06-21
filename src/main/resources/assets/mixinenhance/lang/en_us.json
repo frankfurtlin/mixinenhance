@@ -143,6 +143,8 @@
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.creeperExplodeRadius.@Tooltip": "creeperExplodeRadius",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.spiderSpawnWithEffect": "spiderSpawnWithEffect",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.spiderSpawnWithEffect.@Tooltip": "spiderSpawnWithEffect",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.witherSkeletonSkullDropRate": "witherSkeletonSkullDropRate",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.witherSkeletonSkullDropRate.@Tooltip": "witherSkeletonSkullDropRate",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.enableZombieWeaponEnhancement": "enableZombieWeaponEnhancement",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.enableZombieWeaponEnhancement.@Tooltip": "enableZombieWeaponEnhancement",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.enableVindicatorWeaponEnhancement": "enableVindicatorWeaponEnhancement",

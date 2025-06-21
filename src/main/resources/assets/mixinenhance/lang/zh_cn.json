@@ -143,6 +143,8 @@
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.creeperExplodeRadius.@Tooltip": "苦力怕爆炸半径",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.spiderSpawnWithEffect": "蜘蛛生成时带有效果的概率（0-1）",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.spiderSpawnWithEffect.@Tooltip": "蜘蛛生成时带有效果（速度、力量、再生、隐身）的概率",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.witherSkeletonSkullDropRate": "凋零骷髅死亡时掉落头颅的概率",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.witherSkeletonSkullDropRate.@Tooltip": "凋零骷髅死亡时掉落头颅的概率",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.enableZombieWeaponEnhancement": "启用僵尸武器增强",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.enableZombieWeaponEnhancement.@Tooltip": "僵尸武器升级（所有种类的工具及武器）",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.enableVindicatorWeaponEnhancement": "启用卫道士武器增强",
