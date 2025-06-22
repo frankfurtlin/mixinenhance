@@ -5,6 +5,7 @@
     "compatibilityLevel": "JAVA_21",
     "mixins": [
         "TradeOfferMixin",
+        "block.BlockMixin",
         "block.FarmlandBlockMixin",
         "block.FrostedIceBlockMixin",
         "block.SpongeBlockMixin",

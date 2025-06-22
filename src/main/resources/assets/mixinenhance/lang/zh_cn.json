@@ -31,6 +31,10 @@
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.removeExperimentalWarning.@Tooltip": "消除加载世界时的实验性特性弹窗",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.canOpenGuiInPortal": "玩家在地狱门中不强制关闭背包页面",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.canOpenGuiInPortal.@Tooltip": "玩家在地狱门中不强制关闭背包页面",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.noSlowOnSoulSand": "玩家在灵魂沙上移动不减速",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.noSlowOnSoulSand.@Tooltip": "玩家在灵魂沙上移动不减速",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.noSlowOnHoneyBlock": "玩家在蜂蜜块上移动不减速",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.noSlowOnHoneyBlock.@Tooltip": "玩家在蜂蜜块上移动不减速",
 
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig": "附魔配置",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeAnvilLimit": "消除附魔经验上限",

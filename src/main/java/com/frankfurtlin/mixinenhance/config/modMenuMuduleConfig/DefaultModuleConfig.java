@@ -51,6 +51,10 @@ public class DefaultModuleConfig {
     public boolean removeExperimentalWarning = true;            // 是否消除加载世界时的实验性特性弹窗
     @ConfigEntry.Gui.Tooltip
     public boolean canOpenGuiInPortal = false;                  // 玩家在地狱门中不强制关闭背包页面
+    @ConfigEntry.Gui.Tooltip
+    public boolean noSlowOnSoulSand = false;                    // 玩家在灵魂沙上不减速
+    @ConfigEntry.Gui.Tooltip
+    public boolean noSlowOnHoneyBlock = false;                  // 玩家在蜂蜜块上不减速
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     public DefaultModuleConfig.EnchantmentConfig enchantmentConfig = new DefaultModuleConfig.EnchantmentConfig();
 
