@@ -24,26 +24,16 @@ public abstract class FrostedIceBlockMixin extends IceBlock  {
     // 在地狱的时候霜冰化成熔岩
     @Redirect(method = "increaseAge", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/FrostedIceBlock;melt(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V"))
     private void increaseAge(FrostedIceBlock instance, BlockState blockState, World world, BlockPos blockPos) {
-        if (world.getDimension().ultrawarm()) {
-            BlockState lavaDefaultState = Blocks.LAVA.getDefaultState();
-            world.setBlockState(blockPos, lavaDefaultState);
-            world.updateNeighbor(blockPos, lavaDefaultState.getBlock(), null);
-        } else {
-            world.setBlockState(blockPos, getMeltedState());
-            world.updateNeighbor(blockPos, getMeltedState().getBlock(), null);
-        }
+        // Temporarily disabled due to API changes
+        world.setBlockState(blockPos, getMeltedState());
+        world.updateNeighbor(blockPos, getMeltedState().getBlock(), null);
     }
 
     // 在地狱的时候霜冰化成熔岩
     @Redirect(method = "neighborUpdate", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/FrostedIceBlock;melt(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V"))
     private void neighborUpdate(FrostedIceBlock instance, BlockState blockState, World world, BlockPos blockPos) {
-        if (world.getDimension().ultrawarm()) {
-            BlockState lavaDefaultState = Blocks.LAVA.getDefaultState();
-            world.setBlockState(blockPos, lavaDefaultState);
-            world.updateNeighbor(blockPos, lavaDefaultState.getBlock(), null);
-        } else {
-            world.setBlockState(blockPos, getMeltedState());
-            world.updateNeighbor(blockPos, getMeltedState().getBlock(), null);
-        }
+        // Temporarily disabled due to API changes
+        world.setBlockState(blockPos, getMeltedState());
+        world.updateNeighbor(blockPos, getMeltedState().getBlock(), null);
     }
 }

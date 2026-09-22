@@ -3,12 +3,10 @@ package com.frankfurtlin.mixinenhance.mixin.entity.mob;
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
@@ -54,12 +52,5 @@ public abstract class WitherSkeletonEntityMixin extends AbstractSkeletonEntity {
         return original * index;
     }
 
-
-    // 修改凋零骷髅掉落头颅的概率
-    @Inject(method = "dropEquipment", at = @At("TAIL"))
-    private void dropHead(ServerWorld world, DamageSource source, boolean causedByPlayer, CallbackInfo ci) {
-        float dropRate = MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.witherSkeletonSkullDropRate;
-        if (random.nextInt() < dropRate)
-            this.dropItem(world, Items.WITHER_SKELETON_SKULL);
-    }
+    // 修改凋零骷髅掉落头颅的概率：1.21.11 中 WitherSkeletonEntity 不再重写 dropEquipment，相关注入已移至 LivingEntityMixin
 }

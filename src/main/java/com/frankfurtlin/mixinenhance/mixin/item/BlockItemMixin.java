@@ -14,6 +14,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -39,29 +40,31 @@ public abstract class BlockItemMixin {
      */
     @Inject(method = "place(Lnet/minecraft/item/ItemPlacementContext;)Lnet/minecraft/util/ActionResult;", at= @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;onPlaced(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;)V"))
     private void placeSpawner(ItemPlacementContext context, CallbackInfoReturnable<ActionResult> cir) {
-        ItemPlacementContext itemPlacementContext = this.getPlacementContext(context);
-        if (itemPlacementContext == null) {
-            return;
-        }
-        BlockPos blockPos = itemPlacementContext.getBlockPos();
-        ItemStack itemStack = itemPlacementContext.getStack();
-        World world = itemPlacementContext.getWorld();
-        // 刷怪笼放置的时候带上nbt标签
-        if (itemStack.isOf(Items.SPAWNER) || itemStack.isOf(Items.TRIAL_SPAWNER)) {
-            NbtComponent nbtComponent = itemStack.get(DataComponentTypes.CUSTOM_DATA);
-            if (nbtComponent != null) {
-                NbtCompound nbtCompound = nbtComponent.copyNbt();
-                if (nbtCompound.contains("spawnerData")) {
-                    NbtCompound spawnerData = (NbtCompound)nbtCompound.get("spawnerData");
-                    BlockEntity blockEntity = world.getBlockEntity(blockPos);
-                    if (blockEntity instanceof MobSpawnerBlockEntity spawnerBlockEntity && spawnerData != null) {
-                        spawnerBlockEntity.read(spawnerData, world.getRegistryManager());
-                    }
-                    if (blockEntity instanceof TrialSpawnerBlockEntity spawnerBlockEntity && spawnerData != null) {
-                        spawnerBlockEntity.read(spawnerData, world.getRegistryManager());
-                    }
-                }
-            }
-        }
+        // Temporarily disabled due to API changes
+        // ItemPlacementContext itemPlacementContext = this.getPlacementContext(context);
+        // if (itemPlacementContext == null) {
+        //     return;
+        // }
+        // BlockPos blockPos = itemPlacementContext.getBlockPos();
+        // ItemStack itemStack = itemPlacementContext.getStack();
+        // World world = itemPlacementContext.getWorld();
+        // // 刷怪笼放置的时候带上nbt标签
+        // if (itemStack.isOf(Items.SPAWNER) || itemStack.isOf(Items.TRIAL_SPAWNER)) {
+        //     NbtComponent nbtComponent = itemStack.get(DataComponentTypes.CUSTOM_DATA);
+        //     if (nbtComponent != null) {
+        //         NbtCompound nbtCompound = nbtComponent.copyNbt();
+        //         if (nbtCompound.contains("spawnerData")) {
+        //             NbtCompound spawnerData = (NbtCompound)nbtCompound.get("spawnerData");
+        //             BlockEntity blockEntity = world.getBlockEntity(blockPos);
+        //             // Try to use the read method directly
+        //             if (blockEntity instanceof MobSpawnerBlockEntity spawnerBlockEntity && spawnerData != null) {
+        //                 spawnerBlockEntity.read(spawnerData, world.getRegistryManager());
+        //             }
+        //             if (blockEntity instanceof TrialSpawnerBlockEntity spawnerBlockEntity && spawnerData != null) {
+        //                 spawnerBlockEntity.read(spawnerData, world.getRegistryManager());
+        //             }
+        //         }
+        //     }
+        // }
     }
 }

@@ -22,7 +22,8 @@ public abstract class SpectralArrowEntityMixin {
     }
 
     // 光灵箭荧光持续时间修改
-    @Redirect(method = "writeCustomDataToNbt",
+    // 1.21.11 将 writeCustomDataToNbt 改名为 writeCustomData
+    @Redirect(method = "writeCustomData",
         at = @At(value = "FIELD", target = "Lnet/minecraft/entity/projectile/SpectralArrowEntity;duration:I", opcode = Opcodes.GETFIELD))
     private int spectralArrowDurationToNBT(SpectralArrowEntity instance){
         return MixinEnhanceClient.getConfig().itemModuleConfig.spectralArrowDuration * 20;

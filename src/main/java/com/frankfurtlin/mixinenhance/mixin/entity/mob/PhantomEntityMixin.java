@@ -3,7 +3,7 @@ package com.frankfurtlin.mixinenhance.mixin.entity.mob;
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.FlyingEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PhantomEntity;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,10 +20,10 @@ import java.util.Objects;
  * @date 2024/6/21 15:27
  */
 @Mixin(PhantomEntity.class)
-public abstract class PhantomEntityMixin extends FlyingEntity {
+public abstract class PhantomEntityMixin extends MobEntity {
     @Shadow public abstract int getPhantomSize();
 
-    protected PhantomEntityMixin(EntityType<? extends FlyingEntity> entityType, World world) {
+    protected PhantomEntityMixin(EntityType<? extends MobEntity> entityType, World world) {
         super(entityType, world);
     }
 

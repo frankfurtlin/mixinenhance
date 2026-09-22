@@ -6,9 +6,12 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.mob.WitherSkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
@@ -40,7 +43,8 @@ public abstract class LivingEntityMixin {
     }
 
     // 玩家在水中不减速
-    @ModifyConstant(method = "travelInFluid", constant = @Constant(floatValue = 0.02f, ordinal = 0))
+    // 1.21.11 将 travelInFluid 拆分为 travelInWater / travelInLava
+    @ModifyConstant(method = "travelInWater", constant = @Constant(floatValue = 0.02f, ordinal = 0))
     private float enablePlayerNoSlowInWater(float constant){
         LivingEntity livingEntity = (LivingEntity) (Object)this;
         if(MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.enablePlayerNoSlowInWater && livingEntity instanceof PlayerEntity){
@@ -50,7 +54,8 @@ public abstract class LivingEntityMixin {
     }
 
     // 玩家在熔岩中不减速
-    @ModifyConstant(method = "travelInFluid", constant = @Constant(doubleValue = 0.5))
+    // 1.21.11 将 travelInFluid 拆分为 travelInWater / travelInLava
+    @ModifyConstant(method = "travelInLava", constant = @Constant(doubleValue = 0.5))
     private double enablePlayerNoSlowInLava(double constant){
         LivingEntity livingEntity = (LivingEntity) (Object)this;
         if(MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.enablePlayerNoSlowInLava && livingEntity instanceof PlayerEntity){
@@ -59,10 +64,23 @@ public abstract class LivingEntityMixin {
         return constant;
     }
 
+    // 修改凋零骷髅掉落头颅的概率
+    // 1.21.11 中 WitherSkeletonEntity 不再重写 dropEquipment，改在此处注入
+    @Inject(method = "dropEquipment", at = @At("TAIL"))
+    private void dropHead(ServerWorld world, DamageSource source, boolean causedByPlayer, CallbackInfo ci) {
+        LivingEntity livingEntity = (LivingEntity) (Object) this;
+        if (livingEntity instanceof WitherSkeletonEntity) {
+            float dropRate = MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.witherSkeletonSkullDropRate;
+            if (livingEntity.getRandom().nextInt() < dropRate) {
+                livingEntity.dropItem(world, Items.WITHER_SKELETON_SKULL);
+            }
+        }
+    }
+
     // 怪物死亡时掉落对应的刷怪笼
     @Inject(method = "onKilledBy", at = @At("TAIL"))
     private void injected(LivingEntity adversary, CallbackInfo ci) {
-        World world = ((LivingEntity) (Object) this).getWorld();
+        World world = ((LivingEntity) (Object) this).getEntityWorld();
         if (world.isClient()) {
             return;
         }

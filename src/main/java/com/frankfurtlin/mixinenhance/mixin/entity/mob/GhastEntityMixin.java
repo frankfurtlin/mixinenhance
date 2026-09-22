@@ -3,8 +3,8 @@ package com.frankfurtlin.mixinenhance.mixin.entity.mob;
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.mob.GhastEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -22,10 +22,10 @@ import java.util.Objects;
  * @date 2024/6/12 19:13
  */
 @Mixin(GhastEntity.class)
-public abstract class GhastEntityMixin extends FlyingEntity {
+public abstract class GhastEntityMixin extends MobEntity {
     @Shadow private int fireballStrength;
 
-    protected GhastEntityMixin(EntityType<? extends FlyingEntity> entityType, World world) {
+    protected GhastEntityMixin(EntityType<? extends MobEntity> entityType, World world) {
         super(entityType, world);
     }
 
