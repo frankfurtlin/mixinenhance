@@ -21,7 +21,11 @@ public class EntityModuleConfig {
     public static class MobConfig {
         @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 1, max = 10)
-        public int difficultyIndex = 1;                     // 难度系数(怪物死亡时掉落的经验、怪物的攻击力、单个区块怪物的数量）
+        public int difficultyIndex = 1;                     // 难度系数（怪物死亡时掉落的经验、单个区块怪物的数量）
+        @ConfigEntry.Gui.Tooltip
+        public double healthMultiplier = 1.0;               // 怪物血量倍率
+        @ConfigEntry.Gui.Tooltip
+        public double attackMultiplier = 1.0;               // 怪物攻击倍率（近战与远程伤害）
         @ConfigEntry.Gui.Tooltip
         public boolean enableMobArmorEnhancement = false;   // 是否启用怪物生成时盔甲强度增强（皮、金、锁链、铁、钻石、下届合金）
         @ConfigEntry.Gui.Tooltip
