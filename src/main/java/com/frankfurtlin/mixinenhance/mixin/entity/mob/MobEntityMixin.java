@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -39,13 +38,6 @@ public abstract class MobEntityMixin {
             chances.put(slot, MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.armorAndHandDropChance);
         }
         this.dropChances = new DropChances(chances);
-    }
-
-    // 根据难度系数修改怪物死亡时掉落的经验
-    // 26.3 中 getExperienceToDrop 更名为 getBaseExperienceReward
-    @Inject(method = "getBaseExperienceReward", at = @At(value = "RETURN"), cancellable = true)
-    private void difficultyIndex2XpDrop(CallbackInfoReturnable<Integer> cir) {
-        cir.setReturnValue(MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex * cir.getReturnValue());
     }
 
     // 修改怪物生成时自带盔甲的概率
@@ -138,12 +130,5 @@ public abstract class MobEntityMixin {
     @ModifyConstant(method = "enchantSpawnedArmor", constant = @Constant(floatValue = 0.5F))
     private float enchantmentArmorChance(float chance) {
         return MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enchantmentArmorChance;
-    }
-
-    // 根据难度系数修改单个区块怪物的数量
-    // 26.3 中 getMaxSpawnClusterSize 不再有常量 4（改为按最大生命值计算），改为放大返回值
-    @Inject(method = "getMaxSpawnClusterSize", at = @At("RETURN"), cancellable = true)
-    private void difficultyIndex2LimitPerChunk(CallbackInfoReturnable<Integer> cir) {
-        cir.setReturnValue(MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex * cir.getReturnValue());
     }
 }

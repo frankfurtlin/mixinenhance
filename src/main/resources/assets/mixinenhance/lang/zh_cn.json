@@ -113,8 +113,10 @@
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.noOverlay.@Tooltip": "是否启用玩家画面无遮挡（取消火焰效果等）",
 
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig": "怪物",
-    "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.difficultyIndex": "额外难度系数（1-10）",
-    "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.difficultyIndex.@Tooltip": "影响怪物死亡时掉落的经验、怪物的攻击力、单个区块怪物的数量",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.healthMultiplier": "怪物血量倍率",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.healthMultiplier.@Tooltip": "怪物血量倍率",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.attackMultiplier": "怪物攻击倍率",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.attackMultiplier.@Tooltip": "怪物攻击倍率（近战与远程伤害）",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.spawnEquipmentChance": "怪物生成时自带盔甲的概率（0-1）",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.spawnEquipmentChance.@Tooltip": "怪物生成时自带盔甲的概率（仍受区域难度、月相、游戏天数等影响）",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.enableMobArmorEnhancement": "启用怪物生成时盔甲强度增强",

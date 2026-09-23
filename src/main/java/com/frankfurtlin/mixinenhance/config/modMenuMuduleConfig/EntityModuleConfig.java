@@ -20,9 +20,6 @@ public class EntityModuleConfig {
     }
     public static class MobConfig {
         @ConfigEntry.Gui.Tooltip
-        @ConfigEntry.BoundedDiscrete(min = 1, max = 10)
-        public int difficultyIndex = 1;                     // 难度系数（怪物死亡时掉落的经验、单个区块怪物的数量）
-        @ConfigEntry.Gui.Tooltip
         public double healthMultiplier = 1.0;               // 怪物血量倍率
         @ConfigEntry.Gui.Tooltip
         public double attackMultiplier = 1.0;               // 怪物攻击倍率（近战与远程伤害）

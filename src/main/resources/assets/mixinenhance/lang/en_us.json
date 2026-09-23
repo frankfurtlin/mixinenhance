@@ -113,8 +113,10 @@
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.noOverlay.@Tooltip": "noOverlay",
 
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig": "mob",
-    "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.difficultyIndex": "difficultyIndex",
-    "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.difficultyIndex.@Tooltip": "difficultyIndex",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.healthMultiplier": "healthMultiplier",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.healthMultiplier.@Tooltip": "healthMultiplier",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.attackMultiplier": "attackMultiplier",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.attackMultiplier.@Tooltip": "attackMultiplier",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.spawnEquipmentChance": "spawnEquipmentChance",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.spawnEquipmentChance.@Tooltip": "spawnEquipmentChance",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.enableMobArmorEnhancement": "enableMobArmorEnhancement",
