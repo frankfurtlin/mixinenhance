@@ -1,20 +1,9 @@
 package com.frankfurtlin.mixinenhance.mixin.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.MobSpawnerBlockEntity;
-import net.minecraft.block.entity.TrialSpawnerBlockEntity;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.NbtComponent;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.registry.Registry;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -32,14 +21,14 @@ public abstract class BlockItemMixin {
 
     @Shadow public abstract Block getBlock();
 
-    @Shadow public abstract @Nullable ItemPlacementContext getPlacementContext(ItemPlacementContext context);
+    @Shadow public abstract @Nullable BlockPlaceContext updatePlacementContext(BlockPlaceContext context);
 
     /**
      * @author frankslin
      * @reason 放置方块
      */
-    @Inject(method = "place(Lnet/minecraft/item/ItemPlacementContext;)Lnet/minecraft/util/ActionResult;", at= @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;onPlaced(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;)V"))
-    private void placeSpawner(ItemPlacementContext context, CallbackInfoReturnable<ActionResult> cir) {
+    @Inject(method = "place(Lnet/minecraft/world/item/context/BlockPlaceContext;)Lnet/minecraft/world/InteractionResult;", at= @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/Block;setPlacedBy(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;)V"))
+    private void placeSpawner(BlockPlaceContext context, CallbackInfoReturnable<InteractionResult> cir) {
         // Temporarily disabled due to API changes
         // ItemPlacementContext itemPlacementContext = this.getPlacementContext(context);
         // if (itemPlacementContext == null) {

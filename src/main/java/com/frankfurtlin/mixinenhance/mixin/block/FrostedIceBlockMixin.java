@@ -1,11 +1,10 @@
 package com.frankfurtlin.mixinenhance.mixin.block;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FrostedIceBlock;
-import net.minecraft.block.IceBlock;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.FrostedIceBlock;
+import net.minecraft.world.level.block.IceBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -17,23 +16,23 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  */
 @Mixin(FrostedIceBlock.class)
 public abstract class FrostedIceBlockMixin extends IceBlock  {
-    public FrostedIceBlockMixin(Settings settings) {
+    public FrostedIceBlockMixin(Properties settings) {
         super(settings);
     }
 
     // 在地狱的时候霜冰化成熔岩
-    @Redirect(method = "increaseAge", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/FrostedIceBlock;melt(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V"))
-    private void increaseAge(FrostedIceBlock instance, BlockState blockState, World world, BlockPos blockPos) {
+    @Redirect(method = "slightlyMelt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/FrostedIceBlock;melt(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"))
+    private void increaseAge(FrostedIceBlock instance, BlockState blockState, Level world, BlockPos blockPos) {
         // Temporarily disabled due to API changes
-        world.setBlockState(blockPos, getMeltedState());
-        world.updateNeighbor(blockPos, getMeltedState().getBlock(), null);
+        world.setBlockAndUpdate(blockPos, meltsInto());
+        world.neighborChanged(blockPos, meltsInto().getBlock(), null);
     }
 
     // 在地狱的时候霜冰化成熔岩
-    @Redirect(method = "neighborUpdate", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/FrostedIceBlock;melt(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V"))
-    private void neighborUpdate(FrostedIceBlock instance, BlockState blockState, World world, BlockPos blockPos) {
+    @Redirect(method = "neighborChanged", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/FrostedIceBlock;melt(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"))
+    private void neighborUpdate(FrostedIceBlock instance, BlockState blockState, Level world, BlockPos blockPos) {
         // Temporarily disabled due to API changes
-        world.setBlockState(blockPos, getMeltedState());
-        world.updateNeighbor(blockPos, getMeltedState().getBlock(), null);
+        world.setBlockAndUpdate(blockPos, meltsInto());
+        world.neighborChanged(blockPos, meltsInto().getBlock(), null);
     }
 }

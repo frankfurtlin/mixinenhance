@@ -1,7 +1,7 @@
 package com.frankfurtlin.mixinenhance.mixin.entity;
 
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
-import net.minecraft.entity.TntEntity;
+import net.minecraft.world.entity.item.PrimedTnt;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @version 1.0
  * @date 2024/6/12 7:37
  */
-@Mixin(TntEntity.class)
+@Mixin(PrimedTnt.class)
 public abstract class TntEntityMixin{
 
     @Shadow

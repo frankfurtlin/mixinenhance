@@ -1,20 +1,14 @@
 package com.frankfurtlin.mixinenhance.mixin.entity;
 
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.spawner.MobSpawnerEntry;
-import net.minecraft.block.spawner.MobSpawnerLogic;
-import net.minecraft.entity.*;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.context.LootContextTypes;
-import net.minecraft.loot.context.LootWorldContext;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BaseSpawner;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.SpawnData;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -29,29 +23,29 @@ import java.util.List;
  * @version 1.0
  * @date 2025/4/18 21:42
  */
-@Mixin(MobSpawnerLogic.class)
+@Mixin(BaseSpawner.class)
 public abstract class MobSpawnerLogicMixin {
     @Shadow
-    protected abstract MobSpawnerEntry getSpawnEntry(@Nullable World world, Random random, BlockPos pos);
+    protected abstract SpawnData getOrCreateNextSpawnData(@Nullable Level world, RandomSource random, BlockPos pos);
 
 
     // 刷怪笼改造成刷怪塔(刷怪笼上面方块需要是红石块)
     @Inject(method = "serverTick", at = @At("HEAD"), cancellable = true)
-    private void enableSpawnerFarm(ServerWorld world, BlockPos pos, CallbackInfo ci) {
+    private void enableSpawnerFarm(ServerLevel world, BlockPos pos, CallbackInfo ci) {
         if (MixinEnhanceClient.getConfig().defaultModuleConfig.enableSpawnerFarm) {
             // 刷怪笼上面方块需要是红石块
-            if (!(world.getBlockState(pos.up()).getBlock() == Blocks.REDSTONE_BLOCK)) {
+            if (!(world.getBlockState(pos.above()).getBlock() == Blocks.REDSTONE_BLOCK)) {
                 return;
             }
 
-            Random random = world.getRandom();
+            RandomSource random = world.getRandom();
             if (random.nextInt(20 * 8 / MixinEnhanceClient.getConfig().defaultModuleConfig.spawnerFarmRate) >= 1) {
                 ci.cancel();
                 return;
             }
-            MobSpawnerEntry mobSpawnerEntry = this.getSpawnEntry(world, random, pos);
+            SpawnData mobSpawnerEntry = this.getOrCreateNextSpawnData(world, random, pos);
 
-            NbtCompound nbtCompound = mobSpawnerEntry.getNbt();
+            CompoundTag nbtCompound = mobSpawnerEntry.getEntityToSpawn();
             // Temporarily simplified due to API changes
             ci.cancel();
         }

@@ -1,12 +1,11 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.mob;
 
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
-import net.minecraft.entity.EquipmentDropChances;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.util.Util;
+import net.minecraft.world.entity.DropChances;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -18,6 +17,8 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -25,26 +26,30 @@ import java.util.Random;
  * @version 1.0
  * @date 2024/6/12 15:32
  */
-@Mixin(MobEntity.class)
+@Mixin(Mob.class)
 public abstract class MobEntityMixin {
     @Shadow
-    private EquipmentDropChances equipmentDropChances;
+    private DropChances dropChances;
 
     // 修改怪物死亡时工具及盔甲掉落的概率
     @Inject(method = "<init>", at = @At("TAIL"))
     private void onInit(CallbackInfo ci) {
-        this.equipmentDropChances = new EquipmentDropChances(Util.mapEnum(EquipmentSlot.class,
-            slot -> MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.armorAndHandDropChance));
+        Map<EquipmentSlot, Float> chances = new EnumMap<>(EquipmentSlot.class);
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            chances.put(slot, MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.armorAndHandDropChance);
+        }
+        this.dropChances = new DropChances(chances);
     }
 
     // 根据难度系数修改怪物死亡时掉落的经验
-    @Inject(method = "getExperienceToDrop", at = @At(value = "RETURN"), cancellable = true)
+    // 26.3 中 getExperienceToDrop 更名为 getBaseExperienceReward
+    @Inject(method = "getBaseExperienceReward", at = @At(value = "RETURN"), cancellable = true)
     private void difficultyIndex2XpDrop(CallbackInfoReturnable<Integer> cir) {
         cir.setReturnValue(MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex * cir.getReturnValue());
     }
 
     // 修改怪物生成时自带盔甲的概率
-    @ModifyConstant(method = "initEquipment", constant = @Constant(floatValue = 0.15F))
+    @ModifyConstant(method = "populateDefaultEquipmentSlots", constant = @Constant(floatValue = 0.15F))
     private float spawnEquipmentChance(float chance) {
         return MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.spawnEquipmentChance;
     }
@@ -123,20 +128,22 @@ public abstract class MobEntityMixin {
     }
 
     // 修改怪物生成时主手工具附魔的概率
-    @ModifyConstant(method = "enchantMainHandItem", constant = @Constant(floatValue = 0.25F))
+    @ModifyConstant(method = "enchantSpawnedWeapon", constant = @Constant(floatValue = 0.25F))
     private float enchantMainHandItemChance(float chance) {
         return MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enchantmentMainHandChance;
     }
 
     // 修改怪物生成时盔甲附魔的概率
-    @ModifyConstant(method = "enchantEquipment*", constant = @Constant(floatValue = 0.5F))
+    // 26.3 中 0.5F 常量位于 enchantSpawnedArmor
+    @ModifyConstant(method = "enchantSpawnedArmor", constant = @Constant(floatValue = 0.5F))
     private float enchantmentArmorChance(float chance) {
         return MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enchantmentArmorChance;
     }
 
     // 根据难度系数修改单个区块怪物的数量
-    @ModifyConstant(method = "getLimitPerChunk", constant = @Constant(intValue = 4))
-    private int difficultyIndex2LimitPerChunk(int limit) {
-        return MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex * limit;
+    // 26.3 中 getMaxSpawnClusterSize 不再有常量 4（改为按最大生命值计算），改为放大返回值
+    @Inject(method = "getMaxSpawnClusterSize", at = @At("RETURN"), cancellable = true)
+    private void difficultyIndex2LimitPerChunk(CallbackInfoReturnable<Integer> cir) {
+        cir.setReturnValue(MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.difficultyIndex * cir.getReturnValue());
     }
 }

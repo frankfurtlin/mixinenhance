@@ -1,8 +1,8 @@
 package com.frankfurtlin.mixinenhance.mixin.block.vault;
 
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.VaultBlock;
+import net.minecraft.world.level.block.VaultBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public abstract class VaultBlockMixin {
     // 降低硬度便于精准采集挖掘
     @ModifyVariable(method = "<init>", at = @At("HEAD"), argsOnly = true)
-    private static AbstractBlock.Settings modifyStrength(AbstractBlock.Settings settings) {
+    private static BlockBehaviour.Properties modifyStrength(BlockBehaviour.Properties settings) {
         if (MixinEnhanceClient.getConfig().blockModuleConfig.silkTouchConfig.enableVaultDropWithSilkTouch) {
             return settings.strength(5);
         }

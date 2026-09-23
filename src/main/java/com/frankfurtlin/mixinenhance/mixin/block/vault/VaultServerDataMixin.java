@@ -1,7 +1,7 @@
 package com.frankfurtlin.mixinenhance.mixin.block.vault;
 
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
-import net.minecraft.block.vault.VaultServerData;
+import net.minecraft.world.level.block.entity.vault.VaultServerData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

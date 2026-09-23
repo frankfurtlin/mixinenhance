@@ -1,21 +1,21 @@
 package com.frankfurtlin.mixinenhance.mixin.entity;
 
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.MobSpawnerBlockEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.WitherSkeletonEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.skeleton.WitherSkeleton;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -28,18 +28,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
     // 不死图腾在背包中生效
-    @Redirect(method = "tryUseDeathProtector", at = @At(value = "INVOKE",
-        target = "Lnet/minecraft/entity/LivingEntity;getStackInHand(Lnet/minecraft/util/Hand;)Lnet/minecraft/item/ItemStack;"))
-    private ItemStack inventoryTotemEnabled(LivingEntity livingEntity, Hand hand) {
-        if (MixinEnhanceClient.getConfig().itemModuleConfig.inventoryTotemEnabled && livingEntity instanceof PlayerEntity) {
-            for (int i = 0; i < ((PlayerEntity) livingEntity).getInventory().size(); i++) {
-                ItemStack itemStack = ((PlayerEntity) livingEntity).getInventory().getStack(i);
-                if (itemStack.isOf(Items.TOTEM_OF_UNDYING)) {
+    @Redirect(method = "checkTotemDeathProtection", at = @At(value = "INVOKE",
+        target = "Lnet/minecraft/world/entity/LivingEntity;getItemInHand(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;"))
+    private ItemStack inventoryTotemEnabled(LivingEntity livingEntity, InteractionHand hand) {
+        if (MixinEnhanceClient.getConfig().itemModuleConfig.inventoryTotemEnabled && livingEntity instanceof Player) {
+            for (int i = 0; i < ((Player) livingEntity).getInventory().getContainerSize(); i++) {
+                ItemStack itemStack = ((Player) livingEntity).getInventory().getItem(i);
+                if (itemStack.is(Items.TOTEM_OF_UNDYING)) {
                     return itemStack;
                 }
             }
         }
-        return livingEntity.getStackInHand(hand);
+        return livingEntity.getItemInHand(hand);
     }
 
     // 玩家在水中不减速
@@ -47,7 +47,7 @@ public abstract class LivingEntityMixin {
     @ModifyConstant(method = "travelInWater", constant = @Constant(floatValue = 0.02f, ordinal = 0))
     private float enablePlayerNoSlowInWater(float constant){
         LivingEntity livingEntity = (LivingEntity) (Object)this;
-        if(MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.enablePlayerNoSlowInWater && livingEntity instanceof PlayerEntity){
+        if(MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.enablePlayerNoSlowInWater && livingEntity instanceof Player){
             return 0.04f;
         }
         return constant;
@@ -58,7 +58,7 @@ public abstract class LivingEntityMixin {
     @ModifyConstant(method = "travelInLava", constant = @Constant(doubleValue = 0.5))
     private double enablePlayerNoSlowInLava(double constant){
         LivingEntity livingEntity = (LivingEntity) (Object)this;
-        if(MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.enablePlayerNoSlowInLava && livingEntity instanceof PlayerEntity){
+        if(MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.enablePlayerNoSlowInLava && livingEntity instanceof Player){
             return 0.9;
         }
         return constant;
@@ -66,34 +66,34 @@ public abstract class LivingEntityMixin {
 
     // 修改凋零骷髅掉落头颅的概率
     // 1.21.11 中 WitherSkeletonEntity 不再重写 dropEquipment，改在此处注入
-    @Inject(method = "dropEquipment", at = @At("TAIL"))
-    private void dropHead(ServerWorld world, DamageSource source, boolean causedByPlayer, CallbackInfo ci) {
+    @Inject(method = "dropCustomDeathLoot", at = @At("TAIL"))
+    private void dropHead(ServerLevel world, DamageSource source, boolean causedByPlayer, CallbackInfo ci) {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
-        if (livingEntity instanceof WitherSkeletonEntity) {
+        if (livingEntity instanceof WitherSkeleton) {
             float dropRate = MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.witherSkeletonSkullDropRate;
             if (livingEntity.getRandom().nextInt() < dropRate) {
-                livingEntity.dropItem(world, Items.WITHER_SKELETON_SKULL);
+                livingEntity.spawnAtLocation(world, Items.WITHER_SKELETON_SKULL);
             }
         }
     }
 
     // 怪物死亡时掉落对应的刷怪笼
-    @Inject(method = "onKilledBy", at = @At("TAIL"))
+    @Inject(method = "createWitherRose", at = @At("TAIL"))
     private void injected(LivingEntity adversary, CallbackInfo ci) {
-        World world = ((LivingEntity) (Object) this).getEntityWorld();
-        if (world.isClient()) {
+        Level world = ((LivingEntity) (Object) this).level();
+        if (world.isClientSide()) {
             return;
         }
-        if (adversary instanceof PlayerEntity) {
-            Random random = world.getRandom();
+        if (adversary instanceof Player) {
+            RandomSource random = world.getRandom();
             if (random.nextDouble() < MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.dieWithSpawner) {
-                BlockPos blockPos = ((LivingEntity) (Object) this).getBlockPos();
+                BlockPos blockPos = ((LivingEntity) (Object) this).blockPosition();
                 if (world.getBlockState(blockPos).isAir()) {
-                    world.setBlockState(blockPos, Blocks.SPAWNER.getDefaultState(), Block.NOTIFY_ALL);
+                    world.setBlock(blockPos, Blocks.SPAWNER.defaultBlockState(), Block.UPDATE_ALL);
                 }
                 BlockEntity blockEntity = world.getBlockEntity(blockPos);
-                if (blockEntity instanceof MobSpawnerBlockEntity mobSpawnerBlockEntity) {
-                    mobSpawnerBlockEntity.setEntityType(((LivingEntity) (Object) this).getType(), random);
+                if (blockEntity instanceof SpawnerBlockEntity mobSpawnerBlockEntity) {
+                    mobSpawnerBlockEntity.setEntityId(((LivingEntity) (Object) this).getType(), random);
                 }
             }
         }
