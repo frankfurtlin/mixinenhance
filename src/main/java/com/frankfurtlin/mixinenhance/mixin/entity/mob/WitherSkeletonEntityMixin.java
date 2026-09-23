@@ -12,9 +12,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
@@ -45,11 +43,4 @@ public abstract class WitherSkeletonEntityMixin extends AbstractSkeleton {
         }
     }
 
-    // 根据攻击倍率修改凋零骷髅的攻击力
-    @ModifyConstant(method = "finalizeSpawn", constant = @Constant(doubleValue = 4.0f))
-    private double shootAt(double original) {
-        return original * MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.attackMultiplier;
-    }
-
-    // 修改凋零骷髅掉落头颅的概率：1.21.11 中 WitherSkeletonEntity 不再重写 dropEquipment，相关注入已移至 LivingEntityMixin
 }

@@ -37,9 +37,4 @@ public abstract class DrownedEntityMixin {
         return 1 - MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.drownedSpawnWithTool;
     }
 
-    // 根据攻击倍率修改溺尸的三叉戟伤害
-    @ModifyConstant(method = "performRangedAttack", constant = @Constant(floatValue = 1.6f))
-    private float shootAt(float original) {
-        return (float) (original * MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.attackMultiplier);
-    }
 }
