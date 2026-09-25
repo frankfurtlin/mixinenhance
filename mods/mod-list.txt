@@ -1,0 +1,76 @@
+﻿# mixinenhance 整合包 - 需要跟随版本更新的模组清单
+#
+# 用法：每行一个 Modrinth 项目，格式为：
+#     slug                 仅用 slug 直查（推荐，命中率最高）
+#     slug|搜索关键词      slug 查不到时，用关键词搜索兜底
+#                          （部分模组的 id 是连写的，如 explosiveenhancement，
+#                            直接搜不到，需要补英文名 Explosive Enhancement）
+#   # 开头为注释；新增模组加一行，剔除模组删一行即可。
+#
+# 已剔除及原因：
+#   已内置到 mixinenhance 本体，无需独立模组：
+#     fallingtree        -> 砍树整棵倒下（enableFallingTree）
+#     diggusmaximus      -> 连锁挖矿（enableVeinMining）
+#     freecam            -> 自由视角（enableFreeCam）
+#   整合包不需要（地形与群系 / 建筑结构）：
+#     terralith, tectonic, biomesoplenty, terrestria, nullscape, amplified_nether, cinderscapes,
+#     repurposed_structures, ctov, dungeons_arise, mr_dungeons_andtaverns, additionalstructures,
+#     t_and_t, mr_cherry_villages, villagesandpillages
+
+fabric-api
+modmenu
+cloth-config
+
+# 性能优化
+sodium
+sodium-extra
+lithium
+ferritecore
+dynamic_fps
+indium|Indium
+
+# 光影与视觉
+iris
+continuity
+visuality
+snowyleavesplus|SnowyLeavesPlus
+explosiveenhancement|Explosive Enhancement
+dynamiclights|Dynamic Lights
+gammautils|Gamma Utils
+iseelava|I See Lava
+
+# 地图与导航
+xaerominimap|Xaero's Minimap
+xaeroworldmap|Xaero's World Map
+waystones
+
+# 信息与界面
+jei
+jade
+betterf3|BetterF3
+simplehudenhanced|Simple Hud Enhanced
+appleskin
+totemcounter
+notenoughanimations|NotEnoughAnimations
+
+# 实用与便利
+travelersbackpack
+stackrefill|Stack Refill
+copper_golem|Copper Golem
+
+# 依赖库
+architectury
+cardinal-components
+geckolib
+azurelib
+balm-fabric|Balm
+collective
+cristellib|Cristel Lib
+glitchcore
+lithostitched
+midnightlib
+terrablender
+ukulib
+yungsapi|YUNG's API
+tcdcommons
+betterstats
