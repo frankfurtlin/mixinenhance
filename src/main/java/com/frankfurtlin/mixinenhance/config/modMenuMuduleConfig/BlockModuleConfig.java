@@ -33,4 +33,8 @@ public class BlockModuleConfig {
     public int trialSpawnerCoolDown = 30;                            // 试炼刷怪笼的冷却时间，单位分钟
     @ConfigEntry.Gui.Tooltip
     public boolean unLockVaultReward = false;                        // 是否启用宝库无限兑换
+    @ConfigEntry.Gui.Tooltip
+    public boolean enableFallingTree = false;                        // 是否启用砍树时整棵树一起倒下
+    @ConfigEntry.Gui.Tooltip
+    public boolean enableVeinMining = false;                         // 是否启用挖掘矿石时连锁挖掉相连的同种矿石
 }

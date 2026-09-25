@@ -4,6 +4,8 @@
     "text.autoconfig.mixinenhance.category.item": "item",
     "text.autoconfig.mixinenhance.category.block": "block",
     "text.autoconfig.mixinenhance.category.entity": "entity",
+    "category.mixinenhance.main": "MixinEnhance",
+    "key.mixinenhance.freecam": "Toggle Free Camera",
 
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.keepInventory": "keepInventory",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.keepInventory.@Tooltip": "keepInventory",
@@ -101,6 +103,10 @@
     "text.autoconfig.mixinenhance.option.blockModuleConfig.trialSpawnerCoolDown.@Tooltip": "trialSpawnerCoolDown",
     "text.autoconfig.mixinenhance.option.blockModuleConfig.unLockVaultReward": "unLockVaultReward",
     "text.autoconfig.mixinenhance.option.blockModuleConfig.unLockVaultReward.@Tooltip": "unLockVaultReward",
+    "text.autoconfig.mixinenhance.option.blockModuleConfig.enableFallingTree": "enableFallingTree",
+    "text.autoconfig.mixinenhance.option.blockModuleConfig.enableFallingTree.@Tooltip": "enableFallingTree",
+    "text.autoconfig.mixinenhance.option.blockModuleConfig.enableVeinMining": "enableVeinMining",
+    "text.autoconfig.mixinenhance.option.blockModuleConfig.enableVeinMining.@Tooltip": "enableVeinMining",
 
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig": "player",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enablePlayerNoSlowInWater": "enablePlayerNoSlowInWater",
@@ -111,6 +117,8 @@
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.fluidVisible.@Tooltip": "fluidVisible",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.noOverlay": "noOverlay",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.noOverlay.@Tooltip": "noOverlay",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableFreeCam": "enableFreeCam",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableFreeCam.@Tooltip": "enableFreeCam",
 
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig": "mob",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.healthMultiplier": "healthMultiplier",

@@ -4,6 +4,8 @@
     "text.autoconfig.mixinenhance.category.item": "物品",
     "text.autoconfig.mixinenhance.category.block": "方块",
     "text.autoconfig.mixinenhance.category.entity": "实体",
+    "category.mixinenhance.main": "原版游戏增强",
+    "key.mixinenhance.freecam": "切换自由视角",
 
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.keepInventory": "启用死亡不掉落",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.keepInventory.@Tooltip": "是否启用死亡不掉落",
@@ -101,6 +103,10 @@
     "text.autoconfig.mixinenhance.option.blockModuleConfig.trialSpawnerCoolDown.@Tooltip": "试炼刷怪笼冷却时间，单位分钟",
     "text.autoconfig.mixinenhance.option.blockModuleConfig.unLockVaultReward": "启用宝库无限兑换",
     "text.autoconfig.mixinenhance.option.blockModuleConfig.unLockVaultReward.@Tooltip": "是否启用宝库无限兑换",
+    "text.autoconfig.mixinenhance.option.blockModuleConfig.enableFallingTree": "启用砍树时整棵树倒下",
+    "text.autoconfig.mixinenhance.option.blockModuleConfig.enableFallingTree.@Tooltip": "破坏原木时，相连的同种原木一起被砍倒（仅生存模式生效）",
+    "text.autoconfig.mixinenhance.option.blockModuleConfig.enableVeinMining": "启用连锁挖矿",
+    "text.autoconfig.mixinenhance.option.blockModuleConfig.enableVeinMining.@Tooltip": "破坏矿石时，相连的同种矿石一起被挖掉（仅生存模式生效）",
 
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig": "玩家",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enablePlayerNoSlowInWater": "启用玩家水中移速不变",
@@ -111,6 +117,8 @@
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.fluidVisible.@Tooltip": "是否启用玩家在水中/熔岩清澈的观察",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.noOverlay": "启用玩家画面无遮挡",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.noOverlay.@Tooltip": "是否启用玩家画面无遮挡（取消火焰效果等）",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableFreeCam": "启用自由视角",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableFreeCam.@Tooltip": "按 F4 切换自由视角，视角脱离身体飞行，身体留在原地",
 
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig": "怪物",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.healthMultiplier": "怪物血量倍率",

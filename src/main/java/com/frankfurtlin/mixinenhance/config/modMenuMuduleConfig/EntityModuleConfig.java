@@ -17,6 +17,8 @@ public class EntityModuleConfig {
         public boolean fluidVisible = false;                // 是否启用玩家在水中/熔岩清澈的观察
         @ConfigEntry.Gui.Tooltip
         public boolean noOverlay = false;                   // 是否启用玩家视野无遮挡
+        @ConfigEntry.Gui.Tooltip
+        public boolean enableFreeCam = false;               // 是否启用自由视角（按键切换，脱离身体飞行）
     }
     public static class MobConfig {
         @ConfigEntry.Gui.Tooltip
