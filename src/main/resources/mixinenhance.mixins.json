@@ -44,14 +44,17 @@
         "entity.projectile.SpectralArrowEntityMixin",
         "item.BlockItemMixin",
         "item.ItemStackMixin",
-        "item.PotionItemMixin"
+        "item.PotionItemMixin",
+        "server.ChunkMapMixin"
     ],
     "client": [
         "IntegratedServerLoaderMixin",
         "enchantment.AnvilScreenmixin",
         "entity.ClientPlayerEntityMixin",
         "render.BackgroundRendererMixin",
-        "render.InGameOverlayRendererMixin"
+        "render.CameraMixin",
+        "render.InGameOverlayRendererMixin",
+        "client.KeyboardInputMixin"
     ],
     "injectors": {
         "defaultRequire": 1
