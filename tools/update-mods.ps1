@@ -202,6 +202,19 @@ Write-Host ""
 $results = @()
 $index = 0
 
+# 「slug -> 文件名」映射：记录本次每个模组对应的文件；
+# 下次运行时若发现同一模组换了文件名（即出了新版本），就删掉旧文件，避免多版本共存冲突
+$mapFile = Join-Path $OutDir '.mod-files.json'
+$newMap = @{}
+$oldMap = @{}
+if (Test-Path $mapFile) {
+    try {
+        $json = Get-Content $mapFile -Encoding UTF8 -Raw | ConvertFrom-Json
+        if ($json) { $json.PSObject.Properties | ForEach-Object { $oldMap[$_.Name] = $_.Value } }
+    }
+    catch { }
+}
+
 foreach ($entry in $entries) {
     $index++
     # 条目支持 "slug|搜索关键词"：前者直查项目，后者仅作搜索兜底
@@ -277,10 +290,34 @@ foreach ($entry in $entries) {
         }
     }
 
+    if ($destName) { $newMap[$slug] = $destName }
+
     $results += [pscustomobject]@{
         清单项 = $slug; 模组名 = $title; 状态 = $status
         版本 = $versionLabel; 文件 = $destName; 项目 = $projLabel; 来源 = $source
     }
+}
+
+# 清理被新版本替换掉的旧文件，并写回映射供下次使用
+if (-not $DryRun) {
+    $removed = @()
+    foreach ($key in $newMap.Keys) {
+        $oldName = $oldMap[$key]
+        $newName = $newMap[$key]
+        if ($oldName -and $newName -and ($oldName -ne $newName)) {
+            $oldPath = Join-Path $OutDir $oldName
+            if (Test-Path $oldPath) {
+                Remove-Item $oldPath -Force
+                $removed += $oldName
+            }
+        }
+    }
+    if ($removed.Count -gt 0) {
+        Write-Host ""
+        Write-Host "已清理旧版本 $($removed.Count) 个:" -ForegroundColor DarkYellow
+        $removed | ForEach-Object { Write-Host "  - $_" -ForegroundColor DarkYellow }
+    }
+    $newMap | ConvertTo-Json | Set-Content -Path $mapFile -Encoding UTF8
 }
 
 Write-Host ""
