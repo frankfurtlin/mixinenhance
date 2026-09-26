@@ -71,7 +71,7 @@ public abstract class LivingEntityMixin {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
         if (livingEntity instanceof WitherSkeleton) {
             float dropRate = MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.witherSkeletonSkullDropRate;
-            if (livingEntity.getRandom().nextInt() < dropRate) {
+            if (livingEntity.getRandom().nextFloat() < dropRate) {
                 livingEntity.spawnAtLocation(world, Items.WITHER_SKELETON_SKULL);
             }
         }
