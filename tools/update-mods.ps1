@@ -79,19 +79,33 @@ if (-not $OutDir) { $OutDir = Join-Path (Join-Path $projectRoot 'mods') $GameVer
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 function Invoke-Modrinth {
-    param([string]$Path)
-    try { return Invoke-RestMethod -Uri "$ModrinthBase/$Path" -Headers $Headers -TimeoutSec 30 }
-    catch { return $null }
+    param([string]$Path, [int]$Retries = 2)
+    for ($i = 0; $i -le $Retries; $i++) {
+        try {
+            return Invoke-RestMethod -Uri "$ModrinthBase/$Path" -Headers $Headers -TimeoutSec 30
+        }
+        catch {
+            if ($i -eq $Retries) { return $null }
+            Start-Sleep -Milliseconds 600   # 网络抖动：退避后重试
+        }
+    }
+    return $null
 }
 
 function Invoke-CurseForge {
-    param([string]$Path)
+    param([string]$Path, [int]$Retries = 2)
     if (-not $CurseForgeApiKey) { return $null }
-    try {
-        return Invoke-RestMethod -Uri "$CurseForgeBase/$Path" `
-            -Headers @{ 'x-api-key' = $CurseForgeApiKey; 'Accept' = 'application/json' } -TimeoutSec 30
+    for ($i = 0; $i -le $Retries; $i++) {
+        try {
+            return Invoke-RestMethod -Uri "$CurseForgeBase/$Path" `
+                -Headers @{ 'x-api-key' = $CurseForgeApiKey; 'Accept' = 'application/json' } -TimeoutSec 30
+        }
+        catch {
+            if ($i -eq $Retries) { return $null }
+            Start-Sleep -Milliseconds 600
+        }
     }
-    catch { return $null }
+    return $null
 }
 
 # ---------- Modrinth ----------
@@ -279,13 +293,26 @@ foreach ($entry in $entries) {
         $status = '已存在'
     }
     else {
-        try {
-            Invoke-WebRequest -Uri $downloadUrl -OutFile $dest -Headers $Headers -TimeoutSec 180
+        $downloaded = $false
+        $lastError = ''
+        for ($attempt = 1; $attempt -le 3 -and -not $downloaded; $attempt++) {
+            try {
+                Invoke-WebRequest -Uri $downloadUrl -OutFile $dest -Headers $Headers -TimeoutSec 180
+                $downloaded = $true
+            }
+            catch {
+                $lastError = $_.Exception.Message
+                if ($attempt -lt 3) { Start-Sleep -Seconds 1 }
+            }
+        }
+        if ($downloaded) {
             Write-Host "  -> 下载完成[$source]: $destName" -ForegroundColor Green
             $status = '成功'
         }
-        catch {
-            Write-Host "  -> 下载失败: $($_.Exception.Message)" -ForegroundColor Red
+        else {
+            # 清理残留的不完整文件，避免下次被误判为「已存在」
+            if (Test-Path $dest) { Remove-Item $dest -Force -ErrorAction SilentlyContinue }
+            Write-Host "  -> 下载失败(已重试3次): $lastError" -ForegroundColor Red
             $status = '下载失败'
         }
     }
