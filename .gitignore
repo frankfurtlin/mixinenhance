@@ -118,6 +118,10 @@ run/
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
 
-# 模组下载报告与版本映射（由 tools/update-mods.ps1 每次运行时重新生成）
+# 模组下载报告与版本映射（由 tools/update-mods.py 每次运行时重新生成）
 download-report.csv
 .mod-files.json
+
+# Python
+__pycache__/
+*.pyc
