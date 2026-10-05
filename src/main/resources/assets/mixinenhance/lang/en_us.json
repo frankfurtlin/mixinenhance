@@ -119,6 +119,8 @@
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.noOverlay.@Tooltip": "noOverlay",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableFreeCam": "enableFreeCam",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableFreeCam.@Tooltip": "enableFreeCam",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableTotemCounter": "enableTotemCounter",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableTotemCounter.@Tooltip": "enableTotemCounter",
 
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig": "mob",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.healthMultiplier": "healthMultiplier",

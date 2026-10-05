@@ -119,6 +119,8 @@
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.noOverlay.@Tooltip": "是否启用玩家画面无遮挡（取消火焰效果等）",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableFreeCam": "启用自由视角",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableFreeCam.@Tooltip": "按 F4 切换自由视角，视角脱离身体飞行，身体留在原地",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableTotemCounter": "启用图腾计数显示",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableTotemCounter.@Tooltip": "在经验条上方显示背包与副手中不死图腾的数量",
 
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig": "怪物",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.healthMultiplier": "怪物血量倍率",

@@ -1,6 +1,7 @@
 package com.frankfurtlin.mixinenhance;
 
 import com.frankfurtlin.mixinenhance.client.FreeCamState;
+import com.frankfurtlin.mixinenhance.client.TotemDisplay;
 import com.frankfurtlin.mixinenhance.config.ModMenuConfig;
 import com.mojang.blaze3d.platform.InputConstants;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -70,5 +71,8 @@ public class MixinEnhanceClient implements ClientModInitializer {
             FreeCamState.isActive() ? InteractionResult.FAIL : InteractionResult.PASS);
         UseEntityCallback.EVENT.register((player, level, hand, entity, hitResult) ->
             FreeCamState.isActive() ? InteractionResult.FAIL : InteractionResult.PASS);
+
+        // 图腾计数显示（经验条上方图标 + 数量）
+        TotemDisplay.init();
     }
 }

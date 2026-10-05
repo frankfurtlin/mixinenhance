@@ -25,9 +25,6 @@ public class BlockModuleConfig {
         public boolean enableSuspiciousGravelDropWithSilkTouch = false;       // 是否启用可疑沙砾被精准采集掉落
     }
 
-    @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
-    public BlockModuleConfig.SilkTouchConfig silkTouchConfig = new BlockModuleConfig.SilkTouchConfig();
-
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.BoundedDiscrete(min = 1, max = 30)
     public int trialSpawnerCoolDown = 30;                            // 试炼刷怪笼的冷却时间，单位分钟
@@ -37,4 +34,7 @@ public class BlockModuleConfig {
     public boolean enableFallingTree = false;                        // 是否启用砍树时整棵树一起倒下
     @ConfigEntry.Gui.Tooltip
     public boolean enableVeinMining = false;                         // 是否启用挖掘矿石时连锁挖掉相连的同种矿石
+
+    @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
+    public BlockModuleConfig.SilkTouchConfig silkTouchConfig = new BlockModuleConfig.SilkTouchConfig();
 }
