@@ -55,6 +55,7 @@
         "render.BackgroundRendererMixin",
         "render.CameraMixin",
         "render.InGameOverlayRendererMixin",
+        "render.LightCoordsUtilMixin",
         "client.KeyboardInputMixin"
     ],
     "injectors": {

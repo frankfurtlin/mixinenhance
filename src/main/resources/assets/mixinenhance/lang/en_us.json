@@ -123,6 +123,8 @@
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableFreeCam.@Tooltip": "enableFreeCam",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableTotemCounter": "enableTotemCounter",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableTotemCounter.@Tooltip": "enableTotemCounter",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableDynamicLight": "enableDynamicLight",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableDynamicLight.@Tooltip": "enableDynamicLight",
 
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig": "mob",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.healthMultiplier": "healthMultiplier",

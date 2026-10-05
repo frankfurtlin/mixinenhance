@@ -1,5 +1,6 @@
 package com.frankfurtlin.mixinenhance;
 
+import com.frankfurtlin.mixinenhance.client.DynamicLightHandler;
 import com.frankfurtlin.mixinenhance.client.FreeCamState;
 import com.frankfurtlin.mixinenhance.client.TotemDisplay;
 import com.frankfurtlin.mixinenhance.config.ModMenuConfig;
@@ -74,5 +75,8 @@ public class MixinEnhanceClient implements ClientModInitializer {
 
         // 图腾计数显示（经验条上方图标 + 数量）
         TotemDisplay.init();
+
+        // 动态照明：每客户端 tick 刷新动态光源列表（手持发光物照亮周围）
+        ClientTickEvents.END_CLIENT_TICK.register(DynamicLightHandler::update);
     }
 }

@@ -21,6 +21,8 @@ public class EntityModuleConfig {
         public boolean enableFreeCam = false;               // 是否启用自由视角（按键切换，脱离身体飞行）
         @ConfigEntry.Gui.Tooltip
         public boolean enableTotemCounter = false;          // 是否在经验条上方显示不死图腾数量
+        @ConfigEntry.Gui.Tooltip
+        public boolean enableDynamicLight = false;          // 是否启用手持发光物动态照明
     }
     public static class MobConfig {
         @ConfigEntry.Gui.Tooltip
