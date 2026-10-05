@@ -55,6 +55,8 @@ public class DefaultModuleConfig {
     public boolean noSlowOnSoulSand = false;                    // 玩家在灵魂沙上不减速
     @ConfigEntry.Gui.Tooltip
     public boolean noSlowOnHoneyBlock = false;                  // 玩家在蜂蜜块上不减速
+    @ConfigEntry.Gui.Tooltip
+    public boolean enableStackRefill = false;                   // 是否启用手持物品用完自动补货
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     public DefaultModuleConfig.EnchantmentConfig enchantmentConfig = new DefaultModuleConfig.EnchantmentConfig();
 

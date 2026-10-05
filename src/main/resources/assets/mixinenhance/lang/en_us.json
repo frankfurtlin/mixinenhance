@@ -37,6 +37,8 @@
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.noSlowOnSoulSand.@Tooltip": "noSlowOnSoulSand",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.noSlowOnHoneyBlock": "noSlowOnHoneyBlock",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.noSlowOnHoneyBlock.@Tooltip": "noSlowOnHoneyBlock",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableStackRefill": "enableStackRefill",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableStackRefill.@Tooltip": "enableStackRefill",
 
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig": "enchantmentConfig",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeAnvilLimit": "removeAnvilLimit",

@@ -23,6 +23,7 @@
         "entity.MobDifficultyMixin",
         "entity.MobSpawnerLogicMixin",
         "entity.PlayerEntityMixin",
+        "entity.PlayerStackRefillMixin",
         "entity.ServerPlayerEntityMixin",
         "entity.TntEntityMixin",
         "entity.VillagerEntityMixin",

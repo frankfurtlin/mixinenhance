@@ -37,6 +37,8 @@
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.noSlowOnSoulSand.@Tooltip": "玩家在灵魂沙上移动不减速",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.noSlowOnHoneyBlock": "玩家在蜂蜜块上移动不减速",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.noSlowOnHoneyBlock.@Tooltip": "玩家在蜂蜜块上移动不减速",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableStackRefill": "启用手持物品自动补货",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableStackRefill.@Tooltip": "手持物品用完时自动从背包补充同种物品",
 
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig": "附魔配置",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeAnvilLimit": "消除附魔经验上限",
