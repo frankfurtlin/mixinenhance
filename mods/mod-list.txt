@@ -12,6 +12,7 @@
 #     fallingtree        -> 砍树整棵倒下（enableFallingTree）
 #     diggusmaximus      -> 连锁挖矿（enableVeinMining）
 #     freecam            -> 自由视角（enableFreeCam）
+#     totemcounter       -> 图腾计数（enableTotemCounter）
 #   整合包不需要（地形与群系 / 建筑结构）：
 #     terralith, tectonic, biomesoplenty, terrestria, nullscape, amplified_nether, cinderscapes,
 #     repurposed_structures, ctov, dungeons_arise, mr_dungeons_andtaverns, additionalstructures,
@@ -48,9 +49,7 @@ waystones
 jei
 jade
 betterf3|BetterF3
-simplehudenhanced|Simple Hud Enhanced
 appleskin
-totemcounter
 notenoughanimations|NotEnoughAnimations
 
 # 实用与便利
