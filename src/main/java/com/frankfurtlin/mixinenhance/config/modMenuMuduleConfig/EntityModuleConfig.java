@@ -21,6 +21,8 @@ public class EntityModuleConfig {
         public boolean enableTotemCounter = false;          // 是否在经验条上方显示不死图腾数量
         @ConfigEntry.Gui.Tooltip
         public boolean enableDynamicLight = false;          // 是否启用手持发光物动态照明
+        @ConfigEntry.Gui.Tooltip
+        public boolean enableGamma = false;                 // 是否启用亮度调节（按键循环切换亮度档位）
     }
     public static class MobConfig {
         @ConfigEntry.Gui.Tooltip

@@ -123,6 +123,8 @@
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableTotemCounter.@Tooltip": "在经验条上方显示背包与副手中不死图腾的数量",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableDynamicLight": "启用动态照明",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableDynamicLight.@Tooltip": "手持火把等发光物品时照亮周围",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableGamma": "启用亮度调节",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableGamma.@Tooltip": "开启后固定 100% 亮度（无需火把也能看清）",
 
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig": "怪物",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.mobConfig.healthMultiplier": "怪物血量倍率",

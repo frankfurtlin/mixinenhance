@@ -14,13 +14,18 @@
 #     freecam            -> 自由视角（enableFreeCam）
 #     totemcounter       -> 图腾计数（enableTotemCounter）
 #     dynamiclights      -> 动态照明（enableDynamicLight）
-#     iseelava           -> 岩浆发光（enableLavaLight）
+#     iseelava           -> 岩浆发光（已并入 fluidVisible）
 #     stackrefill        -> 物品自动补货（enableStackRefill）
+#     gammautils         -> 亮度调节（enableGamma）
 #   整合包不需要（地形与群系 / 建筑结构 / 其他）：
 #     terralith, tectonic, biomesoplenty, terrestria, nullscape, amplified_nether, cinderscapes,
 #     repurposed_structures, ctov, dungeons_arise, mr_dungeons_andtaverns, additionalstructures,
 #     t_and_t, mr_cherry_villages, villagesandpillages,
-#     snowyleavesplus, betterf3, betterstats, notenoughanimations, copper_golem, yungsapi
+#     snowyleavesplus, betterf3, betterstats, notenoughanimations, copper_golem, yungsapi,
+#     explosiveenhancement（爆炸特效）
+#   孤儿依赖库（无任何清单内模组依赖，已剔除）：
+#     architectury, cardinal-components, geckolib, azurelib, collective, cristellib,
+#     glitchcore, lithostitched, midnightlib, terrablender, ukulib, tcdcommons
 
 fabric-api
 modmenu
@@ -38,8 +43,6 @@ indium|Indium
 iris
 continuity
 visuality
-explosiveenhancement|Explosive Enhancement
-gammautils|Gamma Utils
 
 # 地图与导航
 xaerominimap|Xaero's Minimap
@@ -55,16 +58,8 @@ appleskin
 travelersbackpack
 
 # 依赖库
-architectury
-cardinal-components
-geckolib
-azurelib
 balm-fabric|Balm
-collective
-cristellib|Cristel Lib
-glitchcore
-lithostitched
-midnightlib
-terrablender
-ukulib
-tcdcommons
+mezzconfig
+shogi
+forge-config-api-port
+placeholder-api
