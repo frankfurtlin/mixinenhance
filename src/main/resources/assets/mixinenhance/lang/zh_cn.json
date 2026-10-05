@@ -111,10 +111,8 @@
     "text.autoconfig.mixinenhance.option.blockModuleConfig.enableVeinMining.@Tooltip": "破坏矿石时，相连的同种矿石一起被挖掉（仅生存模式生效）",
 
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig": "玩家",
-    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enablePlayerNoSlowInWater": "启用玩家水中移速不变",
-    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enablePlayerNoSlowInWater.@Tooltip": "是否启用玩家水中移速不变",
-    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enablePlayerNoSlowInLava": "启用玩家岩浆中移速不变",
-    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enablePlayerNoSlowInLava.@Tooltip": "是否启用玩家岩浆中移速不变",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableNoSlowInFluid": "启用流体中移速不变",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableNoSlowInFluid.@Tooltip": "是否允许玩家在水中/熔岩中不减速",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.fluidVisible": "启用玩家在水中/熔岩清澈的观察",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.fluidVisible.@Tooltip": "是否启用玩家在水中/熔岩清澈的观察",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.noOverlay": "启用玩家画面无遮挡",

@@ -47,7 +47,7 @@ public abstract class LivingEntityMixin {
     @ModifyConstant(method = "travelInWater", constant = @Constant(floatValue = 0.02f, ordinal = 0))
     private float enablePlayerNoSlowInWater(float constant){
         LivingEntity livingEntity = (LivingEntity) (Object)this;
-        if(MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.enablePlayerNoSlowInWater && livingEntity instanceof Player){
+        if(MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.enableNoSlowInFluid && livingEntity instanceof Player){
             return 0.04f;
         }
         return constant;
@@ -58,7 +58,7 @@ public abstract class LivingEntityMixin {
     @ModifyConstant(method = "travelInLava", constant = @Constant(doubleValue = 0.5))
     private double enablePlayerNoSlowInLava(double constant){
         LivingEntity livingEntity = (LivingEntity) (Object)this;
-        if(MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.enablePlayerNoSlowInLava && livingEntity instanceof Player){
+        if(MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.enableNoSlowInFluid && livingEntity instanceof Player){
             return 0.9;
         }
         return constant;

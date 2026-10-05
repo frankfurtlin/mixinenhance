@@ -111,10 +111,8 @@
     "text.autoconfig.mixinenhance.option.blockModuleConfig.enableVeinMining.@Tooltip": "enableVeinMining",
 
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig": "player",
-    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enablePlayerNoSlowInWater": "enablePlayerNoSlowInWater",
-    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enablePlayerNoSlowInWater.@Tooltip": "enablePlayerNoSlowInWater",
-    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enablePlayerNoSlowInLava": "enablePlayerNoSlowInLava",
-    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enablePlayerNoSlowInLava.@Tooltip": "enablePlayerNoSlowInLava",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableNoSlowInFluid": "enableNoSlowInFluid",
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableNoSlowInFluid.@Tooltip": "enableNoSlowInFluid",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.fluidVisible": "fluidVisible",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.fluidVisible.@Tooltip": "fluidVisible",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.noOverlay": "noOverlay",

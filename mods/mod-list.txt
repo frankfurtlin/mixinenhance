@@ -13,10 +13,14 @@
 #     diggusmaximus      -> 连锁挖矿（enableVeinMining）
 #     freecam            -> 自由视角（enableFreeCam）
 #     totemcounter       -> 图腾计数（enableTotemCounter）
-#   整合包不需要（地形与群系 / 建筑结构）：
+#     dynamiclights      -> 动态照明（enableDynamicLight）
+#     iseelava           -> 岩浆发光（enableLavaLight）
+#     stackrefill        -> 物品自动补货（enableStackRefill）
+#   整合包不需要（地形与群系 / 建筑结构 / 其他）：
 #     terralith, tectonic, biomesoplenty, terrestria, nullscape, amplified_nether, cinderscapes,
 #     repurposed_structures, ctov, dungeons_arise, mr_dungeons_andtaverns, additionalstructures,
-#     t_and_t, mr_cherry_villages, villagesandpillages
+#     t_and_t, mr_cherry_villages, villagesandpillages,
+#     snowyleavesplus, betterf3, betterstats, notenoughanimations, copper_golem, yungsapi
 
 fabric-api
 modmenu
@@ -34,11 +38,8 @@ indium|Indium
 iris
 continuity
 visuality
-snowyleavesplus|SnowyLeavesPlus
 explosiveenhancement|Explosive Enhancement
-dynamiclights|Dynamic Lights
 gammautils|Gamma Utils
-iseelava|I See Lava
 
 # 地图与导航
 xaerominimap|Xaero's Minimap
@@ -48,14 +49,10 @@ waystones
 # 信息与界面
 jei
 jade
-betterf3|BetterF3
 appleskin
-notenoughanimations|NotEnoughAnimations
 
 # 实用与便利
 travelersbackpack
-stackrefill|Stack Refill
-copper_golem|Copper Golem
 
 # 依赖库
 architectury
@@ -70,6 +67,4 @@ lithostitched
 midnightlib
 terrablender
 ukulib
-yungsapi|YUNG's API
 tcdcommons
-betterstats

@@ -10,9 +10,7 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 public class EntityModuleConfig {
     public static class PlayerConfig{
         @ConfigEntry.Gui.Tooltip
-        public boolean enablePlayerNoSlowInWater = false;   // 是否允许玩家在水中不减速
-        @ConfigEntry.Gui.Tooltip
-        public boolean enablePlayerNoSlowInLava = false;    // 是否允许玩家在熔岩中不减速
+        public boolean enableNoSlowInFluid = false;         // 是否允许玩家在流体（水/熔岩）中不减速
         @ConfigEntry.Gui.Tooltip
         public boolean fluidVisible = false;                // 是否启用玩家在水中/熔岩清澈的观察
         @ConfigEntry.Gui.Tooltip
