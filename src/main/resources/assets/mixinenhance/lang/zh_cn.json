@@ -170,6 +170,14 @@
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.enableVindicatorWeaponEnhancement": "启用卫道士武器增强",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.enableVindicatorWeaponEnhancement.@Tooltip": "卫道士武器升级（铁、钻石、下届合金剑）",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.enableWitherSkeletonWeaponEnhancement": "启用凋零骷髅武器增强",
-    "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.enableWitherSkeletonWeaponEnhancement.@Tooltip": "凋零骷髅武器升级（石、铁、钻石、下届合金剑）"
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.enableWitherSkeletonWeaponEnhancement.@Tooltip": "凋零骷髅武器升级（石、铁、钻石、下届合金剑）",
+
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.fishingConfig": "钓鱼",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.fishingConfig.excludeLeatherBoots": "排除钓鱼战利品：皮革靴子",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.fishingConfig.excludeLeatherBoots.@Tooltip": "钓鱼不再产出皮革靴子",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.fishingConfig.excludeFishingRod": "排除钓鱼战利品：钓鱼竿（含附魔）",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.fishingConfig.excludeFishingRod.@Tooltip": "钓鱼不再产出钓鱼竿（含附魔钓鱼竿）",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.fishingConfig.excludeBow": "排除钓鱼战利品：弓（含附魔）",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.fishingConfig.excludeBow.@Tooltip": "钓鱼不再产出弓（含附魔弓）"
 
 }

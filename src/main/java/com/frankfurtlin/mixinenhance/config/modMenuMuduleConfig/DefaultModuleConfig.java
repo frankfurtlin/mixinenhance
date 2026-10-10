@@ -23,12 +23,24 @@ public class DefaultModuleConfig {
         public boolean removeBootEnchantmentConflict = true;         // 是否允许靴子深海探索者、冰霜行者不冲突
     }
 
+    public static class FishingConfig {
+        @ConfigEntry.Gui.Tooltip
+        public boolean excludeLeatherBoots = false;   // 排除钓鱼战利品：皮革靴子
+        @ConfigEntry.Gui.Tooltip
+        public boolean excludeFishingRod = false;     // 排除钓鱼战利品：钓鱼竿（含附魔）
+        @ConfigEntry.Gui.Tooltip
+        public boolean excludeBow = false;            // 排除钓鱼战利品：弓（含附魔）
+    }
+
     @ConfigEntry.Gui.Tooltip
     public boolean keepInventory = true;                        // 是否启用死亡不掉落
     @ConfigEntry.Gui.Tooltip
     public boolean enableAutoFishing = false;                   // 是否启用自动钓鱼
     @ConfigEntry.Gui.Tooltip
     public boolean enableTickFishing = false;                   // 是否启用急速钓鱼
+    @ConfigEntry.Gui.CollapsibleObject
+    @ConfigEntry.Gui.Tooltip
+    public DefaultModuleConfig.FishingConfig fishingConfig = new DefaultModuleConfig.FishingConfig();   // 钓鱼战利品过滤
     @ConfigEntry.Gui.Tooltip
     public boolean enableFarmlandNoLandToDirt = false;          // 是否启用耕地践踏不转化成泥土
     @ConfigEntry.Gui.Tooltip

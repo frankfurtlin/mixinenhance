@@ -170,6 +170,14 @@
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.enableVindicatorWeaponEnhancement": "enableVindicatorWeaponEnhancement",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.enableVindicatorWeaponEnhancement.@Tooltip": "enableVindicatorWeaponEnhancement",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.enableWitherSkeletonWeaponEnhancement": "enableWitherSkeletonWeaponEnhancement",
-    "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.enableWitherSkeletonWeaponEnhancement.@Tooltip": "enableWitherSkeletonWeaponEnhancement"
+    "text.autoconfig.mixinenhance.option.entityModuleConfig.hostileMobConfig.enableWitherSkeletonWeaponEnhancement.@Tooltip": "enableWitherSkeletonWeaponEnhancement",
+
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.fishingConfig": "fishing",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.fishingConfig.excludeLeatherBoots": "Exclude fishing loot: leather boots",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.fishingConfig.excludeLeatherBoots.@Tooltip": "Fishing no longer yields leather boots",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.fishingConfig.excludeFishingRod": "Exclude fishing loot: fishing rod (enchanted included)",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.fishingConfig.excludeFishingRod.@Tooltip": "Fishing no longer yields fishing rods (including enchanted ones)",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.fishingConfig.excludeBow": "Exclude fishing loot: bow (enchanted included)",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.fishingConfig.excludeBow.@Tooltip": "Fishing no longer yields bows (including enchanted ones)"
 
 }

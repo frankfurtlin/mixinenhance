@@ -128,3 +128,7 @@ download-report.csv
 # Python
 __pycache__/
 *.pyc
+
+# Gradle run 运行日志与构建产物
+bin/
+run-client.err
