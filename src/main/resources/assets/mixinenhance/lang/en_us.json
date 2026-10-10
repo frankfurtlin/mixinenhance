@@ -109,6 +109,8 @@
     "text.autoconfig.mixinenhance.option.blockModuleConfig.enableFallingTree.@Tooltip": "enableFallingTree",
     "text.autoconfig.mixinenhance.option.blockModuleConfig.enableVeinMining": "enableVeinMining",
     "text.autoconfig.mixinenhance.option.blockModuleConfig.enableVeinMining.@Tooltip": "enableVeinMining",
+    "text.autoconfig.mixinenhance.option.blockModuleConfig.enableFastLeafDecay": "enableFastLeafDecay",
+    "text.autoconfig.mixinenhance.option.blockModuleConfig.enableFastLeafDecay.@Tooltip": "enableFastLeafDecay",
 
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig": "player",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableNoSlowInFluid": "enableNoSlowInFluid",

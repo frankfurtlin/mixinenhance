@@ -34,6 +34,8 @@ public class BlockModuleConfig {
     public boolean enableFallingTree = false;                        // 是否启用砍树时整棵树一起倒下
     @ConfigEntry.Gui.Tooltip
     public boolean enableVeinMining = false;                         // 是否启用挖掘矿石时连锁挖掉相连的同种矿石
+    @ConfigEntry.Gui.Tooltip
+    public boolean enableFastLeafDecay = false;                      // 是否启用树叶快速凋零（树木被砍后树叶立即整体掉落）
 
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     public BlockModuleConfig.SilkTouchConfig silkTouchConfig = new BlockModuleConfig.SilkTouchConfig();

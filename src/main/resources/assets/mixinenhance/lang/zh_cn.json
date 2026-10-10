@@ -109,6 +109,8 @@
     "text.autoconfig.mixinenhance.option.blockModuleConfig.enableFallingTree.@Tooltip": "破坏原木时，相连的同种原木一起被砍倒（仅生存模式生效）",
     "text.autoconfig.mixinenhance.option.blockModuleConfig.enableVeinMining": "启用连锁挖矿",
     "text.autoconfig.mixinenhance.option.blockModuleConfig.enableVeinMining.@Tooltip": "破坏矿石时，相连的同种矿石一起被挖掉（仅生存模式生效）",
+    "text.autoconfig.mixinenhance.option.blockModuleConfig.enableFastLeafDecay": "启用树叶快速凋零",
+    "text.autoconfig.mixinenhance.option.blockModuleConfig.enableFastLeafDecay.@Tooltip": "树木被砍伐后，相连树叶（非玩家放置）立即整体凋零，而非等待随机刻缓慢掉落",
 
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig": "玩家",
     "text.autoconfig.mixinenhance.option.entityModuleConfig.playerConfig.enableNoSlowInFluid": "启用流体中移速不变",

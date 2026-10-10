@@ -7,6 +7,7 @@
         "TradeOfferMixin",
         "block.BlockMixin",
         "block.FarmlandBlockMixin",
+        "block.LeavesBlockMixin",
         "block.FrostedIceBlockMixin",
         "block.SpongeBlockMixin",
         "block.TrialSpawnerBlockMixin",
