@@ -44,6 +44,13 @@ public abstract class PlayerStackRefillMixin {
             return;
         }
 
+        // 玩家正在 GUI 里拎着物品（手动整理背包）：此时选中槽变空属于"搬运"而非"用完"，
+        // 既不要补货，也要清空待补货标记，否则松手后下一 tick 会把同类物品又补回选中槽
+        if (self.containerMenu != null && !self.containerMenu.getCarried().isEmpty()) {
+            mixinEnhance$lastHeldItem = null;
+            return;
+        }
+
         ItemStack mainHand = self.getMainHandItem();
         if (!mainHand.isEmpty()) {
             // 手上还有物品，记录其类型作为下次补货依据
