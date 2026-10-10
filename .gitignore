@@ -122,6 +122,9 @@ run/
 download-report.csv
 .mod-files.json
 
+# 光影下载版本映射（由 tools/update-shaders.py 每次运行时重新生成；*.zip 已被全局忽略）
+.shader-files.json
+
 # Python
 __pycache__/
 *.pyc

@@ -17,14 +17,20 @@
   免费申请：https://console.curseforge.com/ -> API Keys
   当 Modrinth 找不到项目或没有目标版本时自动回退查询。
 
+【版本来源】默认目标版本自动取自项目根目录的 gradle.properties：
+  - 游戏版本 -> minecraft_version（如 26.3）
+  - 加载器   -> loader 字段（没有该字段时默认 fabric）
+  这样脚本下载的模组版本始终与项目当前配置保持一致，无需手动同步。
+  需要临时下载别的版本时，用 --game-version / --loader 显式覆盖即可。
+
 用法示例：
-    # 预览本次会下载/更新哪些
+    # 预览本次会下载/更新哪些（版本取自 gradle.properties）
     python tools/update-mods.py --dry-run --allow-prerelease
 
-    # 正式更新 26.3 整合包
+    # 正式更新（游戏版本跟随 gradle.properties 的 minecraft_version）
     python tools/update-mods.py --allow-prerelease
 
-    # 升级到新版本（自动建 mods/26.4，不影响 26.3）
+    # 升级到新版本（自动建 mods/26.4，不影响当前版本）
     python tools/update-mods.py --game-version 26.4 --allow-prerelease
 
     # 从旧模组目录生成初始清单（仅初始化用一次）
@@ -218,6 +224,27 @@ def load_entries(list_file):
     return entries
 
 
+def read_gradle_properties(project_root):
+    """读取 gradle.properties，返回 {key: value}（忽略注释/空行，去除键值两侧空白）。
+
+    用于让下载目标版本自动跟随项目配置，避免脚本里的默认值与 gradle.properties 脱节。
+    """
+    props = {}
+    prop_file = Path(project_root) / "gradle.properties"
+    if not prop_file.is_file():
+        return props
+    # utf-8-sig：兼容带 BOM 的文件
+    for line in prop_file.read_text(encoding="utf-8-sig").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or line.startswith("!"):
+            continue
+        if "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        props[key.strip()] = value.strip()
+    return props
+
+
 def main():
     # Windows 控制台默认 GBK，打印中文/特殊字符时可能 UnicodeEncodeError，强制 UTF-8 输出
     try:
@@ -227,11 +254,21 @@ def main():
 
     project_root = Path(__file__).resolve().parent.parent
 
+    # 目标版本默认取自 gradle.properties，保证下载版本与项目当前配置一致
+    props = read_gradle_properties(project_root)
+    prop_game_version = props.get("minecraft_version")
+    prop_loader = props.get("loader")
+    default_game_version = prop_game_version or "26.3"
+    default_loader = prop_loader if prop_loader in ("fabric", "forge", "neoforge", "quilt") else "fabric"
+
     parser = argparse.ArgumentParser(description="按清单批量下载/更新 Minecraft 模组")
     parser.add_argument("--list-file", default=str(project_root / "mods" / "mod-list.txt"))
     parser.add_argument("--out-dir", default=None)
-    parser.add_argument("--game-version", default="26.3")
-    parser.add_argument("--loader", default="fabric", choices=["fabric", "forge", "neoforge", "quilt"])
+    parser.add_argument("--game-version", default=default_game_version,
+                        help="目标 Minecraft 版本，默认取自 gradle.properties 的 minecraft_version")
+    parser.add_argument("--loader", default=default_loader,
+                        choices=["fabric", "forge", "neoforge", "quilt"],
+                        help="加载器，默认取自 gradle.properties 的 loader（无则 fabric）")
     parser.add_argument("--allow-prerelease", action="store_true")
     parser.add_argument("--curseforge-api-key", default="")
     parser.add_argument("--source-dir", default="")
@@ -257,7 +294,13 @@ def main():
     entries = load_entries(list_file)
 
     print(f"清单文件  : {list_file}")
-    print(f"目标版本  : Minecraft {args.game_version} / {args.loader}")
+    if prop_game_version and args.game_version == default_game_version:
+        src_hint = "  （来自 gradle.properties）"
+    elif prop_game_version and args.game_version != prop_game_version:
+        src_hint = f"  （命令行覆盖，gradle.properties 为 {prop_game_version}）"
+    else:
+        src_hint = ""
+    print(f"目标版本  : Minecraft {args.game_version} / {args.loader}{src_hint}")
     print(f"输出目录  : {out_dir}")
     print(f"清单模组  : {len(entries)} 个")
     cf_label = "+ CurseForge" if args.curseforge_api_key else "(未配置 CF key)"
