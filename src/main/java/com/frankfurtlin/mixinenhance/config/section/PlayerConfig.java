@@ -13,6 +13,8 @@ public class PlayerConfig {
     @ConfigEntry.Gui.Tooltip
     public boolean enablePlayerExpPickUpNoDelay = false;        // 玩家吸收经验无冷却
     @ConfigEntry.Gui.Tooltip
+    public boolean enableXpMerge = true;                        // 经验球合并（8 格内同值经验球并成一个）
+    @ConfigEntry.Gui.Tooltip
     public boolean enableStackRefill = false;                   // 手持物品用完自动补货
     @ConfigEntry.Gui.Tooltip
     public boolean enableAutoSortContainer = false;             // 打开背包/容器时自动整理

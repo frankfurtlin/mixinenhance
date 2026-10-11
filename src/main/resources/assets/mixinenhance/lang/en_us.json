@@ -30,6 +30,8 @@
 
     "text.autoconfig.mixinenhance.option.playerConfig.enablePlayerExpPickUpNoDelay": "enablePlayerExpPickUpNoDelay",
     "text.autoconfig.mixinenhance.option.playerConfig.enablePlayerExpPickUpNoDelay.@Tooltip": "enablePlayerExpPickUpNoDelay",
+    "text.autoconfig.mixinenhance.option.playerConfig.enableXpMerge": "enableXpMerge",
+    "text.autoconfig.mixinenhance.option.playerConfig.enableXpMerge.@Tooltip": "enableXpMerge",
     "text.autoconfig.mixinenhance.option.playerConfig.enableStackRefill": "enableStackRefill",
     "text.autoconfig.mixinenhance.option.playerConfig.enableStackRefill.@Tooltip": "enableStackRefill",
     "text.autoconfig.mixinenhance.option.playerConfig.enableAutoSortContainer": "enableAutoSortContainer",

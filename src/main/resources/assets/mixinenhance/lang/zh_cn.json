@@ -30,6 +30,8 @@
 
     "text.autoconfig.mixinenhance.option.playerConfig.enablePlayerExpPickUpNoDelay": "启用玩家吸收经验无冷却",
     "text.autoconfig.mixinenhance.option.playerConfig.enablePlayerExpPickUpNoDelay.@Tooltip": "是否启用玩家吸收经验无冷却",
+    "text.autoconfig.mixinenhance.option.playerConfig.enableXpMerge": "启用经验球合并",
+    "text.autoconfig.mixinenhance.option.playerConfig.enableXpMerge.@Tooltip": "8 格内数值相同的经验球会合并成一个（原版只合并贴在一起、ID 相差 40 倍数、数值也相同的球）；经验总量不变，实体更少、卡顿更轻",
     "text.autoconfig.mixinenhance.option.playerConfig.enableStackRefill": "启用手持物品自动补货",
     "text.autoconfig.mixinenhance.option.playerConfig.enableStackRefill.@Tooltip": "手持物品用完时自动从背包补充同种物品",
     "text.autoconfig.mixinenhance.option.playerConfig.enableAutoSortContainer": "启用打开背包/容器自动整理",
