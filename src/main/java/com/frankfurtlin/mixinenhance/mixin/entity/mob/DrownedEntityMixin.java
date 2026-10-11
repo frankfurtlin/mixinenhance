@@ -16,25 +16,25 @@ public abstract class DrownedEntityMixin {
     // 修改溺尸生成时带有鹦鹉螺壳的概率
     @ModifyConstant(method = "finalizeSpawn", constant = @Constant(floatValue = 0.03f))
     private float drownedSpawnWithShell(float constant){
-        return MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.drownedSpawnWithShell;
+        return MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.drownedSpawnWithShell;
     }
 
     // 修改溺尸在河流群系的生成概率
     @ModifyConstant(method = "checkDrownedSpawnRules(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/entity/EntitySpawnReason;Lnet/minecraft/core/BlockPos;Lnet/minecraft/util/RandomSource;)Z", constant = @Constant(intValue = 15))
     private static int drownedSpawnInRiverFactor(int constant){
-        return constant / MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.drownedSpawnFactor;
+        return constant / MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.drownedSpawnFactor;
     }
 
     // 修改溺尸在海洋群系的生成概率
     @ModifyConstant(method = "checkDrownedSpawnRules(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/entity/EntitySpawnReason;Lnet/minecraft/core/BlockPos;Lnet/minecraft/util/RandomSource;)Z", constant = @Constant(intValue = 40))
     private static int drownedSpawnInOceanFactor(int constant){
-        return constant / MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.drownedSpawnFactor;
+        return constant / MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.drownedSpawnFactor;
     }
 
     // 修改溺尸生成时带有工具的概率
     @ModifyConstant(method = "populateDefaultEquipmentSlots", constant = @Constant(doubleValue = 0.9D))
     private double drownedSpawnWithTool(double constant){
-        return 1 - MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.drownedSpawnWithTool;
+        return 1 - MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.drownedSpawnWithTool;
     }
 
 }

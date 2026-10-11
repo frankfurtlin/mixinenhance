@@ -28,7 +28,7 @@ public abstract class BackgroundRendererMixin {
     private void changeFogInFluid(FogEnvironment environment, FogData fogData, Camera camera, ClientLevel clientLevel,
                                   float renderDistance, DeltaTracker deltaTracker) {
         environment.setupFog(fogData, camera, clientLevel, renderDistance, deltaTracker);
-        if (MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.fluidVisible
+        if (MixinEnhanceClient.getConfig().playerConfig.fluidVisible
             && (environment instanceof WaterFogEnvironment || environment instanceof LavaFogEnvironment)) {
             fogData.environmentalStart = renderDistance * 0.75f;
             fogData.environmentalEnd = renderDistance;

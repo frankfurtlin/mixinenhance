@@ -32,7 +32,7 @@ public abstract class LeavesBlockMixin {
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void onLeafTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
-        if (!MixinEnhanceClient.getConfig().blockModuleConfig.enableFastLeafDecay) {
+        if (!MixinEnhanceClient.getConfig().blockConfig.enableFastLeafDecay) {
             return;
         }
         BlockState current = level.getBlockState(pos);

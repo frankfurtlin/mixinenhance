@@ -80,7 +80,7 @@ public class DynamicLightHandler {
         List<LightSource> newSources = new ArrayList<>();
         Map<Integer, LightRange> currentRanges = new HashMap<>();
 
-        if (MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.enableDynamicLight) {
+        if (MixinEnhanceClient.getConfig().playerConfig.enableDynamicLight) {
             ClientLevel level = client.level;
             if (level != null) {
                 for (Entity entity : level.entitiesForRendering()) {

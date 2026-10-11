@@ -16,6 +16,6 @@ public abstract class FireballEntityMixin {
     // 修改火球的伤害（恶魂）
     @ModifyConstant(method = "onHitEntity", constant = @Constant(floatValue = 6.0f))
     private float fireballDamage(float original) {
-        return MixinEnhanceClient.getConfig().itemModuleConfig.fireballDamage;
+        return MixinEnhanceClient.getConfig().itemConfig.projectileDamageConfig.fireballDamage;
     }
 }

@@ -11,7 +11,7 @@ public abstract class AnvilScreenHandlerMixin {
     // 消除附魔经验上限
     @ModifyConstant(method = "createResult", constant = @Constant(intValue = 40), require = 0)
     public int modifyLimit(int limit) {
-        if(MixinEnhanceClient.getConfig().defaultModuleConfig.enchantmentConfig.removeAnvilLimit){
+        if(MixinEnhanceClient.getConfig().enchantConfig.enchantmentConfig.removeAnvilLimit){
             return Integer.MAX_VALUE;
         }
         return 40;

@@ -22,7 +22,7 @@ public abstract class IntegratedServerLoaderMixin {
     // 消除加载世界时的实验性特性弹窗，创建世界
     @Inject(method = "confirmWorldCreation", at = @At("HEAD"), cancellable = true)
     private static void removeWarning(Minecraft client, CreateWorldScreen parent, Lifecycle lifecycle, Runnable loader, boolean bypassWarnings, CallbackInfo ci){
-        if(MixinEnhanceClient.getConfig().defaultModuleConfig.removeExperimentalWarning){
+        if(MixinEnhanceClient.getConfig().generalConfig.removeExperimentalWarning){
             loader.run();
             ci.cancel();
         }
@@ -31,7 +31,7 @@ public abstract class IntegratedServerLoaderMixin {
     // 消除加载世界时的实验性特性弹窗，进入世界
     @Inject(method = "openWorldCheckWorldStemCompatibility", at = @At("HEAD"), cancellable = true)
     private void removeWarning2(LevelStorageSource.LevelStorageAccess session, WorldStem saveLoader, PackRepository dataPackManager, Runnable onCancel, CallbackInfo ci){
-        if(MixinEnhanceClient.getConfig().defaultModuleConfig.removeExperimentalWarning){
+        if(MixinEnhanceClient.getConfig().generalConfig.removeExperimentalWarning){
             this.openWorldLoadBundledResourcePack(session, saveLoader, dataPackManager, onCancel);
             ci.cancel();
         }

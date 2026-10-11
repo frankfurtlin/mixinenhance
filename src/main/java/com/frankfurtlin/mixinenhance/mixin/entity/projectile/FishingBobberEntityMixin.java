@@ -58,7 +58,7 @@ public abstract class FishingBobberEntityMixin extends Projectile {
     @Inject(method = "tick", at = @At(value = "INVOKE", ordinal = 2, shift = At.Shift.AFTER,
         target = "Lnet/minecraft/world/entity/projectile/FishingHook;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V"))
     private void autoFishing(CallbackInfo ci) {
-        if(!MixinEnhanceClient.getConfig().defaultModuleConfig.enableAutoFishing){
+        if(!MixinEnhanceClient.getConfig().fishingConfig.enableAutoFishing){
             return;
         }
         Player user = this.getPlayerOwner();
@@ -80,7 +80,7 @@ public abstract class FishingBobberEntityMixin extends Projectile {
     @Inject(method = "catchingFish", at = @At("HEAD"))
     private void buffFishing(BlockPos pos, CallbackInfo ci){
         Player playerEntity = this.getPlayerOwner();
-        if(playerEntity == null || !MixinEnhanceClient.getConfig().defaultModuleConfig.enableTickFishing){
+        if(playerEntity == null || !MixinEnhanceClient.getConfig().fishingConfig.enableTickFishing){
             return;
         }
         ItemStack usedItem = playerEntity.getItemInHand(InteractionHand.MAIN_HAND);

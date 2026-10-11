@@ -16,7 +16,7 @@ public abstract class EndCrystalEntityMixin {
     // 末地水晶爆炸强度修改
     @ModifyConstant(method = "hurtServer", constant = @Constant(floatValue = 6.0F))
     private float damage(float constant){
-        return MixinEnhanceClient.getConfig().itemModuleConfig.endCrystalConfig.explodeRadius;
+        return MixinEnhanceClient.getConfig().itemConfig.explosionConfig.endCrystalExplodeRadius;
     }
 
 }

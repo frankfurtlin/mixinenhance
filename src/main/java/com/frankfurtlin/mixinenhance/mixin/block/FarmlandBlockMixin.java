@@ -26,7 +26,7 @@ public abstract class FarmlandBlockMixin extends Block  {
     // 耕地践踏不转化成泥土
     @Inject(method = "fallOn", at = @At("HEAD"), cancellable = true)
     private void onLandedUpon(Level world, BlockState state, BlockPos pos, Entity entity, double fallDistance, CallbackInfo ci) {
-        if (MixinEnhanceClient.getConfig().defaultModuleConfig.enableFarmlandNoLandToDirt) {
+        if (MixinEnhanceClient.getConfig().blockConfig.enableFarmlandNoLandToDirt) {
             super.fallOn(world, state, pos, entity, fallDistance);
             ci.cancel();
         }

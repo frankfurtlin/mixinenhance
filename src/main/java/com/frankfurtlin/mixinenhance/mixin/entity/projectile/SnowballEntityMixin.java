@@ -33,6 +33,6 @@ public abstract class SnowballEntityMixin extends ThrowableItemProjectile{
     // 雪球伤害修改
     @ModifyArg(method = "onHitEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)V"), index = 1)
     private float modifyDamageValue(float amount) {
-        return MixinEnhanceClient.getConfig().itemModuleConfig.snowballDamage;
+        return MixinEnhanceClient.getConfig().itemConfig.projectileDamageConfig.snowballDamage;
     }
 }

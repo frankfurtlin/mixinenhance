@@ -20,7 +20,7 @@ public abstract class ItemStackMixin implements DataComponentHolder {
     // 改为向 ItemStack 合并一个覆写方法：命中列表时返回 64，否则按原逻辑读取 MAX_STACK_SIZE 组件
     @Unique
     public int getMaxStackSize() {
-        if (MixinEnhanceClient.getConfig().itemModuleConfig.canStackTo64) {
+        if (MixinEnhanceClient.getConfig().itemConfig.canStackTo64) {
             Item item = this.getItem();
             if ((
                 item == Items.SADDLE ||

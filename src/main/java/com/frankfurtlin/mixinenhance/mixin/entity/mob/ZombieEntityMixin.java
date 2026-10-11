@@ -35,7 +35,7 @@ public abstract class ZombieEntityMixin extends Monster {
     @Inject(method = "finalizeSpawn", at = @At("TAIL"))
     private void modifyPickupLootChance(ServerLevelAccessor world, DifficultyInstance difficulty, EntitySpawnReason spawnReason, SpawnGroupData entityData, CallbackInfoReturnable<SpawnGroupData> cir) {
         if (spawnReason != EntitySpawnReason.CONVERSION) {
-            this.setCanPickUpLoot(random.nextFloat() < MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.pickupLootChance);
+            this.setCanPickUpLoot(random.nextFloat() < MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.pickupLootChance);
         }
     }
 
@@ -47,10 +47,10 @@ public abstract class ZombieEntityMixin extends Monster {
     @Inject(method = "populateDefaultEquipmentSlots", at = @At("TAIL"))
     public void initEquipment(RandomSource random, DifficultyInstance localDifficulty, CallbackInfo ci) {
         float f = random.nextFloat();
-        float f2 = (float) MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.zombieSpawnWithTool;
+        float f2 = (float) MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.zombieSpawnWithTool;
         if (f < f2) {
             int i = random.nextInt(2);
-            if (MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.enableZombieWeaponEnhancement) {
+            if (MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.enableZombieWeaponEnhancement) {
                 i = random.nextInt(15);
             }
             if (i == 0) {

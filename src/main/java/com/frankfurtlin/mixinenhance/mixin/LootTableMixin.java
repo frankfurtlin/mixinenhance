@@ -1,7 +1,7 @@
 package com.frankfurtlin.mixinenhance.mixin;
 
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
-import com.frankfurtlin.mixinenhance.config.modMenuMuduleConfig.DefaultModuleConfig;
+import com.frankfurtlin.mixinenhance.config.section.FishingConfig;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.util.context.ContextMap;
 import net.minecraft.world.entity.projectile.FishingHook;
@@ -32,7 +32,7 @@ public abstract class LootTableMixin {
                 || !(contextMap.get(LootContextParams.THIS_ENTITY) instanceof FishingHook)) {
             return original;
         }
-        DefaultModuleConfig.FishingConfig cfg = MixinEnhanceClient.getConfig().defaultModuleConfig.fishingConfig;
+        FishingConfig.LootFilterConfig cfg = MixinEnhanceClient.getConfig().fishingConfig.lootFilterConfig;
         if (!cfg.excludeCod && !cfg.excludeSalmon && !cfg.excludeTropicalFish && !cfg.excludePufferfish
                 && !cfg.excludeBamboo && !cfg.excludeBowl && !cfg.excludeLeather && !cfg.excludeLeatherBoots
                 && !cfg.excludeFishingRod && !cfg.excludeString && !cfg.excludeStick && !cfg.excludePotion

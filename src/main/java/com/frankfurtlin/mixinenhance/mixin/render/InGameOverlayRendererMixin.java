@@ -23,7 +23,7 @@ public abstract class InGameOverlayRendererMixin {
     @Inject(method = "submitFire", at = @At(value = "HEAD"), cancellable = true)
     private static void removeFireOverlay(PoseStack poseStack, SubmitNodeCollector submitNodeCollector,
                                          TextureAtlasSprite sprite, CallbackInfo ci) {
-        if (MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.noOverlay) {
+        if (MixinEnhanceClient.getConfig().playerConfig.noOverlay) {
             ci.cancel();
         }
     }

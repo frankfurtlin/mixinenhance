@@ -16,6 +16,6 @@ public abstract class SmallFireballEntityMixin {
     // 修改小火球的伤害（火焰弹、烈焰人）
     @ModifyConstant(method = "onHitEntity", constant = @Constant(floatValue = 5.0f))
     private float smallFireballDamage(float original) {
-        return MixinEnhanceClient.getConfig().itemModuleConfig.smallFireballDamage;
+        return MixinEnhanceClient.getConfig().itemConfig.projectileDamageConfig.smallFireballDamage;
     }
 }

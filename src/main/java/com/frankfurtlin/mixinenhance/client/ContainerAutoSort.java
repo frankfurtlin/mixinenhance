@@ -59,7 +59,7 @@ public final class ContainerAutoSort {
         if (!(screen instanceof AbstractContainerScreen<?>)) {
             return;
         }
-        if (!MixinEnhanceClient.getConfig().defaultModuleConfig.enableAutoSortContainer) {
+        if (!MixinEnhanceClient.getConfig().playerConfig.enableAutoSortContainer) {
             return;
         }
         pendingScreen = screen;

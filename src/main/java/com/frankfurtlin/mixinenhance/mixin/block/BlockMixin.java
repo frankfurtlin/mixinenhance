@@ -20,10 +20,10 @@ public abstract class BlockMixin {
     @Inject(method = "getSpeedFactor", at = @At("HEAD"), cancellable = true)
     private void changeBlockVelocityMultiplier(CallbackInfoReturnable<Float> cir) {
         Block block = (Block) (Object)this;
-        if (block instanceof SoulSandBlock && MixinEnhanceClient.getConfig().defaultModuleConfig.noSlowOnSoulSand) {
+        if (block instanceof SoulSandBlock && MixinEnhanceClient.getConfig().generalConfig.noSlowOnSoulSand) {
             cir.setReturnValue(1.0f);
         }
-        if (block instanceof HoneyBlock && MixinEnhanceClient.getConfig().defaultModuleConfig.noSlowOnHoneyBlock) {
+        if (block instanceof HoneyBlock && MixinEnhanceClient.getConfig().generalConfig.noSlowOnHoneyBlock) {
             cir.setReturnValue(1.0f);
         }
     }

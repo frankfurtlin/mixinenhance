@@ -29,7 +29,7 @@ public abstract class WitherSkeletonEntityMixin extends AbstractSkeleton {
     // 凋零骷髅武器升级（石、铁、钻石、下届合金剑）
     @Inject(method = "populateDefaultEquipmentSlots", at = @At("TAIL"))
     public void initEquipment(RandomSource random, DifficultyInstance localDifficulty, CallbackInfo ci) {
-        if (MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.enableWitherSkeletonWeaponEnhancement) {
+        if (MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.enableWitherSkeletonWeaponEnhancement) {
             int level = random.nextInt(4);
             if (level == 0) {
                 this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.STONE_SWORD));

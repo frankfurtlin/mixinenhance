@@ -24,7 +24,7 @@ public class LightCoordsUtilMixin {
         cancellable = true
     )
     private static void addDynamicLight(LightCoordsUtil.BrightnessGetter getter, BlockAndLightGetter level, BlockState state, BlockPos pos, CallbackInfoReturnable<Integer> cir) {
-        if (!MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.enableDynamicLight) {
+        if (!MixinEnhanceClient.getConfig().playerConfig.enableDynamicLight) {
             return;
         }
 

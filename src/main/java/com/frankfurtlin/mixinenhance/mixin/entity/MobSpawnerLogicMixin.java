@@ -32,14 +32,14 @@ public abstract class MobSpawnerLogicMixin {
     // 刷怪笼改造成刷怪塔(刷怪笼上面方块需要是红石块)
     @Inject(method = "serverTick", at = @At("HEAD"), cancellable = true)
     private void enableSpawnerFarm(ServerLevel world, BlockPos pos, CallbackInfo ci) {
-        if (MixinEnhanceClient.getConfig().defaultModuleConfig.enableSpawnerFarm) {
+        if (MixinEnhanceClient.getConfig().blockConfig.spawnerFarmConfig.enableSpawnerFarm) {
             // 刷怪笼上面方块需要是红石块
             if (!(world.getBlockState(pos.above()).getBlock() == Blocks.REDSTONE_BLOCK)) {
                 return;
             }
 
             RandomSource random = world.getRandom();
-            if (random.nextInt(20 * 8 / MixinEnhanceClient.getConfig().defaultModuleConfig.spawnerFarmRate) >= 1) {
+            if (random.nextInt(20 * 8 / MixinEnhanceClient.getConfig().blockConfig.spawnerFarmConfig.spawnerFarmRate) >= 1) {
                 ci.cancel();
                 return;
             }

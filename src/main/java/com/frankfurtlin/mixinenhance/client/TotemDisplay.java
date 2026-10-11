@@ -26,7 +26,7 @@ public class TotemDisplay {
                 return;
             }
 
-            if (MixinEnhanceClient.getConfig().entityModuleConfig.playerConfig.enableTotemCounter) {
+            if (MixinEnhanceClient.getConfig().playerConfig.enableTotemCounter) {
                 renderTotemCounter(context, minecraft);
             }
         });

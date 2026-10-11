@@ -57,7 +57,7 @@ public class MixinEnhanceClient implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (freeCamKey.consumeClick()) {
-                if (getConfig().entityModuleConfig.playerConfig.enableFreeCam) {
+                if (getConfig().playerConfig.enableFreeCam) {
                     FreeCamState.toggle();
                 }
             }

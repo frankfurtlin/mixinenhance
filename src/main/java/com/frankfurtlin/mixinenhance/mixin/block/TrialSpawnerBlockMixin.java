@@ -17,7 +17,7 @@ public abstract class TrialSpawnerBlockMixin {
     // 降低硬度便于精准采集挖掘
     @ModifyVariable(method = "<init>", at = @At("HEAD"), argsOnly = true)
     private static BlockBehaviour.Properties modifyStrength(BlockBehaviour.Properties settings) {
-        if (MixinEnhanceClient.getConfig().blockModuleConfig.silkTouchConfig.enableTrialSpawnerDropWithSilkTouch) {
+        if (MixinEnhanceClient.getConfig().blockConfig.silkTouchConfig.enableTrialSpawnerDropWithSilkTouch) {
             return settings.strength(5);
         }
         return settings.strength(50);

@@ -25,7 +25,7 @@ public abstract class VillagerEntityMixin {
         target = "Lnet/minecraft/world/item/trading/TradeSet;calculateNumberOfTrades(Lnet/minecraft/world/level/storage/loot/LootContext;)I"))
     private int addMoreRecipeCount(TradeSet tradeSet, LootContext lootContext) {
         if ((Object) this instanceof Villager) {
-            return MixinEnhanceClient.getConfig().defaultModuleConfig.tradeCount;
+            return MixinEnhanceClient.getConfig().enchantConfig.tradeConfig.tradeCount;
         }
         return tradeSet.calculateNumberOfTrades(lootContext);
     }

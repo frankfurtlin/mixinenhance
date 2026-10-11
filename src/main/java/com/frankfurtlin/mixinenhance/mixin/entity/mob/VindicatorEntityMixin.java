@@ -30,7 +30,7 @@ public abstract class VindicatorEntityMixin extends Raider {
     @Inject(method = "populateDefaultEquipmentSlots", at = @At("TAIL"))
     public void initEquipment(RandomSource random, DifficultyInstance localDifficulty, CallbackInfo ci) {
         if (this.getCurrentRaid() == null &&
-            MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.enableVindicatorWeaponEnhancement) {
+            MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.enableVindicatorWeaponEnhancement) {
             int level = random.nextInt(3);
             if (level == 0) {
                 this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_AXE));

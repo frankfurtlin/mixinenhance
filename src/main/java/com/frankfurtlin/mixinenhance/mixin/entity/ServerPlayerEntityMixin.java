@@ -20,7 +20,7 @@ public abstract class ServerPlayerEntityMixin {
     @Redirect(method = "restoreFrom", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/world/level/gamerules/GameRules;get(Lnet/minecraft/world/level/gamerules/GameRule;)Ljava/lang/Object;"))
     private Object copyFrom(GameRules instance, GameRule<Boolean> rule) {
-        if(MixinEnhanceClient.getConfig().defaultModuleConfig.keepInventory){
+        if(MixinEnhanceClient.getConfig().generalConfig.keepInventory){
             return Boolean.TRUE;
         }
         return instance.get(rule);

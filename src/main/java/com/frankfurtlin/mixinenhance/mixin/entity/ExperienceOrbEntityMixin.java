@@ -16,7 +16,7 @@ public abstract class ExperienceOrbEntityMixin {
     // 玩家吸收经验无冷却
     @ModifyConstant(method = "playerTouch", constant = @Constant(intValue = 2))
     private int enablePlayerExpPickUpNoDelay(int original){
-        if(MixinEnhanceClient.getConfig().defaultModuleConfig.enablePlayerExpPickUpNoDelay){
+        if(MixinEnhanceClient.getConfig().playerConfig.enablePlayerExpPickUpNoDelay){
             return 0;
         }
         return original;

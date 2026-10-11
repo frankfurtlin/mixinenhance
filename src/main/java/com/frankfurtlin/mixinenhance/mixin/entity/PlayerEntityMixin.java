@@ -20,7 +20,7 @@ public abstract class PlayerEntityMixin {
     @Redirect(method = "dropEquipment", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/world/level/gamerules/GameRules;get(Lnet/minecraft/world/level/gamerules/GameRule;)Ljava/lang/Object;"))
     private Object dropInventory(GameRules instance, GameRule<Boolean> rule) {
-        if(MixinEnhanceClient.getConfig().defaultModuleConfig.keepInventory){
+        if(MixinEnhanceClient.getConfig().generalConfig.keepInventory){
             return Boolean.TRUE;
         }
         return instance.get(rule);
@@ -31,7 +31,7 @@ public abstract class PlayerEntityMixin {
     @Redirect(method = "getBaseExperienceReward", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/world/level/gamerules/GameRules;get(Lnet/minecraft/world/level/gamerules/GameRule;)Ljava/lang/Object;"))
     private Object getBaseExperienceReward(GameRules instance, GameRule<Boolean> rule) {
-        if(MixinEnhanceClient.getConfig().defaultModuleConfig.keepInventory){
+        if(MixinEnhanceClient.getConfig().generalConfig.keepInventory){
             return Boolean.TRUE;
         }
         return instance.get(rule);

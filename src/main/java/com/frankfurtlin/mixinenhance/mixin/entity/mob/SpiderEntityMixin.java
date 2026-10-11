@@ -17,6 +17,6 @@ public abstract class SpiderEntityMixin {
     // 修改蜘蛛生成时带有药水效果的概率
     @ModifyConstant(method = "finalizeSpawn", constant = @Constant(floatValue = 0.1f))
     private float spiderSpawnWithEffect(float original) {
-        return MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.spiderSpawnWithEffect;
+        return MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.spiderSpawnWithEffect;
     }
 }

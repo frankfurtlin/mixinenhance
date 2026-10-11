@@ -17,7 +17,7 @@ public abstract class VaultSharedDataMixin {
     // 宝库无限兑换
     @Inject(method = "hasConnectedPlayers", at = @At("HEAD"), cancellable = true)
     private void hasConnectedPlayers(CallbackInfoReturnable<Boolean> cir) {
-        if (MixinEnhanceClient.getConfig().blockModuleConfig.unLockVaultReward) {
+        if (MixinEnhanceClient.getConfig().blockConfig.trialConfig.unLockVaultReward) {
             cir.setReturnValue(true);
         }
     }

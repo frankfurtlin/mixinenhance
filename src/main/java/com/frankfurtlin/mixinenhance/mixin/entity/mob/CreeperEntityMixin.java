@@ -28,6 +28,6 @@ public abstract class CreeperEntityMixin extends Monster {
     // 修改苦力怕爆炸半径
     @Inject(method = "<init>", at = @At("TAIL"))
     private void creeperExplodeRadius(CallbackInfo ci) {
-        this.explosionRadius = MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.creeperExplodeRadius;
+        this.explosionRadius = MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.creeperExplodeRadius;
     }
 }

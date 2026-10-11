@@ -12,7 +12,7 @@ public abstract class PotionItemMixin {
     // 药水堆叠至64
     @ModifyVariable(method = "<init>", at = @At("HEAD"), argsOnly = true)
     private static Item.Properties modifyStackSize(Item.Properties settings) {
-        if (MixinEnhanceClient.getConfig().itemModuleConfig.canStackTo64) {
+        if (MixinEnhanceClient.getConfig().itemConfig.canStackTo64) {
             return settings.stacksTo(64);
         }
         return settings.stacksTo(1);

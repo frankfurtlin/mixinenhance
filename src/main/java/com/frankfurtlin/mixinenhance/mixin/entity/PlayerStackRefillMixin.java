@@ -27,7 +27,7 @@ public abstract class PlayerStackRefillMixin {
     @Inject(method = "tick", at = @At("HEAD"))
     private void stackRefill(CallbackInfo ci) {
         Player self = (Player) (Object) this;
-        if (!MixinEnhanceClient.getConfig().defaultModuleConfig.enableStackRefill) {
+        if (!MixinEnhanceClient.getConfig().playerConfig.enableStackRefill) {
             return;
         }
         if (self.level().isClientSide()) {

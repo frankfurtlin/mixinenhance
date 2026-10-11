@@ -12,7 +12,7 @@ public abstract class TradeOfferMixin {
     // 村民无限交易
     @Inject(method = "increaseUses", at = @At("HEAD"), cancellable = true)
     public void use(CallbackInfo ci) {
-        if(MixinEnhanceClient.getConfig().defaultModuleConfig.unLockTrade){
+        if(MixinEnhanceClient.getConfig().enchantConfig.tradeConfig.unLockTrade){
             ci.cancel();
         }
     }

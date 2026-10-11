@@ -17,6 +17,6 @@ public abstract class PiglinEntityMixin {
     // 猪灵在生成时带有金质盔甲的概率
     @ModifyConstant(method = "maybeWearArmor", constant = @Constant(floatValue = 0.1f))
     private float piglinSpawnWithArmor(float constant){
-        return MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.piglinSpawnWithArmor;
+        return MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.piglinSpawnWithArmor;
     }
 }

@@ -17,7 +17,7 @@ import net.minecraft.world.item.Items;
  */
 public class PlayerEvents {
     public static void onPlayerJoined(ServerGamePacketListenerImpl handler, PacketSender sender, MinecraftServer server) {
-        if (MixinEnhanceClient.getConfig().defaultModuleConfig.enableJoinWithItems) {
+        if (MixinEnhanceClient.getConfig().generalConfig.enableJoinWithItems) {
             ServerPlayer player = handler.player;
             if (!hasElytra(player)) {
                 ItemStack elytra = new ItemStack(Items.ELYTRA);

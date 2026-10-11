@@ -35,7 +35,7 @@ public abstract class MobEntityMixin {
     private void onInit(CallbackInfo ci) {
         Map<EquipmentSlot, Float> chances = new EnumMap<>(EquipmentSlot.class);
         for (EquipmentSlot slot : EquipmentSlot.values()) {
-            chances.put(slot, MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.armorAndHandDropChance);
+            chances.put(slot, MixinEnhanceClient.getConfig().entityConfig.mobConfig.armorAndHandDropChance);
         }
         this.dropChances = new DropChances(chances);
     }
@@ -43,7 +43,7 @@ public abstract class MobEntityMixin {
     // 修改怪物生成时自带盔甲的概率
     @ModifyConstant(method = "populateDefaultEquipmentSlots", constant = @Constant(floatValue = 0.15F))
     private float spawnEquipmentChance(float chance) {
-        return MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.spawnEquipmentChance;
+        return MixinEnhanceClient.getConfig().entityConfig.mobConfig.spawnEquipmentChance;
     }
 
     /**
@@ -53,7 +53,7 @@ public abstract class MobEntityMixin {
     @Overwrite
     public static @Nullable Item getEquipmentForSlot(EquipmentSlot equipmentSlot, int equipmentLevel) {
         int level = equipmentLevel;
-        if (MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enableMobArmorEnhancement) {
+        if (MixinEnhanceClient.getConfig().entityConfig.mobConfig.enableMobArmorEnhancement) {
             Random random = new Random();
             level = random.nextInt(6);
         }
@@ -122,13 +122,13 @@ public abstract class MobEntityMixin {
     // 修改怪物生成时主手工具附魔的概率
     @ModifyConstant(method = "enchantSpawnedWeapon", constant = @Constant(floatValue = 0.25F))
     private float enchantMainHandItemChance(float chance) {
-        return MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enchantmentMainHandChance;
+        return MixinEnhanceClient.getConfig().entityConfig.mobConfig.enchantmentMainHandChance;
     }
 
     // 修改怪物生成时盔甲附魔的概率
     // 26.3 中 0.5F 常量位于 enchantSpawnedArmor
     @ModifyConstant(method = "enchantSpawnedArmor", constant = @Constant(floatValue = 0.5F))
     private float enchantmentArmorChance(float chance) {
-        return MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.enchantmentArmorChance;
+        return MixinEnhanceClient.getConfig().entityConfig.mobConfig.enchantmentArmorChance;
     }
 }

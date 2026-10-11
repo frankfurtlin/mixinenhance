@@ -22,6 +22,6 @@ public abstract class TntEntityMixin{
     // TNT爆炸强度修改
     @Inject(method = "<init>*", at = @At("TAIL"))
     private void onInit(CallbackInfo ci) {
-        this.explosionPower = MixinEnhanceClient.getConfig().itemModuleConfig.tntConfig.explodeRadius;
+        this.explosionPower = MixinEnhanceClient.getConfig().itemConfig.explosionConfig.tntExplodeRadius;
     }
 }

@@ -36,19 +36,19 @@ public abstract class SpongeBlockMixin extends Block {
     // 海绵最大吸附深度
     @ModifyConstant(method = "removeWaterBreadthFirstSearch", constant = @Constant(intValue = 6))
     private int changeMaxDepth(int constant){
-        return MixinEnhanceClient.getConfig().itemModuleConfig.spongeConfig.maxDepth;
+        return MixinEnhanceClient.getConfig().itemConfig.spongeConfig.maxDepth;
     }
 
     // 海绵最大吸附方块数
     @ModifyConstant(method = "removeWaterBreadthFirstSearch", constant = @Constant(intValue = 65))
     private int changeMaxIterations(int constant){
-        return MixinEnhanceClient.getConfig().itemModuleConfig.spongeConfig.maxIterations;
+        return MixinEnhanceClient.getConfig().itemConfig.spongeConfig.maxIterations;
     }
 
     // 海绵吸收岩浆
     @Inject(method = "tryAbsorbWater", at = @At("TAIL"))
     private void update(Level world, BlockPos pos, CallbackInfo ci) {
-        if (MixinEnhanceClient.getConfig().itemModuleConfig.spongeConfig.canAbsorbLava) {
+        if (MixinEnhanceClient.getConfig().itemConfig.spongeConfig.canAbsorbLava) {
             if (absorbLava(world, pos)) {
                 world.setBlock(pos, Blocks.WET_SPONGE.defaultBlockState(), Block.UPDATE_CLIENTS);
                 world.playSound(null, pos, SoundEvents.SPONGE_ABSORB, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -58,8 +58,8 @@ public abstract class SpongeBlockMixin extends Block {
 
     @Unique
     private boolean absorbLava(Level world, BlockPos pos) {
-        return BlockPos.breadthFirstTraversal(pos, MixinEnhanceClient.getConfig().itemModuleConfig.spongeConfig.maxDepth,
-            MixinEnhanceClient.getConfig().itemModuleConfig.spongeConfig.maxIterations, (currentPos, queuer) -> {
+        return BlockPos.breadthFirstTraversal(pos, MixinEnhanceClient.getConfig().itemConfig.spongeConfig.maxDepth,
+            MixinEnhanceClient.getConfig().itemConfig.spongeConfig.maxIterations, (currentPos, queuer) -> {
             for (Direction direction : ALL_DIRECTIONS) {
                 queuer.accept(currentPos.relative(direction));
             }

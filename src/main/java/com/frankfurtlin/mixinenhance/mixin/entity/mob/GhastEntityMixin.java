@@ -17,6 +17,6 @@ public abstract class GhastEntityMixin {
     // 26.3 中 canSpawn 更名为 checkGhastSpawnRules
     @ModifyConstant(method = "checkGhastSpawnRules", constant = @Constant(intValue = 20))
     private static int spawnRate(int constant){
-        return 20 / MixinEnhanceClient.getConfig().entityModuleConfig.hostileMobConfig.ghastSpawnFactor;
+        return 20 / MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.ghastSpawnFactor;
     }
 }

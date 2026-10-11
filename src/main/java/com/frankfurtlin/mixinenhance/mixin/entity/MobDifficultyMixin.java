@@ -28,8 +28,8 @@ public abstract class MobDifficultyMixin {
         if (!(self instanceof Enemy)) {
             return;
         }
-        double healthMultiplier = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.healthMultiplier;
-        double attackMultiplier = MixinEnhanceClient.getConfig().entityModuleConfig.mobConfig.attackMultiplier;
+        double healthMultiplier = MixinEnhanceClient.getConfig().entityConfig.mobConfig.healthMultiplier;
+        double attackMultiplier = MixinEnhanceClient.getConfig().entityConfig.mobConfig.attackMultiplier;
 
         if (healthMultiplier != 1.0) {
             AttributeInstance health = self.getAttribute(Attributes.MAX_HEALTH);

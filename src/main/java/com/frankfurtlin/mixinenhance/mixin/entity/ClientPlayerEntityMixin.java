@@ -22,7 +22,7 @@ public abstract class ClientPlayerEntityMixin {
     @Redirect(method = "handlePortalTransitionEffect",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;screen()Lnet/minecraft/client/gui/screens/Screen;"))
     private Screen updateNauseaScreen(Gui instance) {
-        if(MixinEnhanceClient.getConfig().defaultModuleConfig.canOpenGuiInPortal){
+        if(MixinEnhanceClient.getConfig().generalConfig.canOpenGuiInPortal){
             return null;
         }
         return instance.screen();

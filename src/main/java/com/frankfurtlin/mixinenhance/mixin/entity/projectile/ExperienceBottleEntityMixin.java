@@ -16,6 +16,6 @@ public abstract class ExperienceBottleEntityMixin {
     // 经验瓶产出经验修改
     @ModifyConstant(method = "onHit", constant = @Constant(intValue = 5))
     private int experienceBottleValue(int constant){
-        return MixinEnhanceClient.getConfig().itemModuleConfig.experienceBottleValue;
+        return MixinEnhanceClient.getConfig().itemConfig.experienceBottleValue;
     }
 }
