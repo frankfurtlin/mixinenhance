@@ -32,6 +32,11 @@ public abstract class LootTableMixin {
                 || !(contextMap.get(LootContextParams.THIS_ENTITY) instanceof FishingHook)) {
             return original;
         }
+        // 经验模式：不套用战利品过滤。物品已由经验模式统一拦截，
+        // 经验按「完整战利品」计算，从而不受排除 xxx 配置影响。
+        if (MixinEnhanceClient.getConfig().fishingConfig.enableExpOnlyMode) {
+            return original;
+        }
         FishingConfig.LootFilterConfig cfg = MixinEnhanceClient.getConfig().fishingConfig.lootFilterConfig;
         if (!cfg.excludeCod && !cfg.excludeSalmon && !cfg.excludeTropicalFish && !cfg.excludePufferfish
                 && !cfg.excludeBamboo && !cfg.excludeBowl && !cfg.excludeLeather && !cfg.excludeLeatherBoots

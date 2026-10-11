@@ -13,6 +13,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,19 +113,35 @@ public final class ContainerAutoSort {
         // 选出待整理的槽位（菜单槽位索引）
         List<Integer> indices = new ArrayList<>();
         NonNullList<Slot> slots = menu.slots;
-        for (int i = 0; i < slots.size(); i++) {
-            Slot slot = menu.getSlot(i);
-            if (playerInvScreen) {
-                // 玩家背包界面：只整理主背包（27 格），不整理快捷栏，
-                // 否则打包会把物品填进快捷栏空位，导致打开背包后主手凭空多出物品。
+        if (playerInvScreen) {
+            // 玩家背包界面：只整理主背包（27 格），不整理快捷栏，
+            // 否则打包会把物品填进快捷栏空位，导致打开背包后主手凭空多出物品。
+            for (int i = 0; i < slots.size(); i++) {
+                Slot slot = menu.getSlot(i);
                 if (slot.container == inv && slot.index >= INV_MAIN_MIN && slot.index <= INV_MAIN_MAX) {
                     indices.add(i);
                 }
-            } else {
-                // 其它容器：只整理容器自身的存储格
-                if (slot.container != inv) {
-                    indices.add(i);
+            }
+        } else {
+            // 其它容器：仅当「容器自身的格子全部是普通存储格」时才整理。
+            // 熔炉/酿造台/工作台/铁砧等含专用格子（产物格、燃料格、结果格等 mayPlace=false）的容器整块跳过，
+            // 避免把产物/燃料误当普通物品搬运（否则会把产物拎到光标上）。
+            List<Integer> containerSlots = new ArrayList<>();
+            boolean allPlainStorage = true;
+            // 运行时才创建测试物品：模组初始化阶段数据组件尚未绑定，静态创建 ItemStack 会抛 "Components not bound yet"
+            ItemStack sortTest = new ItemStack(Items.STONE);
+            for (int i = 0; i < slots.size(); i++) {
+                Slot slot = menu.getSlot(i);
+                if (slot.container == inv) {
+                    continue;
                 }
+                containerSlots.add(i);
+                if (!slot.mayPlace(sortTest)) {
+                    allPlainStorage = false;
+                }
+            }
+            if (allPlainStorage) {
+                indices.addAll(containerSlots);
             }
         }
         if (indices.size() < 2) {
