@@ -67,7 +67,7 @@
 1. 按 `Ctrl+Shift+P`
 2. 输入 `Tasks: Run Task`
 3. 选择 `🔨 构建 Mod`
-4. 构建完成后，JAR 文件在 `build/libs/AMixinEnhance-1.21.5.jar`
+4. 构建完成后，JAR 文件在 `build/libs/AMixinEnhance-26.3.jar`（名字随 `gradle.properties` 的 `mod_version` 变化）
 
 ### 3. 本地游玩
 1. 按 `Ctrl+Shift+P`
@@ -83,7 +83,7 @@
 **A**: 确保你在项目根目录（包含 gradlew.bat 的目录）
 
 ### Q: 构建失败，提示 Java 版本错误？
-**A**: 确保已安装 JDK 21，并在 VSCode 设置中配置正确的 Java 路径
+**A**: 确保已安装 JDK 25（见 `build.gradle` 的 `targetJavaVersion`），并在 VSCode 设置中配置正确的 Java 路径
 
 ### Q: 如何查看构建输出？
 **A**: 打开 VSCode 的终端面板（`Ctrl+` `），选择任务对应的终端标签
@@ -173,8 +173,8 @@
 ## 📚 更多信息
 
 - **Fabric Wiki**: https://fabricmc.net/wiki/
-- **Mixin 文档**: 查看项目中的 `doc/mixin.md`
-- **项目文档**: 查看 `使用说明.txt`
+- **Mixin 文档**: 见 [docs/README.md](README.md) 的「外部参考」一节（上游官方文档，不随本仓库维护）
+- **项目文档**: 见 [docs/README.md](README.md)（开发规范、升级指南、功能开发实录等）
 
 ---
 
