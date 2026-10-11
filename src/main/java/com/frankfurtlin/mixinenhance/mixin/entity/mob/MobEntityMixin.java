@@ -48,10 +48,13 @@ public abstract class MobEntityMixin {
     /** 附魔强度上限：系数为 1 时按满级 30 级计算 */
     private static final int MAX_ENCHANT_LEVEL = 30;
 
+    /** 死亡掉落概率 = 系数 ÷ 该值（系数 1 时掉落 10%），避免装备掉落过滥 */
+    private static final double DROP_CHANCE_DIVISOR = 10.0;
+
     @Shadow
     private DropChances dropChances;
 
-    // 死亡掉落概率：手部槽位沿用武器系数，其余（盔甲）沿用盔甲系数
+    // 死亡掉落概率：手部槽位沿用武器系数，其余（盔甲）沿用盔甲系数，再统一除以 10
     @Inject(method = "<init>", at = @At("TAIL"))
     private void onInit(CallbackInfo ci) {
         double armorFactor = MixinEnhanceClient.getConfig().entityConfig.equipmentConfig.armorFactor;
@@ -59,7 +62,8 @@ public abstract class MobEntityMixin {
         Map<EquipmentSlot, Float> chances = new EnumMap<>(EquipmentSlot.class);
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             boolean hand = slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND;
-            chances.put(slot, (float) (hand ? weaponFactor : armorFactor));
+            double factor = hand ? weaponFactor : armorFactor;
+            chances.put(slot, (float) (factor / DROP_CHANCE_DIVISOR));
         }
         this.dropChances = new DropChances(chances);
     }

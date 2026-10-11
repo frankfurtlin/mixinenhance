@@ -125,9 +125,9 @@
 
     "text.autoconfig.mixinenhance.option.entityConfig.equipmentConfig": "怪物装备系数",
     "text.autoconfig.mixinenhance.option.entityConfig.equipmentConfig.armorFactor": "盔甲系数（0-1）",
-    "text.autoconfig.mixinenhance.option.entityConfig.equipmentConfig.armorFactor.@Tooltip": "自带盔甲的概率、材质、附魔与强度、死亡掉落概率都由它决定（0 不带、1 最强；猪灵金甲也沿用）",
+    "text.autoconfig.mixinenhance.option.entityConfig.equipmentConfig.armorFactor.@Tooltip": "自带盔甲的概率、材质、附魔与强度都由它决定（0 不带、1 最强；猪灵金甲也沿用）；死亡掉落概率 = 系数 ÷ 10（系数 1 时 10%）",
     "text.autoconfig.mixinenhance.option.entityConfig.equipmentConfig.weaponFactor": "武器系数（0-1）",
-    "text.autoconfig.mixinenhance.option.entityConfig.equipmentConfig.weaponFactor.@Tooltip": "武器材质、附魔与强度、死亡掉落概率都由它决定；僵尸/溺尸这类「按概率带武器」的怪，概率也由它决定（原版必带武器的怪不受影响）",
+    "text.autoconfig.mixinenhance.option.entityConfig.equipmentConfig.weaponFactor.@Tooltip": "武器材质、附魔与强度都由它决定，僵尸/溺尸这类「按概率带武器」的怪概率也由它决定（原版必带武器的怪不受影响）；死亡掉落概率 = 系数 ÷ 10（系数 1 时 10%）",
 
     "text.autoconfig.mixinenhance.option.entityConfig.hostileMobConfig": "敌对怪物",
     "text.autoconfig.mixinenhance.option.entityConfig.hostileMobConfig.pickupLootChance": "僵尸拾取物品的概率（0-1）",

@@ -23,10 +23,10 @@ public class EntityConfig {
     public static class EquipmentConfig {
         @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
-        public double armorFactor = 0.15;                           // 怪物盔甲系数（概率/材质/附魔/掉落）
+        public double armorFactor = 0.15;                           // 怪物盔甲系数（概率/材质/附魔；掉落 = 系数÷10）
         @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
-        public double weaponFactor = 0.15;                          // 怪物武器系数（概率/材质/附魔/掉落）
+        public double weaponFactor = 0.15;                          // 怪物武器系数（概率/材质/附魔；掉落 = 系数÷10）
     }
 
     public static class HostileMobConfig {
