@@ -8,7 +8,7 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-# 需要 contents: write 才能创建/更新 Release
+# 需要 contents: write 才能移动 tag 并创建/更新 Release
 permissions:
   contents: write
 
@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up JDK 25
         uses: actions/setup-java@v4
@@ -35,6 +37,11 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
+      # 从 gradle.properties 读取当前版本号（mod_version，如 26.3），用作 tag 名
+      - name: Read mod version
+        id: ver
+        run: echo "version=$(grep -E '^[[:space:]]*mod_version' gradle.properties | cut -d= -f2 | tr -d ' \t\r')" >> "$GITHUB_OUTPUT"
+
       - name: Build
         run: ./gradlew build --no-daemon --stacktrace
 
@@ -42,30 +49,37 @@ jobs:
         id: jar
         run: echo "path=$(ls build/libs/AMixinEnhance-*.jar | grep -v -- '-sources.jar' | head -n1)" >> "$GITHUB_OUTPUT"
 
-      # 1) 每次推送都把 jar 作为 Actions 产物保存（在对应 run 的 Artifacts 里下载）
+      # 每次推送都把 jar 作为 Actions 产物保存（在对应 run 的 Artifacts 里下载）
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: AMixinEnhance-${{ github.sha }}
+          name: AMixinEnhance-${{ steps.ver.outputs.version }}-${{ github.sha }}
           path: ${{ steps.jar.outputs.path }}
           if-no-files-found: error
 
-      # 2) 推送到 main：把 jar 更新到一个滚动的 "latest" 预发布 Release
-      - name: Publish rolling release (main)
+      # push 到 main：把「当前版本」tag 强制移动到最新提交（覆盖上一次的 tag）
+      - name: Move version tag to latest commit
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git tag -f "${{ steps.ver.outputs.version }}"
+          git push -f origin "${{ steps.ver.outputs.version }}"
+
+      # 为「当前版本」tag 创建/更新正式 Release（非预发布，会显示在仓库首页 Latest release）
+      - name: Publish release (main)
         if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: latest
-          name: Latest Build
+          tag_name: ${{ steps.ver.outputs.version }}
+          name: MixinEnhance ${{ steps.ver.outputs.version }}
+          prerelease: false
+          make_latest: true
           body: |
-            自动构建于 ${{ github.sha }}
-            提交：${{ github.event.head_commit.message }}
-          prerelease: true
-          make_latest: false
+            当前版本 ${{ steps.ver.outputs.version }}，随 main 分支最新提交自动构建。
+            提交：${{ github.sha }}
           files: ${{ steps.jar.outputs.path }}
 
-      # 3) 推送形如 v* 的 tag：创建正式 Release 并附上 jar
-      - name: Publish release (tag)
+      # 手动推送 v* tag 时的正式发布（附带自动生成的更新说明）
+      - name: Publish release (v* tag)
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
