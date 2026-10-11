@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug Minecraft Client",
+            "request": "launch",
+            "mainClass": "net.fabricmc.devlaunchinjector.Main",
+            "projectName": "mixinEnhance",
+            "cwd": "${workspaceFolder}/run",
+            "vmArgs": [
+                "-Dfabric.dli.config=${workspaceFolder}/.gradle/loom-cache/launch.cfg",
+                "-Dfabric.dli.env=client",
+                "-Dfabric.dli.main=net.fabricmc.loader.launch.knot.KnotClient"
+            ]
+        },
+        {
+            "type": "java",
+            "name": "Debug Minecraft Server",
+            "request": "launch",
+            "mainClass": "net.fabricmc.devlaunchinjector.Main",
+            "projectName": "mixinEnhance",
+            "cwd": "${workspaceFolder}/run",
+            "vmArgs": [
+                "-Dfabric.dli.config=${workspaceFolder}/.gradle/loom-cache/launch.cfg",
+                "-Dfabric.dli.env=server",
+                "-Dfabric.dli.main=net.fabricmc.loader.launch.knot.KnotServer"
+            ]
+        }
+    ]
+}

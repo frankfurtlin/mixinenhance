@@ -1,0 +1,140 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "🎮 运行 Minecraft 客户端",
+            "type": "shell",
+            "command": "gradlew.bat",
+            "args": ["runClient"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "icon": {
+                "id": "play",
+                "color": "terminal.ansiGreen"
+            },
+            "detail": "启动开发环境的 Minecraft 客户端"
+        },
+        {
+            "label": "🔨 构建 Mod",
+            "type": "shell",
+            "command": "gradlew.bat",
+            "args": ["build"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "icon": {
+                "id": "package",
+                "color": "terminal.ansiYellow"
+            },
+            "detail": "构建 Mod JAR 文件到 build/libs/"
+        },
+        {
+            "label": "🧹 清理构建缓存",
+            "type": "shell",
+            "command": "gradlew.bat",
+            "args": ["clean"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "icon": {
+                "id": "trash",
+                "color": "terminal.ansiRed"
+            },
+            "detail": "清理 build 目录和构建缓存"
+        },
+        {
+            "label": "🖥️ 运行 Minecraft 服务端",
+            "type": "shell",
+            "command": "gradlew.bat",
+            "args": ["runServer"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "icon": {
+                "id": "server",
+                "color": "terminal.ansiBlue"
+            },
+            "detail": "启动开发环境的 Minecraft 服务端"
+        },
+        {
+            "label": "📦 构建并安装到 Minecraft",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "Write-Host '步骤 1/2: 构建 Mod...' -ForegroundColor Yellow; .\\gradlew build; if ($LASTEXITCODE -eq 0) { Write-Host ''; Write-Host '步骤 2/2: 安装到 Minecraft...' -ForegroundColor Yellow; $jar = Get-ChildItem build/libs/AMixinEnhance-*.jar | Select-Object -First 1; if ($jar) { $modsDir = $env:APPDATA + '\\.minecraft\\mods'; New-Item -ItemType Directory -Force -Path $modsDir | Out-Null; Copy-Item $jar.FullName -Destination $modsDir -Force; Write-Host ''; Write-Host '✅ 安装成功！' -ForegroundColor Green; Write-Host \"文件已复制到: $modsDir\" -ForegroundColor Gray } else { Write-Host ''; Write-Host '❌ 未找到构建的jar文件' -ForegroundColor Red } } else { Write-Host ''; Write-Host '❌ 构建失败' -ForegroundColor Red }"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "icon": {
+                "id": "arrow-right",
+                "color": "terminal.ansiMagenta"
+            },
+            "detail": "构建 Mod 并自动安装到 %APPDATA%\\.minecraft\\mods"
+        },
+        {
+            "label": "🔄 重新构建",
+            "type": "shell",
+            "command": "gradlew.bat",
+            "args": ["clean", "build"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "icon": {
+                "id": "refresh",
+                "color": "terminal.ansiCyan"
+            },
+            "detail": "清理并重新构建 Mod"
+        }
+    ]
+}

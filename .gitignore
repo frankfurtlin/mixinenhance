@@ -1,6 +1,10 @@
 # User-specific stuff
 .idea/
-.vscode/
+# 只忽略 .vscode 下的个人配置；VSCode 任务与调试配置纳入仓库
+# （docs/VSCode使用指南.md 描述的就是这两个文件里的任务/调试项）
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
 
 *.iml
 *.ipr
