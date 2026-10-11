@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.render;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.client.GammaState;
 import net.minecraft.client.renderer.LightmapRenderStateExtractor;
 import net.minecraft.client.renderer.state.LightmapRenderState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class LightmapRenderStateExtractorMixin {
     @Inject(method = "extract", at = @At("RETURN"))
     private void forceFullBright(LightmapRenderState state, float partialTicks, CallbackInfo ci) {
-        if (MixinEnhanceClient.getConfig().playerConfig.enableGamma) {
+        if (GammaState.isEnabled()) {
             // 天空光拉满（夜晚变暗的主因）、整体亮度最大、无夜晚黑暗
             state.skyFactor = 1.0f;
             state.brightness = 1.0f;

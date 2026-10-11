@@ -45,8 +45,12 @@ public abstract class CameraMixin {
             return;
         }
         this.detached = true;
-        setRotation(minecraft.player.getYRot(), minecraft.player.getXRot());
-        setPosition(FreeCamState.getX(), FreeCamState.getY(), FreeCamState.getZ());
+        // 位置与视角都按 partialTicks 插值：相机位置每 tick 才推进一次，
+        // 直接用 tick 值摆放会出现 20Hz 的跳变（就是「卡」的来源），原版 alignWithEntity 也是这么插值的
+        setRotation(minecraft.player.getViewYRot(partialTicks), minecraft.player.getViewXRot(partialTicks));
+        setPosition(FreeCamState.getRenderX(partialTicks),
+            FreeCamState.getRenderY(partialTicks),
+            FreeCamState.getRenderZ(partialTicks));
         ci.cancel();
     }
 

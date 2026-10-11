@@ -17,13 +17,13 @@ public class PlayerConfig {
     @ConfigEntry.Gui.Tooltip
     public boolean enableAutoSortContainer = false;             // 打开背包/容器时自动整理
     @ConfigEntry.Gui.Tooltip
-    public boolean enableFreeCam = false;                       // 自由视角
+    public boolean enableFreeCam = true;                        // 自由视角（游戏内 F6 切换；关掉则按 F6 无反应）
     @ConfigEntry.Gui.Tooltip
     public boolean enableTotemCounter = false;                  // 图腾计数显示
     @ConfigEntry.Gui.Tooltip
     public boolean enableDynamicLight = false;                  // 动态照明
     @ConfigEntry.Gui.Tooltip
-    public boolean enableGamma = false;                         // 亮度调节
+    public boolean enableGamma = true;                          // 亮度调节（默认原版亮度，游戏内按 F7 切全亮；关掉配置则按 F7 无反应）
     @ConfigEntry.Gui.Tooltip
     public boolean enableNoSlowInFluid = false;                 // 流体中移速不变
     @ConfigEntry.Gui.Tooltip
