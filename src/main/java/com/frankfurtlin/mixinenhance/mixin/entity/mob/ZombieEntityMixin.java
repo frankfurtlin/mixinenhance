@@ -1,28 +1,26 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.mob;
 
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
-import com.frankfurtlin.mixinenhance.util.ItemTagUtil;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import net.minecraft.tags.ItemTags;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.zombie.Zombie;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.level.ServerLevelAccessor;
 
 /**
+ * 僵尸系（僵尸/尸壳/僵尸村民等）：
+ * 自带武器的概率改为由「武器系数」决定（原版固定 5%），武器材质则由公共钩子统一处理。
+ *
  * @author Frankfurtlin
  * @version 1.0
  * @date 2024/6/12 15:46
@@ -41,26 +39,10 @@ public abstract class ZombieEntityMixin extends Monster {
         }
     }
 
-    // 修改僵尸生成时自带的武器概率；
-    // 开启武器增强时，从原版「所有工具」标签（锹/镐/剑/斧/锄/矛）随机装备一件，
-    // 从而自动包含后续新增的工具类型，无需改代码。
-    @Inject(method = "populateDefaultEquipmentSlots", at = @At("TAIL"))
-    public void initEquipment(RandomSource random, DifficultyInstance localDifficulty, CallbackInfo ci) {
-        float f = random.nextFloat();
-        float f2 = (float) MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.zombieSpawnWithTool;
-        if (f < f2) {
-            if (MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.enableZombieWeaponEnhancement) {
-                ItemStack tool = ItemTagUtil.randomStack(random,
-                    ItemTags.SHOVELS, ItemTags.PICKAXES, ItemTags.SWORDS,
-                    ItemTags.AXES, ItemTags.HOES, ItemTags.SPEARS);
-                if (tool != null) {
-                    this.setItemSlot(EquipmentSlot.MAINHAND, tool);
-                }
-            } else {
-                // 原版：铁剑 / 铁锹 二选一
-                this.setItemSlot(EquipmentSlot.MAINHAND,
-                    new ItemStack(random.nextBoolean() ? Items.IRON_SWORD : Items.IRON_SHOVEL));
-            }
-        }
+    // 僵尸在原版是「按概率带武器」（0.05F），所以这里把概率直接换成武器系数：
+    // 系数 1 必带、0 不带。武器材质由公共钩子处理。
+    @ModifyConstant(method = "populateDefaultEquipmentSlots", constant = @Constant(floatValue = 0.05F), require = 0)
+    private float mixinEnhance$weaponChance(float chance) {
+        return (float) MixinEnhanceClient.getConfig().entityConfig.equipmentConfig.weaponFactor;
     }
 }

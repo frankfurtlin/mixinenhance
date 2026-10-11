@@ -3,7 +3,7 @@ package com.frankfurtlin.mixinenhance.config.section;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 /**
- * 实体与怪物：怪物属性倍率、生成时装备/附魔，以及各类敌对生物的行为调整。
+ * 实体与怪物：怪物生成时的装备系数，以及各类敌对生物的行为调整。
  *
  * @author Frankfurtlin
  * @version 1.0
@@ -12,26 +12,21 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 public class EntityConfig {
     public static class MobConfig {
         @ConfigEntry.Gui.Tooltip
-        public double healthMultiplier = 1.0;                       // 怪物血量倍率
-        @ConfigEntry.Gui.Tooltip
-        public double attackMultiplier = 1.0;                       // 怪物攻击倍率（近战与远程伤害）
-        @ConfigEntry.Gui.Tooltip
-        public boolean enableMobArmorEnhancement = false;           // 怪物生成时盔甲强度增强（皮、铜、金、锁链、铁、钻石、下界合金）
-        @ConfigEntry.Gui.Tooltip
-        @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
-        public float spawnEquipmentChance = 0.15f;                  // 怪物生成时自带盔甲的概率
-        @ConfigEntry.Gui.Tooltip
-        @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
-        public float enchantmentArmorChance = 0.5f;                 // 怪物生成时盔甲附魔的概率
-        @ConfigEntry.Gui.Tooltip
-        @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
-        public float enchantmentMainHandChance = 0.25f;             // 怪物生成时主手工具附魔的概率
-        @ConfigEntry.Gui.Tooltip
-        @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
-        public float armorAndHandDropChance = 0.085f;               // 怪物死亡时工具及盔甲掉落的概率
-        @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
         public double dieWithSpawner = 0.01;                        // 怪物死亡时掉落对应刷怪笼的概率
+    }
+
+    /**
+     * 怪物生成时的装备系数（0-1）：一个系数同时决定「有没有装备、材质好不好、附不附魔、附魔多强、
+     * 死亡时掉不掉落」，全部只取决于配置，不再受区域难度/月相/游戏天数影响。
+     */
+    public static class EquipmentConfig {
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
+        public double armorFactor = 0.15;                           // 怪物盔甲系数（概率/材质/附魔/掉落）
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
+        public double weaponFactor = 0.15;                          // 怪物武器系数（概率/材质/附魔/掉落）
     }
 
     public static class HostileMobConfig {
@@ -39,29 +34,11 @@ public class EntityConfig {
         @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
         public float pickupLootChance = 0.55f;                      // 僵尸拾取物品的概率
         @ConfigEntry.Gui.Tooltip
-        @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
-        public double zombieSpawnWithTool = 0.05;                   // 僵尸生成时自带武器的概率
-        @ConfigEntry.Gui.Tooltip
-        public boolean enableZombieWeaponEnhancement = false;       // 僵尸武器增强（原版「所有工具」标签随机）
-        @ConfigEntry.Gui.Tooltip
-        public boolean enableVindicatorWeaponEnhancement = false;   // 卫道士武器增强（原版「所有斧」标签随机）
-        @ConfigEntry.Gui.Tooltip
-        public boolean enableWitherSkeletonWeaponEnhancement = false; // 凋零骷髅武器增强（原版「所有剑」标签随机）
-        @ConfigEntry.Gui.Tooltip
-        @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
-        public float drownedSpawnWithShell = 0.03f;                 // 溺尸生成时自带鹦鹉螺壳的概率
-        @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 1, max = 5)
         public int drownedSpawnFactor = 1;                          // 溺尸生成倍率
         @ConfigEntry.Gui.Tooltip
-        @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
-        public double drownedSpawnWithTool = 0.1;                   // 溺尸生成时带有工具的概率
-        @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 1, max = 10)
         public int ghastSpawnFactor = 1;                            // 恶魂生成倍率
-        @ConfigEntry.Gui.Tooltip
-        @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
-        public float piglinSpawnWithArmor = 0.1f;                   // 猪灵生成时自带金质盔甲的概率
         @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 1, max = 10)
         public int creeperExplodeRadius = 3;                        // 苦力怕爆炸半径
@@ -75,6 +52,8 @@ public class EntityConfig {
 
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     public MobConfig mobConfig = new MobConfig();
+    @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
+    public EquipmentConfig equipmentConfig = new EquipmentConfig();
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     public HostileMobConfig hostileMobConfig = new HostileMobConfig();
 }

@@ -13,9 +13,10 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
  */
 @Mixin(Piglin.class)
 public abstract class PiglinEntityMixin {
-    // 猪灵在生成时带有金质盔甲的概率
-    @ModifyConstant(method = "maybeWearArmor", constant = @Constant(floatValue = 0.1f))
-    private float piglinSpawnWithArmor(float constant){
-        return MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.piglinSpawnWithArmor;
+    // 猪灵生成时自带金质盔甲的概率 = 盔甲系数（原版 0.1F）
+    // 武器（金剑/弩）由公共钩子按武器系数处理；盔甲材质保持原版金质
+    @ModifyConstant(method = "maybeWearArmor", constant = @Constant(floatValue = 0.1f), require = 0)
+    private float mixinEnhance$armorChance(float constant) {
+        return (float) MixinEnhanceClient.getConfig().entityConfig.equipmentConfig.armorFactor;
     }
 }

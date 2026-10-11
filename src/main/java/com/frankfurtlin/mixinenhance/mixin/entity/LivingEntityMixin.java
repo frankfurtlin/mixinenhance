@@ -1,12 +1,14 @@
 package com.frankfurtlin.mixinenhance.mixin.entity;
 
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.util.EquipmentQuality;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.skeleton.WitherSkeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -28,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
     // 不死图腾在背包中生效
-    @Redirect(method = "checkTotemDeathProtection", at = @At(value = "INVOKE",
+    @Redirect(require = 0, method = "checkTotemDeathProtection", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/world/entity/LivingEntity;getItemInHand(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;"))
     private ItemStack inventoryTotemEnabled(LivingEntity livingEntity, InteractionHand hand) {
         if (MixinEnhanceClient.getConfig().itemConfig.inventoryTotemEnabled && livingEntity instanceof Player) {
@@ -44,7 +46,7 @@ public abstract class LivingEntityMixin {
 
     // 玩家在水中不减速
     // 1.21.11 将 travelInFluid 拆分为 travelInWater / travelInLava
-    @ModifyConstant(method = "travelInWater", constant = @Constant(floatValue = 0.02f, ordinal = 0))
+    @ModifyConstant(method = "travelInWater", constant = @Constant(floatValue = 0.02f, ordinal = 0), require = 0)
     private float enablePlayerNoSlowInWater(float constant){
         LivingEntity livingEntity = (LivingEntity) (Object)this;
         if(MixinEnhanceClient.getConfig().playerConfig.enableNoSlowInFluid && livingEntity instanceof Player){
@@ -55,7 +57,7 @@ public abstract class LivingEntityMixin {
 
     // 玩家在熔岩中不减速
     // 1.21.11 将 travelInFluid 拆分为 travelInWater / travelInLava
-    @ModifyConstant(method = "travelInLava", constant = @Constant(doubleValue = 0.5))
+    @ModifyConstant(method = "travelInLava", constant = @Constant(doubleValue = 0.5), require = 0)
     private double enablePlayerNoSlowInLava(double constant){
         LivingEntity livingEntity = (LivingEntity) (Object)this;
         if(MixinEnhanceClient.getConfig().playerConfig.enableNoSlowInFluid && livingEntity instanceof Player){
@@ -97,6 +99,29 @@ public abstract class LivingEntityMixin {
                 }
             }
         }
+    }
+
+    /**
+     * 怪物出生时自带武器的「材质」由武器系数决定（概率部分见 ZombieEntityMixin / DrownedEntityMixin）。
+     *
+     * <p>原版所有怪物（僵尸/卫道士/凋零骷髅/骷髅/溺尸/猪灵/掠夺者…）都是通过
+     * {@link LivingEntity#setItemSlot} 把武器放进手上的，所以这里是唯一需要的公共注入点：
+     * 出生时（{@code tickCount == 0} 或处于 finalizeSpawn 中）把武器换成本系数对应的材质。
+     * 原版「必带武器」的怪（卫道士、凋零骷髅、骷髅等）保持必带，只受材质/附魔影响；
+     * 原版「按概率带武器」的怪（僵尸、溺尸）则由各自的原版概率常量改写成系数。</p>
+     *
+     * <p>后天拾取的武器（已 tick 过）不受影响；弓/弩/三叉戟没有材质变体，只受附魔系数影响。</p>
+     */
+    @ModifyVariable(method = "setItemSlot", at = @At("HEAD"), argsOnly = true, ordinal = 0, require = 0)
+    private ItemStack mixinEnhance$weaponByFactor(ItemStack stack) {
+        if (!((Object) this instanceof Mob mob) || mob.level().isClientSide()
+            || !EquipmentQuality.isWeapon(stack)
+            || (mob.tickCount != 0 && !EquipmentQuality.isSpawning())) {
+            return stack;
+        }
+        double factor = MixinEnhanceClient.getConfig().entityConfig.equipmentConfig.weaponFactor;
+        ItemStack better = EquipmentQuality.betterWeapon(stack, factor, mob.getRandom().nextDouble());
+        return better == null ? stack : better;
     }
 }
 
