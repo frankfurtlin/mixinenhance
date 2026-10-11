@@ -184,6 +184,8 @@
     "text.autoconfig.mixinenhance.option.fishingConfig.enableAutoFishing.@Tooltip": "enableAutoFishing",
     "text.autoconfig.mixinenhance.option.fishingConfig.enableTickFishing": "enableTickFishing",
     "text.autoconfig.mixinenhance.option.fishingConfig.enableTickFishing.@Tooltip": "enableTickFishing",
+    "text.autoconfig.mixinenhance.option.fishingConfig.enableExpOnlyMode": "enableExpOnlyMode",
+    "text.autoconfig.mixinenhance.option.fishingConfig.enableExpOnlyMode.@Tooltip": "enableExpOnlyMode",
 
     "text.autoconfig.mixinenhance.option.fishingConfig.lootFilterConfig": "lootFilterConfig",
     "text.autoconfig.mixinenhance.option.fishingConfig.lootFilterConfig.excludeCod": "excludeCod",

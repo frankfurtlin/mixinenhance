@@ -62,6 +62,8 @@ public class FishingConfig {
     public boolean enableAutoFishing = false;           // 自动钓鱼
     @ConfigEntry.Gui.Tooltip
     public boolean enableTickFishing = false;           // 急速钓鱼
+    @ConfigEntry.Gui.Tooltip
+    public boolean enableExpOnlyMode = false;           // 钓鱼经验模式：只给经验，不给战利品
 
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     public LootFilterConfig lootFilterConfig = new LootFilterConfig();

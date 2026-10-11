@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -52,6 +54,18 @@ public abstract class FishingBobberEntityMixin extends Projectile {
         super(entityType, world);
     }
 
+    // 钓鱼经验模式：拦截战利品物品实体（ItemEntity）的生成，但保留经验球（ExperienceOrb）。
+    // 原版 retrieve 的循环里，对每件战利品依次 addFreshEntity(ItemEntity) 与 addFreshEntity(ExperienceOrb(1~6))；
+    // 这里只跳过 ItemEntity，经验照常发放，因此实现「只给经验，不给战利品」。
+    @Redirect(method = "retrieve",
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"))
+    private boolean expOnlySkipLoot(Level level, Entity entity) {
+        if (MixinEnhanceClient.getConfig().fishingConfig.enableExpOnlyMode && entity instanceof ItemEntity) {
+            return false;
+        }
+        return level.addFreshEntity(entity);
+    }
+
     // 自动钓鱼：浮标下沉（鱼上钩）时自动收杆并重新抛竿
     // 1.21.11 中 getWorld() 改名为 getEntityWorld()；use() 内部 discard 时会清空 player.fishHook，
     // 随后 ItemStack.use 会重新抛出新的浮标
@@ -77,6 +91,7 @@ public abstract class FishingBobberEntityMixin extends Projectile {
 
     // 急速钓鱼：浮标在水中时每 tick 直接结算钓鱼战利品
     // 1.21.11 中改用 getEntityWorld()/getEntityPos()，Criteria 触发参数直接传 this
+    // 经验模式下只发经验球，不生成战利品物品实体
     @Inject(method = "catchingFish", at = @At("HEAD"))
     private void buffFishing(BlockPos pos, CallbackInfo ci){
         Player playerEntity = this.getPlayerOwner();
@@ -95,13 +110,16 @@ public abstract class FishingBobberEntityMixin extends Projectile {
             LootTable lootTable = world.getServer().reloadableRegistries().getLootTable(BuiltInLootTables.FISHING);
             List<ItemStack> list = lootTable.getRandomItems(lootWorldContext);
             CriteriaTriggers.FISHING_ROD_HOOKED.trigger((ServerPlayer)playerEntity, usedItem, (FishingHook)(Object)this, list);
+            boolean expOnly = MixinEnhanceClient.getConfig().fishingConfig.enableExpOnlyMode;
             for (ItemStack itemStack : list) {
-                ItemEntity itemEntity = new ItemEntity(world, this.getX(), this.getY(), this.getZ(), itemStack);
-                double d = playerEntity.getX() - this.getX();
-                double e = playerEntity.getY() - this.getY();
-                double f = playerEntity.getZ() - this.getZ();
-                itemEntity.setDeltaMovement(d * 0.1, e * 0.1 + Math.sqrt(Math.sqrt(d * d + e * e + f * f)) * 0.08, f * 0.1);
-                world.addFreshEntity(itemEntity);
+                if (!expOnly) {
+                    ItemEntity itemEntity = new ItemEntity(world, this.getX(), this.getY(), this.getZ(), itemStack);
+                    double d = playerEntity.getX() - this.getX();
+                    double e = playerEntity.getY() - this.getY();
+                    double f = playerEntity.getZ() - this.getZ();
+                    itemEntity.setDeltaMovement(d * 0.1, e * 0.1 + Math.sqrt(Math.sqrt(d * d + e * e + f * f)) * 0.08, f * 0.1);
+                    world.addFreshEntity(itemEntity);
+                }
                 world.addFreshEntity(new ExperienceOrb(world, playerEntity.getX(), playerEntity.getY() + 0.5, playerEntity.getZ(), this.random.nextInt(6) + 1));
                 if (itemStack.is(ItemTags.FISHES)) {
                     playerEntity.awardStat(Stats.FISH_CAUGHT, 1);

@@ -184,6 +184,8 @@
     "text.autoconfig.mixinenhance.option.fishingConfig.enableAutoFishing.@Tooltip": "是否启用自动钓鱼",
     "text.autoconfig.mixinenhance.option.fishingConfig.enableTickFishing": "启用急速钓鱼",
     "text.autoconfig.mixinenhance.option.fishingConfig.enableTickFishing.@Tooltip": "是否启用急速钓鱼",
+    "text.autoconfig.mixinenhance.option.fishingConfig.enableExpOnlyMode": "启用钓鱼经验模式（只给经验）",
+    "text.autoconfig.mixinenhance.option.fishingConfig.enableExpOnlyMode.@Tooltip": "钓鱼时只获得经验，不再产出任何战利品物品",
 
     "text.autoconfig.mixinenhance.option.fishingConfig.lootFilterConfig": "钓鱼战利品过滤",
     "text.autoconfig.mixinenhance.option.fishingConfig.lootFilterConfig.excludeCod": "排除钓鱼战利品：鳕鱼",
