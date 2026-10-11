@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class PlayerEntityMixin {
     // 死亡不掉落（物品）
     // 26.3 中玩家物品掉落由 dropEquipment 处理，规则读取为 GameRules.get(GameRule)
-    @Redirect(method = "dropEquipment", at = @At(value = "INVOKE",
+    @Redirect(require = 0, method = "dropEquipment", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/world/level/gamerules/GameRules;get(Lnet/minecraft/world/level/gamerules/GameRule;)Ljava/lang/Object;"))
     private Object dropInventory(GameRules instance, GameRule<Boolean> rule) {
         if(MixinEnhanceClient.getConfig().generalConfig.keepInventory){
@@ -28,7 +28,7 @@ public abstract class PlayerEntityMixin {
 
     // 死亡不掉落（经验）
     // 26.3 中 getExperienceToDrop 更名为 getBaseExperienceReward
-    @Redirect(method = "getBaseExperienceReward", at = @At(value = "INVOKE",
+    @Redirect(require = 0, method = "getBaseExperienceReward", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/world/level/gamerules/GameRules;get(Lnet/minecraft/world/level/gamerules/GameRule;)Ljava/lang/Object;"))
     private Object getBaseExperienceReward(GameRules instance, GameRule<Boolean> rule) {
         if(MixinEnhanceClient.getConfig().generalConfig.keepInventory){

@@ -57,7 +57,7 @@ public abstract class FishingBobberEntityMixin extends Projectile {
     // 钓鱼经验模式：拦截战利品物品实体（ItemEntity）的生成，但保留经验球（ExperienceOrb）。
     // 原版 retrieve 的循环里，对每件战利品依次 addFreshEntity(ItemEntity) 与 addFreshEntity(ExperienceOrb(1~6))；
     // 这里只跳过 ItemEntity，经验照常发放，因此实现「只给经验，不给战利品」。
-    @Redirect(method = "retrieve",
+    @Redirect(method = "retrieve", require = 0,
         at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"))
     private boolean expOnlySkipLoot(Level level, Entity entity) {
         if (MixinEnhanceClient.getConfig().fishingConfig.enableExpOnlyMode && entity instanceof ItemEntity) {
@@ -66,12 +66,13 @@ public abstract class FishingBobberEntityMixin extends Projectile {
         return level.addFreshEntity(entity);
     }
 
-    // 自动钓鱼：浮标下沉（鱼上钩）时自动收杆并重新抛竿
-    // 1.21.11 中 getWorld() 改名为 getEntityWorld()；use() 内部 discard 时会清空 player.fishHook，
-    // 随后 ItemStack.use 会重新抛出新的浮标
-    @Inject(method = "tick", at = @At(value = "INVOKE", ordinal = 2, shift = At.Shift.AFTER,
-        target = "Lnet/minecraft/world/entity/projectile/FishingHook;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V"))
-    private void autoFishing(CallbackInfo ci) {
+    // 自动钓鱼：鱼上钩（浮标溅水）时自动收杆并重新抛竿
+    // 旧写法锚在 tick() 里第 2 个 setDeltaMovement 调用上（ordinal = 2），原版多一个调用就错位；
+    // 现改为锚定「上钩溅水音效」：catchingFish 里播放 FISHING_BOBBER_SPLASH 即代表鱼已上钩。
+    // 注意：use() 内部 discard 会清空 player.fishHook，随后 ItemStack.use 会重新抛出新的浮标
+    @Inject(method = "catchingFish", require = 0, at = @At(value = "FIELD", shift = At.Shift.AFTER,
+        target = "Lnet/minecraft/sounds/SoundEvents;FISHING_BOBBER_SPLASH:Lnet/minecraft/sounds/SoundEvent;"))
+    private void autoFishing(BlockPos pos, CallbackInfo ci) {
         if(!MixinEnhanceClient.getConfig().fishingConfig.enableAutoFishing){
             return;
         }

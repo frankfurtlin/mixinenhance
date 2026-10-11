@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 public abstract class GhastEntityMixin {
     // 修改恶魂生成率
     // 26.3 中 canSpawn 更名为 checkGhastSpawnRules
-    @ModifyConstant(method = "checkGhastSpawnRules", constant = @Constant(intValue = 20))
+    @ModifyConstant(method = "checkGhastSpawnRules", constant = @Constant(intValue = 20), require = 0)
     private static int spawnRate(int constant){
         return 20 / MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.ghastSpawnFactor;
     }

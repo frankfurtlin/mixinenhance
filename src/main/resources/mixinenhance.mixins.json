@@ -45,7 +45,7 @@
         "entity.projectile.SnowballEntityMixin",
         "entity.projectile.SpectralArrowEntityMixin",
         "item.BlockItemMixin",
-        "item.ItemStackMixin",
+        "item.ItemInstanceMixin",
         "item.PotionItemMixin",
         "LootTableMixin",
         "server.ChunkMapMixin"

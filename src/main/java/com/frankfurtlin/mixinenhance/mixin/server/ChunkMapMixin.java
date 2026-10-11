@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  */
 @Mixin(ChunkMap.class)
 public abstract class ChunkMapMixin {
-    @Redirect(method = "move", at = @At(value = "INVOKE",
+    @Redirect(require = 0, method = "move", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/core/SectionPos;of(Lnet/minecraft/world/level/entity/EntityAccess;)Lnet/minecraft/core/SectionPos;"))
     private static SectionPos mixinEnhance$useFreeCamCenterInMove(EntityAccess entity) {
         return useFreeCamCenter(entity);
@@ -40,7 +40,7 @@ public abstract class ChunkMapMixin {
     // chunkPlayers 查条目。之前这里未重定向，导致 addPlayer 用相机区块、lastSectionPos 用真实区块，
     // 自由视角下移除玩家时查真实区块得到 null -> DistanceManager.removePlayer NPE（死亡/退出/移动包触发）。
     // 必须和 move/updatePlayerStatus 用同一坐标。
-    @Redirect(method = "updatePlayerPos", at = @At(value = "INVOKE",
+    @Redirect(require = 0, method = "updatePlayerPos", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/core/SectionPos;of(Lnet/minecraft/world/level/entity/EntityAccess;)Lnet/minecraft/core/SectionPos;"))
     private static SectionPos mixinEnhance$useFreeCamCenterInUpdatePlayerPos(EntityAccess entity) {
         return useFreeCamCenter(entity);

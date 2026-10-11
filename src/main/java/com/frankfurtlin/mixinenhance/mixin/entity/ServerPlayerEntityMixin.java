@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class ServerPlayerEntityMixin {
     // 死亡不掉落（重生时复制背包与经验）
     // 1.21.11 中 GameRules.get(GameRule) 改为 GameRules.getValue(GameRule)
-    @Redirect(method = "restoreFrom", at = @At(value = "INVOKE",
+    @Redirect(require = 0, method = "restoreFrom", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/world/level/gamerules/GameRules;get(Lnet/minecraft/world/level/gamerules/GameRule;)Ljava/lang/Object;"))
     private Object copyFrom(GameRules instance, GameRule<Boolean> rule) {
         if(MixinEnhanceClient.getConfig().generalConfig.keepInventory){

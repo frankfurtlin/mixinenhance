@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(AnvilScreen.class)
 public abstract class AnvilScreenmixin {
     // 消除附魔经验上限
-    @ModifyConstant(method = "extractLabels", constant = @Constant(intValue = 40))
+    @ModifyConstant(method = "extractLabels", constant = @Constant(intValue = 40), require = 0)
     public int modifyLimit(int limit) {
         if(MixinEnhanceClient.getConfig().enchantConfig.enchantmentConfig.removeAnvilLimit){
             return Integer.MAX_VALUE;

@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(EndCrystal.class)
 public abstract class EndCrystalEntityMixin {
     // 末地水晶爆炸强度修改
-    @ModifyConstant(method = "hurtServer", constant = @Constant(floatValue = 6.0F))
+    @ModifyConstant(method = "hurtServer", constant = @Constant(floatValue = 6.0F), require = 0)
     private float damage(float constant){
         return MixinEnhanceClient.getConfig().itemConfig.explosionConfig.endCrystalExplodeRadius;
     }

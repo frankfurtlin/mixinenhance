@@ -23,7 +23,7 @@ public abstract class BackgroundRendererMixin {
     // 在水中/熔岩中时，不渲染雾
     // 26.3 中雾效由 FogEnvironment 体系计算，改为重定向 FogEnvironment.setupFog，
     // 在水/熔岩环境下把雾的起止距离拉远到渲染距离
-    @Redirect(method = "setupFog", at = @At(value = "INVOKE",
+    @Redirect(require = 0, method = "setupFog", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/client/renderer/fog/environment/FogEnvironment;setupFog(Lnet/minecraft/client/renderer/fog/FogData;Lnet/minecraft/client/Camera;Lnet/minecraft/client/multiplayer/ClientLevel;FLnet/minecraft/client/DeltaTracker;)V"))
     private void changeFogInFluid(FogEnvironment environment, FogData fogData, Camera camera, ClientLevel clientLevel,
                                   float renderDistance, DeltaTracker deltaTracker) {

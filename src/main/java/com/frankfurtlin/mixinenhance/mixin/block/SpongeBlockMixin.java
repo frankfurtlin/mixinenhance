@@ -34,13 +34,13 @@ public abstract class SpongeBlockMixin extends Block {
     }
 
     // 海绵最大吸附深度
-    @ModifyConstant(method = "removeWaterBreadthFirstSearch", constant = @Constant(intValue = 6))
+    @ModifyConstant(method = "removeWaterBreadthFirstSearch", constant = @Constant(intValue = 6), require = 0)
     private int changeMaxDepth(int constant){
         return MixinEnhanceClient.getConfig().itemConfig.spongeConfig.maxDepth;
     }
 
     // 海绵最大吸附方块数
-    @ModifyConstant(method = "removeWaterBreadthFirstSearch", constant = @Constant(intValue = 65))
+    @ModifyConstant(method = "removeWaterBreadthFirstSearch", constant = @Constant(intValue = 65), require = 0)
     private int changeMaxIterations(int constant){
         return MixinEnhanceClient.getConfig().itemConfig.spongeConfig.maxIterations;
     }

@@ -21,7 +21,7 @@ public abstract class VillagerEntityMixin {
     // TradeSet.calculateNumberOfTrades 决定（取代原先 updateTrades 里的常量 2）。
     // 该方法在 AbstractVillager.addOffersFromTradeSet 中被调用，故重定向该调用；
     // 仅对村民（Villager）生效，流浪商人（WanderingTrader）保持原逻辑。
-    @Redirect(method = "addOffersFromTradeSet", at = @At(value = "INVOKE",
+    @Redirect(require = 0, method = "addOffersFromTradeSet", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/world/item/trading/TradeSet;calculateNumberOfTrades(Lnet/minecraft/world/level/storage/loot/LootContext;)I"))
     private int addMoreRecipeCount(TradeSet tradeSet, LootContext lootContext) {
         if ((Object) this instanceof Villager) {

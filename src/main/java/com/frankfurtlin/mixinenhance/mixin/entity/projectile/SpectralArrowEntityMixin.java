@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(SpectralArrow.class)
 public abstract class SpectralArrowEntityMixin {
     // 光灵箭荧光持续时间修改
-    @Redirect(method = "doPostHurtEffects",
+    @Redirect(require = 0, method = "doPostHurtEffects",
         at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/projectile/arrow/SpectralArrow;duration:I", opcode = Opcodes.GETFIELD))
     private int spectralArrowDurationOnHit(SpectralArrow instance){
         return MixinEnhanceClient.getConfig().itemConfig.spectralArrowDuration * 20;
@@ -23,7 +23,7 @@ public abstract class SpectralArrowEntityMixin {
 
     // 光灵箭荧光持续时间修改
     // 1.21.11 将 writeCustomDataToNbt 改名为 writeCustomData
-    @Redirect(method = "addAdditionalSaveData",
+    @Redirect(require = 0, method = "addAdditionalSaveData",
         at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/projectile/arrow/SpectralArrow;duration:I", opcode = Opcodes.GETFIELD))
     private int spectralArrowDurationToNBT(SpectralArrow instance){
         return MixinEnhanceClient.getConfig().itemConfig.spectralArrowDuration * 20;

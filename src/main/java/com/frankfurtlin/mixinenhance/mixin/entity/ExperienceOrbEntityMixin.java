@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(ExperienceOrb.class)
 public abstract class ExperienceOrbEntityMixin {
     // 玩家吸收经验无冷却
-    @ModifyConstant(method = "playerTouch", constant = @Constant(intValue = 2))
+    @ModifyConstant(method = "playerTouch", constant = @Constant(intValue = 2), require = 0)
     private int enablePlayerExpPickUpNoDelay(int original){
         if(MixinEnhanceClient.getConfig().playerConfig.enablePlayerExpPickUpNoDelay){
             return 0;

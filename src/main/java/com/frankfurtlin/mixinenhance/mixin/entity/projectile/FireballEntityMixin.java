@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(LargeFireball.class)
 public abstract class FireballEntityMixin {
     // 修改火球的伤害（恶魂）
-    @ModifyConstant(method = "onHitEntity", constant = @Constant(floatValue = 6.0f))
+    @ModifyConstant(method = "onHitEntity", constant = @Constant(floatValue = 6.0f), require = 0)
     private float fireballDamage(float original) {
         return MixinEnhanceClient.getConfig().itemConfig.projectileDamageConfig.fireballDamage;
     }

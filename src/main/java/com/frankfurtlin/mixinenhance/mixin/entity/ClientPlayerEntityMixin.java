@@ -19,7 +19,7 @@ public abstract class ClientPlayerEntityMixin {
 
     // 玩家在地狱门中不强制关闭背包页面
     // 26.3 中当前屏幕改由 Minecraft.gui 管理，通过 Gui.screen() 访问
-    @Redirect(method = "handlePortalTransitionEffect",
+    @Redirect(require = 0, method = "handlePortalTransitionEffect",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;screen()Lnet/minecraft/client/gui/screens/Screen;"))
     private Screen updateNauseaScreen(Gui instance) {
         if(MixinEnhanceClient.getConfig().generalConfig.canOpenGuiInPortal){

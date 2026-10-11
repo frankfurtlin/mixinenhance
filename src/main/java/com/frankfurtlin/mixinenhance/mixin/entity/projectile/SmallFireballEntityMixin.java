@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(SmallFireball.class)
 public abstract class SmallFireballEntityMixin {
     // 修改小火球的伤害（火焰弹、烈焰人）
-    @ModifyConstant(method = "onHitEntity", constant = @Constant(floatValue = 5.0f))
+    @ModifyConstant(method = "onHitEntity", constant = @Constant(floatValue = 5.0f), require = 0)
     private float smallFireballDamage(float original) {
         return MixinEnhanceClient.getConfig().itemConfig.projectileDamageConfig.smallFireballDamage;
     }
