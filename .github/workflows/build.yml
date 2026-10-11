@@ -1,75 +1,73 @@
-name: Build and Release
+name: Build
 
 on:
   push:
-    branches: [main]
-    tags:
-      - 'v*'
+    branches: [ main ]
+    tags: [ 'v*' ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
   workflow_dispatch:
 
+# 需要 contents: write 才能创建/更新 Release
 permissions:
   contents: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK 25
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 25
+          java-version: '25'
 
-      - name: Cache Gradle
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
 
-      - name: Build with Gradle
-        run: ./gradlew build
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
 
-      - name: Upload build artifact
+      - name: Build
+        run: ./gradlew build --no-daemon --stacktrace
+
+      - name: Locate built jar
+        id: jar
+        run: echo "path=$(ls build/libs/AMixinEnhance-*.jar | grep -v -- '-sources.jar' | head -n1)" >> "$GITHUB_OUTPUT"
+
+      # 1) 每次推送都把 jar 作为 Actions 产物保存（在对应 run 的 Artifacts 里下载）
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: mixin-enhance-build
-          path: build/libs/
-          retention-days: 30
+          name: AMixinEnhance-${{ github.sha }}
+          path: ${{ steps.jar.outputs.path }}
+          if-no-files-found: error
 
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK 25
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 25
-
-      - name: Build with Gradle
-        run: ./gradlew build
-
-      - name: Create Release
+      # 2) 推送到 main：把 jar 更新到一个滚动的 "latest" 预发布 Release
+      - name: Publish rolling release (main)
+        if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v2
         with:
-          files: build/libs/*.jar
+          tag_name: latest
+          name: Latest Build
+          body: |
+            自动构建于 ${{ github.sha }}
+            提交：${{ github.event.head_commit.message }}
+          prerelease: true
+          make_latest: false
+          files: ${{ steps.jar.outputs.path }}
+
+      # 3) 推送形如 v* 的 tag：创建正式 Release 并附上 jar
+      - name: Publish release (tag)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.jar.outputs.path }}
           generate_release_notes: true
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
