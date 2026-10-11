@@ -1,6 +1,8 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.mob;
 
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.util.ItemTagUtil;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
@@ -8,7 +10,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.monster.skeleton.AbstractSkeleton;
 import net.minecraft.world.entity.monster.skeleton.WitherSkeleton;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,21 +27,14 @@ public abstract class WitherSkeletonEntityMixin extends AbstractSkeleton {
         super(entityType, world);
     }
 
-    // 凋零骷髅武器升级（石、铁、钻石、下届合金剑）
+    // 凋零骷髅武器升级：从原版「剑」标签随机装备一把（自动包含后续新增的剑）
     @Inject(method = "populateDefaultEquipmentSlots", at = @At("TAIL"))
     public void initEquipment(RandomSource random, DifficultyInstance localDifficulty, CallbackInfo ci) {
         if (MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.enableWitherSkeletonWeaponEnhancement) {
-            int level = random.nextInt(4);
-            if (level == 0) {
-                this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.STONE_SWORD));
-            } else if (level == 1) {
-                this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
-            } else if (level == 2) {
-                this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_SWORD));
-            } else {
-                this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.NETHERITE_SWORD));
+            ItemStack sword = ItemTagUtil.randomStack(random, ItemTags.SWORDS);
+            if (sword != null) {
+                this.setItemSlot(EquipmentSlot.MAINHAND, sword);
             }
         }
     }
-
 }

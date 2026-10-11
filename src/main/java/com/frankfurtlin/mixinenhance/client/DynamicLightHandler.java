@@ -6,6 +6,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -28,29 +29,21 @@ import java.util.Map;
  * lightSources 用 volatile 快照，tick 线程整体替换、渲染线程读稳定快照。
  */
 public class DynamicLightHandler {
-    /** 发光物品 -> 亮度（与原版方块光照等级一致） */
-    private static final Map<Item, Integer> LIGHT_ITEMS = createLightItems();
+    /**
+     * 非方块类发光物品 -> 亮度（少量额外登记）。
+     *
+     * <p>方块发光物品（火把/灯笼/萤石/海晶灯/营火/末地烛/蛙明灯/灵魂系列/红石火把/发光地衣……）不再硬编码：
+     * 直接由「对应方块的发光等级」推导（见 {@link #getLuminance}），
+     * 因此原版后续版本乃至其它模组新增的发光方块都会自动生效，无需改代码。</p>
+     *
+     * <p>这里只保留少数「物品本身不是方块、无法由方块光照推导」的发光物品。</p>
+     */
+    private static final Map<Item, Integer> EXTRA_LIGHT_ITEMS = createExtraLightItems();
 
-    private static Map<Item, Integer> createLightItems() {
+    private static Map<Item, Integer> createExtraLightItems() {
         Map<Item, Integer> map = new HashMap<>();
-        map.put(Items.TORCH, 14);
-        map.put(Items.LANTERN, 15);
-        map.put(Items.GLOWSTONE, 15);
-        map.put(Items.SEA_LANTERN, 15);
-        map.put(Items.JACK_O_LANTERN, 15);
-        map.put(Items.SHROOMLIGHT, 15);
+        // 发光浆果（发光洞穴藤蔓的果实）：物品本身不是方块，无法从方块光照推导
         map.put(Items.GLOW_BERRIES, 14);
-        map.put(Items.CAMPFIRE, 15);
-        map.put(Items.END_ROD, 14);
-        map.put(Items.CONDUIT, 15);
-        map.put(Items.OCHRE_FROGLIGHT, 15);
-        map.put(Items.PEARLESCENT_FROGLIGHT, 15);
-        map.put(Items.VERDANT_FROGLIGHT, 15);
-        map.put(Items.SOUL_TORCH, 10);
-        map.put(Items.SOUL_LANTERN, 10);
-        map.put(Items.SOUL_CAMPFIRE, 10);
-        map.put(Items.REDSTONE_TORCH, 7);
-        map.put(Items.GLOW_LICHEN, 7);
         return map;
     }
 
@@ -144,6 +137,15 @@ public class DynamicLightHandler {
     }
 
     private static int getLuminance(ItemStack stack) {
-        return stack.isEmpty() ? 0 : LIGHT_ITEMS.getOrDefault(stack.getItem(), 0);
+        if (stack.isEmpty()) {
+            return 0;
+        }
+        Item item = stack.getItem();
+        // 方块物品：直接取其方块（默认状态）的发光等级，自动覆盖所有发光方块（含未来版本/其它模组新增）
+        if (item instanceof BlockItem blockItem) {
+            return blockItem.getBlock().defaultBlockState().getLightEmission();
+        }
+        // 非方块发光物品：查少量额外登记
+        return EXTRA_LIGHT_ITEMS.getOrDefault(item, 0);
     }
 }
