@@ -1,5 +1,6 @@
 package com.frankfurtlin.mixinenhance;
 
+import com.frankfurtlin.mixinenhance.client.ContainerAutoSort;
 import com.frankfurtlin.mixinenhance.client.DynamicLightHandler;
 import com.frankfurtlin.mixinenhance.client.FreeCamState;
 import com.frankfurtlin.mixinenhance.client.TotemDisplay;
@@ -11,6 +12,7 @@ import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
+import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
@@ -78,5 +80,10 @@ public class MixinEnhanceClient implements ClientModInitializer {
 
         // 动态照明：每客户端 tick 刷新动态光源列表（手持发光物照亮周围）
         ClientTickEvents.END_CLIENT_TICK.register(DynamicLightHandler::update);
+
+        // 打开背包/容器时自动整理（合并相同物品并按物品顺序排序）
+        ScreenEvents.AFTER_INIT.register((client, screen, scaledWidth, scaledHeight) ->
+            ContainerAutoSort.onScreenInit(screen));
+        ClientTickEvents.END_CLIENT_TICK.register(ContainerAutoSort::onClientTick);
     }
 }

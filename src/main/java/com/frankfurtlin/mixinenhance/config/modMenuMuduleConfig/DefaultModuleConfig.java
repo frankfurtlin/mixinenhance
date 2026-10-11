@@ -108,6 +108,8 @@ public class DefaultModuleConfig {
     public boolean noSlowOnHoneyBlock = false;                  // 玩家在蜂蜜块上不减速
     @ConfigEntry.Gui.Tooltip
     public boolean enableStackRefill = false;                   // 是否启用手持物品用完自动补货
+    @ConfigEntry.Gui.Tooltip
+    public boolean enableAutoSortContainer = false;             // 是否启用打开背包/容器时自动整理
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     public DefaultModuleConfig.EnchantmentConfig enchantmentConfig = new DefaultModuleConfig.EnchantmentConfig();
 

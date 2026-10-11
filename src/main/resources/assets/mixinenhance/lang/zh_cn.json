@@ -39,6 +39,8 @@
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.noSlowOnHoneyBlock.@Tooltip": "玩家在蜂蜜块上移动不减速",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableStackRefill": "启用手持物品自动补货",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableStackRefill.@Tooltip": "手持物品用完时自动从背包补充同种物品",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableAutoSortContainer": "启用打开背包/容器自动整理",
+    "text.autoconfig.mixinenhance.option.defaultModuleConfig.enableAutoSortContainer.@Tooltip": "打开背包或容器时自动合并相同物品并按物品顺序整理（仅生存模式；容器只整理自身存储格，背包界面只整理主背包、不含快捷栏）",
 
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig": "附魔配置",
     "text.autoconfig.mixinenhance.option.defaultModuleConfig.enchantmentConfig.removeAnvilLimit": "消除附魔经验上限",
