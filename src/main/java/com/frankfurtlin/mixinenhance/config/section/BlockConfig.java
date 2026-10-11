@@ -29,10 +29,10 @@ public class BlockConfig {
 
     public static class SpawnerFarmConfig {
         @ConfigEntry.Gui.Tooltip
-        public boolean enableSpawnerFarm = false;                        // 刷怪笼秒变刷怪塔
+        public boolean enableSpawnerFarm = false;                        // 刷怪笼秒变刷怪塔（六面任一相邻位置红石块激活）
         @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 1, max = 8)
-        public int spawnerFarmRate = 1;                                  // 刷怪塔倍率
+        public int spawnerFarmRate = 1;                                  // 刷怪塔倍率（产出频率）
     }
 
     public static class TrialConfig {

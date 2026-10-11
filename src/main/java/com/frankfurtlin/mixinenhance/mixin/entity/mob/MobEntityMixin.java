@@ -27,6 +27,9 @@ import java.util.Random;
  */
 @Mixin(Mob.class)
 public abstract class MobEntityMixin {
+    /** 盔甲材质档位数：皮、铜、金、锁链、铁、钻石、下界合金（与 26.3 原版一致） */
+    private static final int ARMOR_LEVEL_COUNT = 7;
+
     @Shadow
     private DropChances dropChances;
 
@@ -48,75 +51,53 @@ public abstract class MobEntityMixin {
 
     /**
      * @author frankslin
-     * @reason 修改怪物生成时自带盔甲的等级（皮、金、锁链、铁、钻石、下届合金）
+     * @reason 修改怪物生成时自带盔甲的等级（皮、铜、金、锁链、铁、钻石、下界合金，与 26.3 原版材质一致）
      */
     @Overwrite
     public static @Nullable Item getEquipmentForSlot(EquipmentSlot equipmentSlot, int equipmentLevel) {
         int level = equipmentLevel;
         if (MixinEnhanceClient.getConfig().entityConfig.mobConfig.enableMobArmorEnhancement) {
-            Random random = new Random();
-            level = random.nextInt(6);
+            level = new Random().nextInt(ARMOR_LEVEL_COUNT);
         }
-        switch (equipmentSlot) {
-            case HEAD:
-                if (level == 0) {
-                    return Items.LEATHER_HELMET;
-                } else if (level == 1) {
-                    return Items.GOLDEN_HELMET;
-                } else if (level == 2) {
-                    return Items.CHAINMAIL_HELMET;
-                } else if (level == 3) {
-                    return Items.IRON_HELMET;
-                } else if (level == 4) {
-                    return Items.DIAMOND_HELMET;
-                } else {
-                    return Items.NETHERITE_HELMET;
-                }
-            case CHEST:
-                if (level == 0) {
-                    return Items.LEATHER_CHESTPLATE;
-                } else if (level == 1) {
-                    return Items.GOLDEN_CHESTPLATE;
-                } else if (level == 2) {
-                    return Items.CHAINMAIL_CHESTPLATE;
-                } else if (level == 3) {
-                    return Items.IRON_CHESTPLATE;
-                } else if (level == 4) {
-                    return Items.DIAMOND_CHESTPLATE;
-                } else {
-                    return Items.NETHERITE_CHESTPLATE;
-                }
-            case LEGS:
-                if (level == 0) {
-                    return Items.LEATHER_LEGGINGS;
-                } else if (level == 1) {
-                    return Items.GOLDEN_LEGGINGS;
-                } else if (level == 2) {
-                    return Items.CHAINMAIL_LEGGINGS;
-                } else if (level == 3) {
-                    return Items.IRON_LEGGINGS;
-                } else if (level == 4) {
-                    return Items.DIAMOND_LEGGINGS;
-                } else {
-                    return Items.NETHERITE_LEGGINGS;
-                }
-            case FEET:
-                if (level == 0) {
-                    return Items.LEATHER_BOOTS;
-                } else if (level == 1) {
-                    return Items.GOLDEN_BOOTS;
-                } else if (level == 2) {
-                    return Items.CHAINMAIL_BOOTS;
-                } else if (level == 3) {
-                    return Items.IRON_BOOTS;
-                } else if (level == 4) {
-                    return Items.DIAMOND_BOOTS;
-                } else {
-                    return Items.NETHERITE_BOOTS;
-                }
-            default:
-                return null;
-        }
+        return switch (equipmentSlot) {
+            case HEAD -> switch (level) {
+                case 0 -> Items.LEATHER_HELMET;
+                case 1 -> Items.COPPER_HELMET;
+                case 2 -> Items.GOLDEN_HELMET;
+                case 3 -> Items.CHAINMAIL_HELMET;
+                case 4 -> Items.IRON_HELMET;
+                case 5 -> Items.DIAMOND_HELMET;
+                default -> Items.NETHERITE_HELMET;
+            };
+            case CHEST -> switch (level) {
+                case 0 -> Items.LEATHER_CHESTPLATE;
+                case 1 -> Items.COPPER_CHESTPLATE;
+                case 2 -> Items.GOLDEN_CHESTPLATE;
+                case 3 -> Items.CHAINMAIL_CHESTPLATE;
+                case 4 -> Items.IRON_CHESTPLATE;
+                case 5 -> Items.DIAMOND_CHESTPLATE;
+                default -> Items.NETHERITE_CHESTPLATE;
+            };
+            case LEGS -> switch (level) {
+                case 0 -> Items.LEATHER_LEGGINGS;
+                case 1 -> Items.COPPER_LEGGINGS;
+                case 2 -> Items.GOLDEN_LEGGINGS;
+                case 3 -> Items.CHAINMAIL_LEGGINGS;
+                case 4 -> Items.IRON_LEGGINGS;
+                case 5 -> Items.DIAMOND_LEGGINGS;
+                default -> Items.NETHERITE_LEGGINGS;
+            };
+            case FEET -> switch (level) {
+                case 0 -> Items.LEATHER_BOOTS;
+                case 1 -> Items.COPPER_BOOTS;
+                case 2 -> Items.GOLDEN_BOOTS;
+                case 3 -> Items.CHAINMAIL_BOOTS;
+                case 4 -> Items.IRON_BOOTS;
+                case 5 -> Items.DIAMOND_BOOTS;
+                default -> Items.NETHERITE_BOOTS;
+            };
+            default -> null;
+        };
     }
 
     // 修改怪物生成时主手工具附魔的概率

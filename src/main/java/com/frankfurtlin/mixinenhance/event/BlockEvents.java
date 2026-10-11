@@ -1,6 +1,7 @@
 package com.frankfurtlin.mixinenhance.event;
 
 import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -87,14 +88,21 @@ public class BlockEvents {
                 spawnerData = trialSpawnerBlockEntity.saveWithFullMetadata(world.registryAccess());
             }
 
-            outStack = blockState.getCloneItemStack(world, blockPos, true);
+            // 注意：第三个参数 includeData 对刷怪笼无实际作用——BlockBehaviour 的默认实现
+            // 直接返回 new ItemStack(asItem()) 并忽略它，SpawnerBlock 也没有重写。
+            // 掉落物上的怪物数据完全由下面的 CUSTOM_DATA 提供，放置时由 BlockItemMixin 还原。
+            outStack = blockState.getCloneItemStack(world, blockPos, false);
             if (spawnerData != null) {
                 CompoundTag nbtCompound = new CompoundTag();
                 nbtCompound.put("spawnerData", spawnerData);
                 CustomData.set(DataComponents.CUSTOM_DATA, outStack, nbtCompound);
 
                 if (spawnerDisplayEntity != null) {
-                    outStack.set(DataComponents.CUSTOM_NAME, spawnerDisplayEntity.getName().copy().append(Component.literal(" ").append(block.getName())));
+                    // 名称形如「【僵尸】刷怪笼」：怪物名用高亮色，方便一眼区分笼子类型
+                    outStack.set(DataComponents.CUSTOM_NAME, Component.literal("【")
+                        .append(spawnerDisplayEntity.getName().copy().withStyle(ChatFormatting.GOLD))
+                        .append(Component.literal("】"))
+                        .append(block.getName()));
                 }
             }
         } else if ((MixinEnhanceClient.getConfig().blockConfig.silkTouchConfig.enableVaultDropWithSilkTouch && block.equals(Blocks.VAULT)) ||

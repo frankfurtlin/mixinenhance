@@ -16,7 +16,7 @@ public class EntityConfig {
         @ConfigEntry.Gui.Tooltip
         public double attackMultiplier = 1.0;                       // 怪物攻击倍率（近战与远程伤害）
         @ConfigEntry.Gui.Tooltip
-        public boolean enableMobArmorEnhancement = false;           // 怪物生成时盔甲强度增强
+        public boolean enableMobArmorEnhancement = false;           // 怪物生成时盔甲强度增强（皮、铜、金、锁链、铁、钻石、下界合金）
         @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
         public float spawnEquipmentChance = 0.15f;                  // 怪物生成时自带盔甲的概率
@@ -42,11 +42,11 @@ public class EntityConfig {
         @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
         public double zombieSpawnWithTool = 0.05;                   // 僵尸生成时自带武器的概率
         @ConfigEntry.Gui.Tooltip
-        public boolean enableZombieWeaponEnhancement = false;       // 僵尸武器升级（所有种类）
+        public boolean enableZombieWeaponEnhancement = false;       // 僵尸武器增强（原版「所有工具」标签随机）
         @ConfigEntry.Gui.Tooltip
-        public boolean enableVindicatorWeaponEnhancement = false;   // 卫道士武器升级（铁、钻石、下界合金剑）
+        public boolean enableVindicatorWeaponEnhancement = false;   // 卫道士武器增强（原版「所有斧」标签随机）
         @ConfigEntry.Gui.Tooltip
-        public boolean enableWitherSkeletonWeaponEnhancement = false; // 凋零骷髅武器升级（石、铁、钻石、下界合金剑）
+        public boolean enableWitherSkeletonWeaponEnhancement = false; // 凋零骷髅武器增强（原版「所有剑」标签随机）
         @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 0, max = 1)
         public float drownedSpawnWithShell = 0.03f;                 // 溺尸生成时自带鹦鹉螺壳的概率
