@@ -26,7 +26,11 @@ public class ModMenuConfig implements ConfigData {
     /**
      * 配置结构版本号：由 {@link ConfigMigrations} 在读取配置前自动维护，用于把旧配置迁移到新结构。
      * 不在配置界面上显示（改字段名/移动字段时见 docs/开发规范.md 的迁移约定）。
+     *
+     * <p>注意：{@code @ConfigEntry.Category} 必须给上。没有归属标签页的字段会让 Cloth 额外生成一个
+     * {@code category.default} 标签页（未翻译、内容为空），即使字段自己已经被 {@code Gui.Excluded} 隐藏。</p>
      */
+    @ConfigEntry.Category("general")
     @ConfigEntry.Gui.Excluded
     public int configVersion = ConfigMigrations.CURRENT_VERSION;
 
