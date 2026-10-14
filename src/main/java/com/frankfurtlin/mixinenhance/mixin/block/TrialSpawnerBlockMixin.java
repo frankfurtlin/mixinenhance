@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.block;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.world.level.block.TrialSpawnerBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,7 +17,7 @@ public abstract class TrialSpawnerBlockMixin {
     // 降低硬度便于精准采集挖掘
     @ModifyVariable(method = "<init>", at = @At("HEAD"), argsOnly = true)
     private static BlockBehaviour.Properties modifyStrength(BlockBehaviour.Properties settings) {
-        if (MixinEnhanceClient.getConfig().blockConfig.silkTouchConfig.enableTrialSpawnerDropWithSilkTouch) {
+        if (MixinEnhanceConfig.get().blockConfig.silkTouchConfig.enableTrialSpawnerDropWithSilkTouch) {
             return settings.strength(5);
         }
         return settings.strength(50);

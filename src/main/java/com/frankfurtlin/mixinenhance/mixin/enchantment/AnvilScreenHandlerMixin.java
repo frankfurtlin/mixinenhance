@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.enchantment;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.world.inventory.AnvilMenu;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -11,7 +11,7 @@ public abstract class AnvilScreenHandlerMixin {
     // 消除附魔经验上限
     @ModifyConstant(method = "createResult", constant = @Constant(intValue = 40), require = 0)
     public int modifyLimit(int limit) {
-        if(MixinEnhanceClient.getConfig().enchantConfig.enchantmentConfig.removeAnvilLimit){
+        if(MixinEnhanceConfig.get().enchantConfig.enchantmentConfig.removeAnvilLimit){
             return Integer.MAX_VALUE;
         }
         return 40;

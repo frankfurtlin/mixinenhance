@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.screens.Screen;
@@ -22,7 +22,7 @@ public abstract class ClientPlayerEntityMixin {
     @Redirect(require = 0, method = "handlePortalTransitionEffect",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;screen()Lnet/minecraft/client/gui/screens/Screen;"))
     private Screen updateNauseaScreen(Gui instance) {
-        if(MixinEnhanceClient.getConfig().generalConfig.canOpenGuiInPortal){
+        if(MixinEnhanceConfig.get().generalConfig.canOpenGuiInPortal){
             return null;
         }
         return instance.screen();

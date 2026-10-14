@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import com.frankfurtlin.mixinenhance.util.EquipmentQuality;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -33,7 +33,7 @@ public abstract class LivingEntityMixin {
     @Redirect(require = 0, method = "checkTotemDeathProtection", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/world/entity/LivingEntity;getItemInHand(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;"))
     private ItemStack inventoryTotemEnabled(LivingEntity livingEntity, InteractionHand hand) {
-        if (MixinEnhanceClient.getConfig().itemConfig.inventoryTotemEnabled && livingEntity instanceof Player) {
+        if (MixinEnhanceConfig.get().itemConfig.inventoryTotemEnabled && livingEntity instanceof Player) {
             for (int i = 0; i < ((Player) livingEntity).getInventory().getContainerSize(); i++) {
                 ItemStack itemStack = ((Player) livingEntity).getInventory().getItem(i);
                 if (itemStack.is(Items.TOTEM_OF_UNDYING)) {
@@ -49,7 +49,7 @@ public abstract class LivingEntityMixin {
     @ModifyConstant(method = "travelInWater", constant = @Constant(floatValue = 0.02f, ordinal = 0), require = 0)
     private float enablePlayerNoSlowInWater(float constant){
         LivingEntity livingEntity = (LivingEntity) (Object)this;
-        if(MixinEnhanceClient.getConfig().playerConfig.enableNoSlowInFluid && livingEntity instanceof Player){
+        if(MixinEnhanceConfig.get().playerConfig.enableNoSlowInFluid && livingEntity instanceof Player){
             return 0.04f;
         }
         return constant;
@@ -60,7 +60,7 @@ public abstract class LivingEntityMixin {
     @ModifyConstant(method = "travelInLava", constant = @Constant(doubleValue = 0.5), require = 0)
     private double enablePlayerNoSlowInLava(double constant){
         LivingEntity livingEntity = (LivingEntity) (Object)this;
-        if(MixinEnhanceClient.getConfig().playerConfig.enableNoSlowInFluid && livingEntity instanceof Player){
+        if(MixinEnhanceConfig.get().playerConfig.enableNoSlowInFluid && livingEntity instanceof Player){
             return 0.9;
         }
         return constant;
@@ -72,7 +72,7 @@ public abstract class LivingEntityMixin {
     private void dropHead(ServerLevel world, DamageSource source, boolean causedByPlayer, CallbackInfo ci) {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
         if (livingEntity instanceof WitherSkeleton) {
-            float dropRate = MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.witherSkeletonSkullDropRate;
+            float dropRate = MixinEnhanceConfig.get().entityConfig.hostileMobConfig.witherSkeletonSkullDropRate;
             if (livingEntity.getRandom().nextFloat() < dropRate) {
                 livingEntity.spawnAtLocation(world, Items.WITHER_SKELETON_SKULL);
             }
@@ -88,7 +88,7 @@ public abstract class LivingEntityMixin {
         }
         if (adversary instanceof Player) {
             RandomSource random = world.getRandom();
-            if (random.nextDouble() < MixinEnhanceClient.getConfig().entityConfig.mobConfig.dieWithSpawner) {
+            if (random.nextDouble() < MixinEnhanceConfig.get().entityConfig.mobConfig.dieWithSpawner) {
                 BlockPos blockPos = ((LivingEntity) (Object) this).blockPosition();
                 if (world.getBlockState(blockPos).isAir()) {
                     world.setBlock(blockPos, Blocks.SPAWNER.defaultBlockState(), Block.UPDATE_ALL);
@@ -119,7 +119,7 @@ public abstract class LivingEntityMixin {
             || (mob.tickCount != 0 && !EquipmentQuality.isSpawning())) {
             return stack;
         }
-        double factor = MixinEnhanceClient.getConfig().entityConfig.equipmentConfig.weaponFactor;
+        double factor = MixinEnhanceConfig.get().entityConfig.equipmentConfig.weaponFactor;
         ItemStack better = EquipmentQuality.betterWeapon(stack, factor, mob.getRandom().nextDouble());
         return better == null ? stack : better;
     }

@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.mob;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -17,6 +17,6 @@ public abstract class PiglinEntityMixin {
     // 武器（金剑/弩）由公共钩子按武器系数处理；盔甲材质保持原版金质
     @ModifyConstant(method = "maybeWearArmor", constant = @Constant(floatValue = 0.1f), require = 0)
     private float mixinEnhance$armorChance(float constant) {
-        return (float) MixinEnhanceClient.getConfig().entityConfig.equipmentConfig.armorFactor;
+        return (float) MixinEnhanceConfig.get().entityConfig.equipmentConfig.armorFactor;
     }
 }

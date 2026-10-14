@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import com.frankfurtlin.mixinenhance.config.section.FishingConfig;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.util.context.ContextMap;
@@ -34,10 +34,10 @@ public abstract class LootTableMixin {
         }
         // 经验模式：不套用战利品过滤。物品已由经验模式统一拦截，
         // 经验按「完整战利品」计算，从而不受排除 xxx 配置影响。
-        if (MixinEnhanceClient.getConfig().fishingConfig.enableExpOnlyMode) {
+        if (MixinEnhanceConfig.get().fishingConfig.enableExpOnlyMode) {
             return original;
         }
-        FishingConfig.LootFilterConfig cfg = MixinEnhanceClient.getConfig().fishingConfig.lootFilterConfig;
+        FishingConfig.LootFilterConfig cfg = MixinEnhanceConfig.get().fishingConfig.lootFilterConfig;
         if (!cfg.excludeCod && !cfg.excludeSalmon && !cfg.excludeTropicalFish && !cfg.excludePufferfish
                 && !cfg.excludeBamboo && !cfg.excludeBowl && !cfg.excludeLeather && !cfg.excludeLeatherBoots
                 && !cfg.excludeFishingRod && !cfg.excludeString && !cfg.excludeStick && !cfg.excludePotion

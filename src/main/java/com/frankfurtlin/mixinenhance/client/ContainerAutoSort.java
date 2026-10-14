@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.client;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -60,7 +60,7 @@ public final class ContainerAutoSort {
         if (!(screen instanceof AbstractContainerScreen<?>)) {
             return;
         }
-        if (!MixinEnhanceClient.getConfig().playerConfig.enableAutoSortContainer) {
+        if (!MixinEnhanceConfig.get().playerConfig.enableAutoSortContainer) {
             return;
         }
         pendingScreen = screen;

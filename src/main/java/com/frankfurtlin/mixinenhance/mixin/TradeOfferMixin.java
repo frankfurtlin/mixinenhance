@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.world.item.trading.MerchantOffer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,7 +12,7 @@ public abstract class TradeOfferMixin {
     // 村民无限交易
     @Inject(method = "increaseUses", at = @At("HEAD"), cancellable = true)
     public void use(CallbackInfo ci) {
-        if(MixinEnhanceClient.getConfig().enchantConfig.tradeConfig.unLockTrade){
+        if(MixinEnhanceConfig.get().enchantConfig.tradeConfig.unLockTrade){
             ci.cancel();
         }
     }

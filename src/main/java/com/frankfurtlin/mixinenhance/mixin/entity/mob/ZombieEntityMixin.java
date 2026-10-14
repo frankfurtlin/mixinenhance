@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.mob;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.zombie.Zombie;
@@ -35,7 +35,7 @@ public abstract class ZombieEntityMixin extends Monster {
     @Inject(method = "finalizeSpawn", at = @At("TAIL"))
     private void modifyPickupLootChance(ServerLevelAccessor world, DifficultyInstance difficulty, EntitySpawnReason spawnReason, SpawnGroupData entityData, CallbackInfoReturnable<SpawnGroupData> cir) {
         if (spawnReason != EntitySpawnReason.CONVERSION) {
-            this.setCanPickUpLoot(random.nextFloat() < MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.pickupLootChance);
+            this.setCanPickUpLoot(random.nextFloat() < MixinEnhanceConfig.get().entityConfig.hostileMobConfig.pickupLootChance);
         }
     }
 
@@ -43,6 +43,6 @@ public abstract class ZombieEntityMixin extends Monster {
     // 系数 1 必带、0 不带。武器材质由公共钩子处理。
     @ModifyConstant(method = "populateDefaultEquipmentSlots", constant = @Constant(floatValue = 0.05F), require = 0)
     private float mixinEnhance$weaponChance(float chance) {
-        return (float) MixinEnhanceClient.getConfig().entityConfig.equipmentConfig.weaponFactor;
+        return (float) MixinEnhanceConfig.get().entityConfig.equipmentConfig.weaponFactor;
     }
 }

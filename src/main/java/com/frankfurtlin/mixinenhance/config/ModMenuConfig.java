@@ -1,5 +1,6 @@
 package com.frankfurtlin.mixinenhance.config;
 
+import com.frankfurtlin.mixinenhance.ConfigMigrations;
 import com.frankfurtlin.mixinenhance.config.section.BlockConfig;
 import com.frankfurtlin.mixinenhance.config.section.EnchantTradeConfig;
 import com.frankfurtlin.mixinenhance.config.section.EntityConfig;
@@ -22,6 +23,13 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 @Config(name = "mixinenhance")
 @SuppressWarnings("FieldMayBeFinal")
 public class ModMenuConfig implements ConfigData {
+    /**
+     * 配置结构版本号：由 {@link ConfigMigrations} 在读取配置前自动维护，用于把旧配置迁移到新结构。
+     * 不在配置界面上显示（改字段名/移动字段时见 docs/开发规范.md 的迁移约定）。
+     */
+    @ConfigEntry.Gui.Excluded
+    public int configVersion = ConfigMigrations.CURRENT_VERSION;
+
     // 常规
     @ConfigEntry.Category("general")
     @ConfigEntry.Gui.TransitiveObject

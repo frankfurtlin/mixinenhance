@@ -42,6 +42,13 @@ jobs:
         id: ver
         run: echo "version=$(grep -E '^[[:space:]]*mod_version' gradle.properties | cut -d= -f2 | tr -d ' \t\r')" >> "$GITHUB_OUTPUT"
 
+      # 静态检查：未使用导入 + 注入清单是否过期（清单决定启动时的注入自检，过期等于自检失真）
+      - name: Static checks
+        run: |
+          python3 tools/check_unused_imports.py
+          python3 tools/gen_injection_manifest.py --check
+
+      # build 会一并跑 src/test 下的单元测试
       - name: Build
         run: ./gradlew build --no-daemon --stacktrace
 

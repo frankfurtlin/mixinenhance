@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Install a git pre-commit hook that runs tools/check_unused_imports.py.
+"""Install a git pre-commit hook that runs the project's static checks.
+
+Checks: unused imports (tools/check_unused_imports.py) and whether the injection
+manifest is up to date (tools/gen_injection_manifest.py --check).
 
 .git/hooks is not version-controlled, so re-run this script after cloning on a new machine.
 
@@ -10,7 +13,8 @@ import os
 import sys
 
 HOOK = """#!/bin/sh
-# Pre-commit check: unused imports (installed by tools/install_git_hooks.py)
+# Pre-commit checks: unused imports + injection manifest freshness
+# (installed by tools/install_git_hooks.py)
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 PY=""
 for c in python3 python py; do
@@ -19,10 +23,11 @@ for c in python3 python py; do
     fi
 done
 if [ -z "$PY" ]; then
-    echo "check-unused-imports: no working Python found, skipping."
+    echo "pre-commit: no working Python found, skipping checks."
     exit 0
 fi
 "$PY" "$ROOT/tools/check_unused_imports.py" || exit 1
+"$PY" "$ROOT/tools/gen_injection_manifest.py" --check || exit 1
 """
 
 
@@ -38,7 +43,7 @@ def main():
     with open(hook_path, "w", encoding="utf-8", newline="\n") as fh:
         fh.write(HOOK)
     print("Installed pre-commit hook: %s" % hook_path)
-    print("The unused-import check will now run before every git commit.")
+    print("Unused-import and injection-manifest checks will now run before every git commit.")
     return 0
 
 

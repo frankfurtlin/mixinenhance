@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.client;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -73,7 +73,7 @@ public class DynamicLightHandler {
         List<LightSource> newSources = new ArrayList<>();
         Map<Integer, LightRange> currentRanges = new HashMap<>();
 
-        if (MixinEnhanceClient.getConfig().playerConfig.enableDynamicLight) {
+        if (MixinEnhanceConfig.get().playerConfig.enableDynamicLight) {
             ClientLevel level = client.level;
             if (level != null) {
                 for (Entity entity : level.entitiesForRendering()) {

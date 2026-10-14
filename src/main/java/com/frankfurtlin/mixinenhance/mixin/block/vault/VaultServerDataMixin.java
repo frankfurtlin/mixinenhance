@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.block.vault;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.world.level.block.entity.vault.VaultServerData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,7 +17,7 @@ public abstract class VaultServerDataMixin {
     // 宝库无限兑换
     @Inject(method = "hasRewardedPlayer", at = @At("HEAD"), cancellable = true)
     private void hasRewardedPlayer(CallbackInfoReturnable<Boolean> cir) {
-        if (MixinEnhanceClient.getConfig().blockConfig.trialConfig.unLockVaultReward) {
+        if (MixinEnhanceConfig.get().blockConfig.trialConfig.unLockVaultReward) {
             cir.setReturnValue(false);
         }
     }

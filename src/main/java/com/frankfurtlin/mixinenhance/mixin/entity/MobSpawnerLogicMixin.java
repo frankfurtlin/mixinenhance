@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -47,7 +47,7 @@ public abstract class MobSpawnerLogicMixin {
     // 刷怪笼改造成刷怪塔(前后左右上下任一相邻位置放置红石块)
     @Inject(method = "serverTick", at = @At("HEAD"), cancellable = true)
     private void enableSpawnerFarm(ServerLevel world, BlockPos pos, CallbackInfo ci) {
-        if (!MixinEnhanceClient.getConfig().blockConfig.spawnerFarmConfig.enableSpawnerFarm) {
+        if (!MixinEnhanceConfig.get().blockConfig.spawnerFarmConfig.enableSpawnerFarm) {
             return;
         }
 
@@ -66,7 +66,7 @@ public abstract class MobSpawnerLogicMixin {
         ci.cancel();
 
         RandomSource random = world.getRandom();
-        int rate = Math.max(1, MixinEnhanceClient.getConfig().blockConfig.spawnerFarmConfig.spawnerFarmRate);
+        int rate = Math.max(1, MixinEnhanceConfig.get().blockConfig.spawnerFarmConfig.spawnerFarmRate);
         // 倍率越高越频繁：rate=1 约 8 秒一次，rate=8 约每秒一次
         if (random.nextInt(20 * 8 / rate) >= 1) {
             return;

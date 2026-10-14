@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.client;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -26,7 +26,7 @@ public class TotemDisplay {
                 return;
             }
 
-            if (MixinEnhanceClient.getConfig().playerConfig.enableTotemCounter) {
+            if (MixinEnhanceConfig.get().playerConfig.enableTotemCounter) {
                 renderTotemCounter(context, minecraft);
             }
         });

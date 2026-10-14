@@ -38,6 +38,21 @@ dependencies {
     implementation("me.shedaniel.cloth:cloth-config-fabric:${project.clothconfig_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
+
+    // Cloth Config 自己用的 json5 解析库：配置迁移需要直接读写配置文件（版本号 / 键改名）
+    implementation "blue.endless:jankson:1.2.0"
+
+    // 单元测试：只覆盖不依赖游戏启动的纯逻辑（配置路径展开、注入清单等）
+    testImplementation platform("org.junit:junit-bom:5.11.4")
+    testImplementation "org.junit.jupiter:junit-jupiter"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+tasks.named("test") {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "failed", "skipped"
+    }
 }
 
 processResources {

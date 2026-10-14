@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.client;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 
 /**
  * 亮度调节（全亮）的运行时开关。
@@ -22,7 +22,7 @@ public final class GammaState {
 
     /** 当前是否生效（配置开启 且 已按快捷键打开）。 */
     public static boolean isEnabled() {
-        return enabled && MixinEnhanceClient.getConfig().playerConfig.enableGamma;
+        return enabled && MixinEnhanceConfig.get().playerConfig.enableGamma;
     }
 
     /**
@@ -31,7 +31,7 @@ public final class GammaState {
      * @return 切换后是否生效；配置关闭时无反应，返回 false
      */
     public static boolean toggle() {
-        if (!MixinEnhanceClient.getConfig().playerConfig.enableGamma) {
+        if (!MixinEnhanceConfig.get().playerConfig.enableGamma) {
             return false;
         }
         enabled = !enabled;

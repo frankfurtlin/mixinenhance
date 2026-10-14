@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.gamerules.GameRule;
 import net.minecraft.world.level.gamerules.GameRules;
@@ -20,7 +20,7 @@ public abstract class PlayerEntityMixin {
     @Redirect(require = 0, method = "dropEquipment", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/world/level/gamerules/GameRules;get(Lnet/minecraft/world/level/gamerules/GameRule;)Ljava/lang/Object;"))
     private Object dropInventory(GameRules instance, GameRule<Boolean> rule) {
-        if(MixinEnhanceClient.getConfig().generalConfig.keepInventory){
+        if(MixinEnhanceConfig.get().generalConfig.keepInventory){
             return Boolean.TRUE;
         }
         return instance.get(rule);
@@ -31,7 +31,7 @@ public abstract class PlayerEntityMixin {
     @Redirect(require = 0, method = "getBaseExperienceReward", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/world/level/gamerules/GameRules;get(Lnet/minecraft/world/level/gamerules/GameRule;)Ljava/lang/Object;"))
     private Object getBaseExperienceReward(GameRules instance, GameRule<Boolean> rule) {
-        if(MixinEnhanceClient.getConfig().generalConfig.keepInventory){
+        if(MixinEnhanceConfig.get().generalConfig.keepInventory){
             return Boolean.TRUE;
         }
         return instance.get(rule);

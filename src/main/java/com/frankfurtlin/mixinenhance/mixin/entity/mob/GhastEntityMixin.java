@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.mob;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.world.entity.monster.Ghast;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -17,6 +17,6 @@ public abstract class GhastEntityMixin {
     // 26.3 中 canSpawn 更名为 checkGhastSpawnRules
     @ModifyConstant(method = "checkGhastSpawnRules", constant = @Constant(intValue = 20), require = 0)
     private static int spawnRate(int constant){
-        return 20 / MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.ghastSpawnFactor;
+        return 20 / MixinEnhanceConfig.get().entityConfig.hostileMobConfig.ghastSpawnFactor;
     }
 }

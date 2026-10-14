@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.block;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.level.Level;
@@ -48,7 +48,7 @@ public abstract class FrostedIceBlockMixin extends IceBlock {
      * 超热环境下开启特性时放熔岩；其余情况全部交还原版 {@code melt}。
      */
     private void meltIntoLavaOrVanilla(BlockState blockState, Level world, BlockPos blockPos) {
-        if (MixinEnhanceClient.getConfig().blockConfig.enableFrostWalkerWorkOnLava
+        if (MixinEnhanceConfig.get().blockConfig.enableFrostWalkerWorkOnLava
             && world.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, blockPos)) {
             world.setBlockAndUpdate(blockPos, Blocks.LAVA.defaultBlockState());
             world.neighborChanged(blockPos, Blocks.LAVA, null);

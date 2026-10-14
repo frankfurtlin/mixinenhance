@@ -1,0 +1,51 @@
+# 由 tools/gen_injection_manifest.py 自动生成，请勿手改（CI 会校验是否过期）
+# 格式：处理器方法名|目标类|mixin|端
+# 作用：require = 0 的注入点失效时不会崩、只会静默失效，启动时按本清单核对
+# 共 47 项
+modifyLimit|net.minecraft.world.inventory.AnvilMenu|AnvilScreenHandlerMixin|common
+modifyLimit|net.minecraft.client.gui.screens.inventory.AnvilScreen|AnvilScreenmixin|client
+changeFogInFluid|net.minecraft.client.renderer.fog.FogRenderer|BackgroundRendererMixin|client
+mixinEnhance$useFreeCamCenterInMove|net.minecraft.server.level.ChunkMap|ChunkMapMixin|common
+mixinEnhance$useFreeCamCenterInUpdatePlayerPos|net.minecraft.server.level.ChunkMap|ChunkMapMixin|common
+mixinEnhance$useFreeCamCenterInUpdateStatus|net.minecraft.server.level.ChunkMap|ChunkMapMixin|common
+updateNauseaScreen|net.minecraft.client.player.LocalPlayer|ClientPlayerEntityMixin|client
+drownedSpawnInOceanFactor|net.minecraft.world.entity.monster.zombie.Drowned|DrownedEntityMixin|common
+drownedSpawnInRiverFactor|net.minecraft.world.entity.monster.zombie.Drowned|DrownedEntityMixin|common
+mixinEnhance$weaponChance|net.minecraft.world.entity.monster.zombie.Drowned|DrownedEntityMixin|common
+damage|net.minecraft.world.entity.boss.enderdragon.EndCrystal|EndCrystalEntityMixin|common
+experienceBottleValue|net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownExperienceBottle|ExperienceBottleEntityMixin|common
+enablePlayerExpPickUpNoDelay|net.minecraft.world.entity.ExperienceOrb|ExperienceOrbEntityMixin|common
+mixinEnhance$mergeIdModulo|net.minecraft.world.entity.ExperienceOrb|ExperienceOrbEntityMixin|common
+mixinEnhance$mergeRadius|net.minecraft.world.entity.ExperienceOrb|ExperienceOrbEntityMixin|common
+fireballDamage|net.minecraft.world.entity.projectile.hurtingprojectile.LargeFireball|FireballEntityMixin|common
+autoFishing|net.minecraft.world.entity.projectile.FishingHook|FishingBobberEntityMixin|common
+expOnlySkipLoot|net.minecraft.world.entity.projectile.FishingHook|FishingBobberEntityMixin|common
+increaseAge|net.minecraft.world.level.block.FrostedIceBlock|FrostedIceBlockMixin|common
+neighborUpdate|net.minecraft.world.level.block.FrostedIceBlock|FrostedIceBlockMixin|common
+spawnRate|net.minecraft.world.entity.monster.Ghast|GhastEntityMixin|common
+mixinEnhance$canStackTo64|net.minecraft.world.item.ItemInstance|ItemInstanceMixin|common
+enablePlayerNoSlowInLava|net.minecraft.world.entity.LivingEntity|LivingEntityMixin|common
+enablePlayerNoSlowInWater|net.minecraft.world.entity.LivingEntity|LivingEntityMixin|common
+inventoryTotemEnabled|net.minecraft.world.entity.LivingEntity|LivingEntityMixin|common
+mixinEnhance$weaponByFactor|net.minecraft.world.entity.LivingEntity|LivingEntityMixin|common
+mixinEnhance$armorByFactor|net.minecraft.world.entity.Mob|MobEntityMixin|common
+mixinEnhance$armorChance|net.minecraft.world.entity.Mob|MobEntityMixin|common
+mixinEnhance$armorEnchantChance|net.minecraft.world.entity.Mob|MobEntityMixin|common
+mixinEnhance$beginSpawn|net.minecraft.world.entity.Mob|MobEntityMixin|common
+mixinEnhance$enchantByFactor|net.minecraft.world.entity.Mob|MobEntityMixin|common
+mixinEnhance$endSpawn|net.minecraft.world.entity.Mob|MobEntityMixin|common
+mixinEnhance$exactArmorChance|net.minecraft.world.entity.Mob|MobEntityMixin|common
+mixinEnhance$exactEnchantChance|net.minecraft.world.entity.Mob|MobEntityMixin|common
+mixinEnhance$weaponEnchantChance|net.minecraft.world.entity.Mob|MobEntityMixin|common
+mixinEnhance$armorChance|net.minecraft.world.entity.monster.piglin.Piglin|PiglinEntityMixin|common
+dropInventory|net.minecraft.world.entity.player.Player|PlayerEntityMixin|common
+getBaseExperienceReward|net.minecraft.world.entity.player.Player|PlayerEntityMixin|common
+copyFrom|net.minecraft.server.level.ServerPlayer|ServerPlayerEntityMixin|common
+smallFireballDamage|net.minecraft.world.entity.projectile.hurtingprojectile.SmallFireball|SmallFireballEntityMixin|common
+spectralArrowDurationOnHit|net.minecraft.world.entity.projectile.arrow.SpectralArrow|SpectralArrowEntityMixin|common
+spectralArrowDurationToNBT|net.minecraft.world.entity.projectile.arrow.SpectralArrow|SpectralArrowEntityMixin|common
+spiderSpawnWithEffect|net.minecraft.world.entity.monster.spider.Spider|SpiderEntityMixin|common
+changeMaxDepth|net.minecraft.world.level.block.SpongeBlock|SpongeBlockMixin|common
+changeMaxIterations|net.minecraft.world.level.block.SpongeBlock|SpongeBlockMixin|common
+addMoreRecipeCount|net.minecraft.world.entity.npc.villager.AbstractVillager|VillagerEntityMixin|common
+mixinEnhance$weaponChance|net.minecraft.world.entity.monster.zombie.Zombie|ZombieEntityMixin|common

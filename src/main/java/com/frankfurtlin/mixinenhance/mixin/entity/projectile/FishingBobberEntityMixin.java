@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.projectile;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -60,7 +60,7 @@ public abstract class FishingBobberEntityMixin extends Projectile {
     @Redirect(method = "retrieve", require = 0,
         at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"))
     private boolean expOnlySkipLoot(Level level, Entity entity) {
-        if (MixinEnhanceClient.getConfig().fishingConfig.enableExpOnlyMode && entity instanceof ItemEntity) {
+        if (MixinEnhanceConfig.get().fishingConfig.enableExpOnlyMode && entity instanceof ItemEntity) {
             return false;
         }
         return level.addFreshEntity(entity);
@@ -73,7 +73,7 @@ public abstract class FishingBobberEntityMixin extends Projectile {
     @Inject(method = "catchingFish", require = 0, at = @At(value = "FIELD", shift = At.Shift.AFTER,
         target = "Lnet/minecraft/sounds/SoundEvents;FISHING_BOBBER_SPLASH:Lnet/minecraft/sounds/SoundEvent;"))
     private void autoFishing(BlockPos pos, CallbackInfo ci) {
-        if(!MixinEnhanceClient.getConfig().fishingConfig.enableAutoFishing){
+        if(!MixinEnhanceConfig.get().fishingConfig.enableAutoFishing){
             return;
         }
         Player user = this.getPlayerOwner();
@@ -96,7 +96,7 @@ public abstract class FishingBobberEntityMixin extends Projectile {
     @Inject(method = "catchingFish", at = @At("HEAD"))
     private void buffFishing(BlockPos pos, CallbackInfo ci){
         Player playerEntity = this.getPlayerOwner();
-        if(playerEntity == null || !MixinEnhanceClient.getConfig().fishingConfig.enableTickFishing){
+        if(playerEntity == null || !MixinEnhanceConfig.get().fishingConfig.enableTickFishing){
             return;
         }
         ItemStack usedItem = playerEntity.getItemInHand(InteractionHand.MAIN_HAND);
@@ -111,7 +111,7 @@ public abstract class FishingBobberEntityMixin extends Projectile {
             LootTable lootTable = world.getServer().reloadableRegistries().getLootTable(BuiltInLootTables.FISHING);
             List<ItemStack> list = lootTable.getRandomItems(lootWorldContext);
             CriteriaTriggers.FISHING_ROD_HOOKED.trigger((ServerPlayer)playerEntity, usedItem, (FishingHook)(Object)this, list);
-            boolean expOnly = MixinEnhanceClient.getConfig().fishingConfig.enableExpOnlyMode;
+            boolean expOnly = MixinEnhanceConfig.get().fishingConfig.enableExpOnlyMode;
             for (ItemStack itemStack : list) {
                 if (!expOnly) {
                     ItemEntity itemEntity = new ItemEntity(world, this.getX(), this.getY(), this.getZ(), itemStack);

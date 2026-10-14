@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.block;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -26,7 +26,7 @@ public abstract class FarmlandBlockMixin extends Block  {
     // 耕地践踏不转化成泥土
     @Inject(method = "fallOn", at = @At("HEAD"), cancellable = true)
     private void onLandedUpon(Level world, BlockState state, BlockPos pos, Entity entity, double fallDistance, CallbackInfo ci) {
-        if (MixinEnhanceClient.getConfig().blockConfig.enableFarmlandNoLandToDirt) {
+        if (MixinEnhanceConfig.get().blockConfig.enableFarmlandNoLandToDirt) {
             super.fallOn(world, state, pos, entity, fallDistance);
             ci.cancel();
         }

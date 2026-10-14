@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.world.entity.npc.villager.AbstractVillager;
 import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.item.trading.TradeSet;
@@ -25,7 +25,7 @@ public abstract class VillagerEntityMixin {
         target = "Lnet/minecraft/world/item/trading/TradeSet;calculateNumberOfTrades(Lnet/minecraft/world/level/storage/loot/LootContext;)I"))
     private int addMoreRecipeCount(TradeSet tradeSet, LootContext lootContext) {
         if ((Object) this instanceof Villager) {
-            return MixinEnhanceClient.getConfig().enchantConfig.tradeConfig.tradeCount;
+            return MixinEnhanceConfig.get().enchantConfig.tradeConfig.tradeCount;
         }
         return tradeSet.calculateNumberOfTrades(lootContext);
     }

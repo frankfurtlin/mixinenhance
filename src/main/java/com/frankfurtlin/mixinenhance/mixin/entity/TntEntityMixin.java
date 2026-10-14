@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.world.entity.item.PrimedTnt;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -22,6 +22,6 @@ public abstract class TntEntityMixin{
     // TNT爆炸强度修改
     @Inject(method = "<init>*", at = @At("TAIL"))
     private void onInit(CallbackInfo ci) {
-        this.explosionPower = MixinEnhanceClient.getConfig().itemConfig.explosionConfig.tntExplodeRadius;
+        this.explosionPower = MixinEnhanceConfig.get().itemConfig.explosionConfig.tntExplodeRadius;
     }
 }

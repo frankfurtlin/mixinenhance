@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.mob;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Monster;
@@ -28,6 +28,6 @@ public abstract class CreeperEntityMixin extends Monster {
     // 修改苦力怕爆炸半径
     @Inject(method = "<init>", at = @At("TAIL"))
     private void creeperExplodeRadius(CallbackInfo ci) {
-        this.explosionRadius = MixinEnhanceClient.getConfig().entityConfig.hostileMobConfig.creeperExplodeRadius;
+        this.explosionRadius = MixinEnhanceConfig.get().entityConfig.hostileMobConfig.creeperExplodeRadius;
     }
 }

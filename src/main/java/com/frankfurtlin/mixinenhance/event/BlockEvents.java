@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.event;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -71,8 +71,8 @@ public class BlockEvents {
         Block block = blockState.getBlock();
 
         ItemStack outStack = null;
-        if (((MixinEnhanceClient.getConfig().blockConfig.silkTouchConfig.enableSpawnerDropWithSilkTouch && block.equals(Blocks.SPAWNER)) ||
-            (MixinEnhanceClient.getConfig().blockConfig.silkTouchConfig.enableTrialSpawnerDropWithSilkTouch && block.equals(Blocks.TRIAL_SPAWNER))) &&
+        if (((MixinEnhanceConfig.get().blockConfig.silkTouchConfig.enableSpawnerDropWithSilkTouch && block.equals(Blocks.SPAWNER)) ||
+            (MixinEnhanceConfig.get().blockConfig.silkTouchConfig.enableTrialSpawnerDropWithSilkTouch && block.equals(Blocks.TRIAL_SPAWNER))) &&
             isPickaxe) {
             if (blockEntity == null) {
                 blockEntity = world.getBlockEntity(blockPos);
@@ -105,11 +105,11 @@ public class BlockEvents {
                         .append(block.getName()));
                 }
             }
-        } else if ((MixinEnhanceClient.getConfig().blockConfig.silkTouchConfig.enableVaultDropWithSilkTouch && block.equals(Blocks.VAULT)) ||
-            (MixinEnhanceClient.getConfig().blockConfig.silkTouchConfig.enableBuddingAmethystDropWithSilkTouch && block.equals(Blocks.BUDDING_AMETHYST)) ||
-            (MixinEnhanceClient.getConfig().blockConfig.silkTouchConfig.enableFarmlandDropWithSilkTouch && block.equals(Blocks.FARMLAND)) ||
-            (MixinEnhanceClient.getConfig().blockConfig.silkTouchConfig.enableSuspiciousSandDropWithSilkTouch && block.equals(Blocks.SUSPICIOUS_SAND)) ||
-            (MixinEnhanceClient.getConfig().blockConfig.silkTouchConfig.enableSuspiciousGravelDropWithSilkTouch && block.equals(Blocks.SUSPICIOUS_GRAVEL))) {
+        } else if ((MixinEnhanceConfig.get().blockConfig.silkTouchConfig.enableVaultDropWithSilkTouch && block.equals(Blocks.VAULT)) ||
+            (MixinEnhanceConfig.get().blockConfig.silkTouchConfig.enableBuddingAmethystDropWithSilkTouch && block.equals(Blocks.BUDDING_AMETHYST)) ||
+            (MixinEnhanceConfig.get().blockConfig.silkTouchConfig.enableFarmlandDropWithSilkTouch && block.equals(Blocks.FARMLAND)) ||
+            (MixinEnhanceConfig.get().blockConfig.silkTouchConfig.enableSuspiciousSandDropWithSilkTouch && block.equals(Blocks.SUSPICIOUS_SAND)) ||
+            (MixinEnhanceConfig.get().blockConfig.silkTouchConfig.enableSuspiciousGravelDropWithSilkTouch && block.equals(Blocks.SUSPICIOUS_GRAVEL))) {
             outStack = blockState.getCloneItemStack(world, blockPos, true);
         }
 
@@ -133,8 +133,8 @@ public class BlockEvents {
      * @return 是否已接管本次破坏（true 表示取消原版破坏流程）
      */
     private static boolean handleChainBreak(Level world, Player player, BlockPos origin, BlockState originState) {
-        boolean fallingTree = MixinEnhanceClient.getConfig().blockConfig.enableFallingTree;
-        boolean veinMining = MixinEnhanceClient.getConfig().blockConfig.enableVeinMining;
+        boolean fallingTree = MixinEnhanceConfig.get().blockConfig.enableFallingTree;
+        boolean veinMining = MixinEnhanceConfig.get().blockConfig.enableVeinMining;
         if (!fallingTree && !veinMining) {
             return false;
         }

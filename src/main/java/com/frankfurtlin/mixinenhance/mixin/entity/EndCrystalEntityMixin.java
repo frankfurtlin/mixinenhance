@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -16,7 +16,7 @@ public abstract class EndCrystalEntityMixin {
     // 末地水晶爆炸强度修改
     @ModifyConstant(method = "hurtServer", constant = @Constant(floatValue = 6.0F), require = 0)
     private float damage(float constant){
-        return MixinEnhanceClient.getConfig().itemConfig.explosionConfig.endCrystalExplodeRadius;
+        return MixinEnhanceConfig.get().itemConfig.explosionConfig.endCrystalExplodeRadius;
     }
 
 }

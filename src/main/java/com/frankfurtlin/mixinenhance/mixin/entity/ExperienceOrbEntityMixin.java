@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.world.entity.ExperienceOrb;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -31,7 +31,7 @@ public abstract class ExperienceOrbEntityMixin {
     // 玩家吸收经验无冷却
     @ModifyConstant(method = "playerTouch", constant = @Constant(intValue = 2), require = 0)
     private int enablePlayerExpPickUpNoDelay(int original) {
-        if (MixinEnhanceClient.getConfig().playerConfig.enablePlayerExpPickUpNoDelay) {
+        if (MixinEnhanceConfig.get().playerConfig.enablePlayerExpPickUpNoDelay) {
             return 0;
         }
         return original;
@@ -40,7 +40,7 @@ public abstract class ExperienceOrbEntityMixin {
     // 经验球合并（1/2）：放大原版合并的扫描范围
     @ModifyConstant(method = "scanForMerges", constant = @Constant(doubleValue = 0.5D), require = 0)
     private double mixinEnhance$mergeRadius(double original) {
-        return MixinEnhanceClient.getConfig().playerConfig.enableXpMerge ? MERGE_RADIUS : original;
+        return MixinEnhanceConfig.get().playerConfig.enableXpMerge ? MERGE_RADIUS : original;
     }
 
     // 经验球合并（2/2）：去掉原版「实体 ID 差必须是 40 的整数倍」的限制
@@ -48,6 +48,6 @@ public abstract class ExperienceOrbEntityMixin {
     @ModifyConstant(method = "canMerge(Lnet/minecraft/world/entity/ExperienceOrb;II)Z",
         constant = @Constant(intValue = 40), require = 0)
     private static int mixinEnhance$mergeIdModulo(int original) {
-        return MixinEnhanceClient.getConfig().playerConfig.enableXpMerge ? MERGE_ID_MODULO : original;
+        return MixinEnhanceConfig.get().playerConfig.enableXpMerge ? MERGE_ID_MODULO : original;
     }
 }

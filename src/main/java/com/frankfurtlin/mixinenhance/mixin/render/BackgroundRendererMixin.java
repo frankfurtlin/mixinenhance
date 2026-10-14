@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.render;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -28,7 +28,7 @@ public abstract class BackgroundRendererMixin {
     private void changeFogInFluid(FogEnvironment environment, FogData fogData, Camera camera, ClientLevel clientLevel,
                                   float renderDistance, DeltaTracker deltaTracker) {
         environment.setupFog(fogData, camera, clientLevel, renderDistance, deltaTracker);
-        if (MixinEnhanceClient.getConfig().playerConfig.fluidVisible
+        if (MixinEnhanceConfig.get().playerConfig.fluidVisible
             && (environment instanceof WaterFogEnvironment || environment instanceof LavaFogEnvironment)) {
             fogData.environmentalStart = renderDistance * 0.75f;
             fogData.environmentalEnd = renderDistance;

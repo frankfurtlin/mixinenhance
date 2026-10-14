@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.event;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
@@ -17,7 +17,7 @@ import net.minecraft.world.item.Items;
  */
 public class PlayerEvents {
     public static void onPlayerJoined(ServerGamePacketListenerImpl handler, PacketSender sender, MinecraftServer server) {
-        if (MixinEnhanceClient.getConfig().generalConfig.enableJoinWithItems) {
+        if (MixinEnhanceConfig.get().generalConfig.enableJoinWithItems) {
             ServerPlayer player = handler.player;
             if (!hasElytra(player)) {
                 ItemStack elytra = new ItemStack(Items.ELYTRA);

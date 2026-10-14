@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.item;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import com.frankfurtlin.mixinenhance.util.StackableItems;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemInstance;
@@ -29,7 +29,7 @@ public interface ItemInstanceMixin {
     default void mixinEnhance$canStackTo64(CallbackInfoReturnable<Integer> cir) {
         int original = cir.getReturnValue();
         if (original >= Item.DEFAULT_MAX_STACK_SIZE
-            || !MixinEnhanceClient.getConfig().itemConfig.canStackTo64) {
+            || !MixinEnhanceConfig.get().itemConfig.canStackTo64) {
             return;
         }
         if (((Object) this) instanceof ItemStack stack && StackableItems.isForceStackable(stack)) {

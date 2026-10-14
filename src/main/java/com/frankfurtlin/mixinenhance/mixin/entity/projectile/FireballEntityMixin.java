@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.projectile;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.world.entity.projectile.hurtingprojectile.LargeFireball;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -16,6 +16,6 @@ public abstract class FireballEntityMixin {
     // 修改火球的伤害（恶魂）
     @ModifyConstant(method = "onHitEntity", constant = @Constant(floatValue = 6.0f), require = 0)
     private float fireballDamage(float original) {
-        return MixinEnhanceClient.getConfig().itemConfig.projectileDamageConfig.fireballDamage;
+        return MixinEnhanceConfig.get().itemConfig.projectileDamageConfig.fireballDamage;
     }
 }

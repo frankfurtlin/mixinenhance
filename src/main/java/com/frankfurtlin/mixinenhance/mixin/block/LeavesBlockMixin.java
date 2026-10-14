@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.block;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -32,7 +32,7 @@ public abstract class LeavesBlockMixin {
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void onLeafTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
-        if (!MixinEnhanceClient.getConfig().blockConfig.enableFastLeafDecay) {
+        if (!MixinEnhanceConfig.get().blockConfig.enableFastLeafDecay) {
             return;
         }
         BlockState current = level.getBlockState(pos);

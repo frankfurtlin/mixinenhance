@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -27,7 +27,7 @@ public abstract class PlayerStackRefillMixin {
     @Inject(method = "tick", at = @At("HEAD"))
     private void stackRefill(CallbackInfo ci) {
         Player self = (Player) (Object) this;
-        if (!MixinEnhanceClient.getConfig().playerConfig.enableStackRefill) {
+        if (!MixinEnhanceConfig.get().playerConfig.enableStackRefill) {
             return;
         }
         if (self.level().isClientSide()) {

@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity.mob;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import com.frankfurtlin.mixinenhance.util.EquipmentQuality;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryAccess;
@@ -57,8 +57,8 @@ public abstract class MobEntityMixin {
     // 死亡掉落概率：手部槽位沿用武器系数，其余（盔甲）沿用盔甲系数，再统一除以 10
     @Inject(method = "<init>", at = @At("TAIL"))
     private void onInit(CallbackInfo ci) {
-        double armorFactor = MixinEnhanceClient.getConfig().entityConfig.equipmentConfig.armorFactor;
-        double weaponFactor = MixinEnhanceClient.getConfig().entityConfig.equipmentConfig.weaponFactor;
+        double armorFactor = MixinEnhanceConfig.get().entityConfig.equipmentConfig.armorFactor;
+        double weaponFactor = MixinEnhanceConfig.get().entityConfig.equipmentConfig.weaponFactor;
         Map<EquipmentSlot, Float> chances = new EnumMap<>(EquipmentSlot.class);
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             boolean hand = slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND;
@@ -71,7 +71,7 @@ public abstract class MobEntityMixin {
     // 自带盔甲的概率 = 盔甲系数
     @ModifyConstant(method = "populateDefaultEquipmentSlots", constant = @Constant(floatValue = 0.15F), require = 0)
     private float mixinEnhance$armorChance(float chance) {
-        return (float) MixinEnhanceClient.getConfig().entityConfig.equipmentConfig.armorFactor;
+        return (float) MixinEnhanceConfig.get().entityConfig.equipmentConfig.armorFactor;
     }
 
     // 概率只按配置来：原版的 0.15F * 区域难度系数 会把概率带偏，这里把系数固定为 1
@@ -89,7 +89,7 @@ public abstract class MobEntityMixin {
         if (tiers <= 0) {
             return Mob.getEquipmentForSlot(equipmentSlot, vanillaLevel);
         }
-        double factor = MixinEnhanceClient.getConfig().entityConfig.equipmentConfig.armorFactor;
+        double factor = MixinEnhanceConfig.get().entityConfig.equipmentConfig.armorFactor;
         int tier = EquipmentQuality.randomTier(tiers, factor, ThreadLocalRandom.current().nextDouble());
         return Mob.getEquipmentForSlot(equipmentSlot, tier);
     }
@@ -97,13 +97,13 @@ public abstract class MobEntityMixin {
     // 盔甲附魔概率 = 盔甲系数
     @ModifyConstant(method = "enchantSpawnedArmor", constant = @Constant(floatValue = 0.5F), require = 0)
     private float mixinEnhance$armorEnchantChance(float chance) {
-        return (float) MixinEnhanceClient.getConfig().entityConfig.equipmentConfig.armorFactor;
+        return (float) MixinEnhanceConfig.get().entityConfig.equipmentConfig.armorFactor;
     }
 
     // 武器附魔概率 = 武器系数（原版是 0.25F；此前只改了盔甲的 0.5F 与武器概率，武器附魔一直卡在 25%）
     @ModifyConstant(method = "enchantSpawnedWeapon", constant = @Constant(floatValue = 0.25F), require = 0)
     private float mixinEnhance$weaponEnchantChance(float chance) {
-        return (float) MixinEnhanceClient.getConfig().entityConfig.equipmentConfig.weaponFactor;
+        return (float) MixinEnhanceConfig.get().entityConfig.equipmentConfig.weaponFactor;
     }
 
     // 附魔概率只按配置来（同上，去掉区域难度系数）
@@ -121,8 +121,8 @@ public abstract class MobEntityMixin {
         Mob self = (Mob) (Object) this;
         // 主手装备用武器系数，其余（盔甲）用盔甲系数
         double factor = self.getMainHandItem() == stack
-            ? MixinEnhanceClient.getConfig().entityConfig.equipmentConfig.weaponFactor
-            : MixinEnhanceClient.getConfig().entityConfig.equipmentConfig.armorFactor;
+            ? MixinEnhanceConfig.get().entityConfig.equipmentConfig.weaponFactor
+            : MixinEnhanceConfig.get().entityConfig.equipmentConfig.armorFactor;
         int level = (int) Math.max(1, Math.round(MAX_ENCHANT_LEVEL * factor));
         EnchantmentHelper.enchantItem(random, stack, level, registries, Optional.<HolderSet<Enchantment>>empty());
     }

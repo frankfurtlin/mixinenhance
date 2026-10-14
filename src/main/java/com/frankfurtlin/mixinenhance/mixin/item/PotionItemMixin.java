@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.item;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PotionItem;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,7 +12,7 @@ public abstract class PotionItemMixin {
     // 药水堆叠至64
     @ModifyVariable(method = "<init>", at = @At("HEAD"), argsOnly = true)
     private static Item.Properties modifyStackSize(Item.Properties settings) {
-        if (MixinEnhanceClient.getConfig().itemConfig.canStackTo64) {
+        if (MixinEnhanceConfig.get().itemConfig.canStackTo64) {
             return settings.stacksTo(64);
         }
         return settings.stacksTo(1);

@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.entity;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.gamerules.GameRule;
 import net.minecraft.world.level.gamerules.GameRules;
@@ -20,7 +20,7 @@ public abstract class ServerPlayerEntityMixin {
     @Redirect(require = 0, method = "restoreFrom", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/world/level/gamerules/GameRules;get(Lnet/minecraft/world/level/gamerules/GameRule;)Ljava/lang/Object;"))
     private Object copyFrom(GameRules instance, GameRule<Boolean> rule) {
-        if(MixinEnhanceClient.getConfig().generalConfig.keepInventory){
+        if(MixinEnhanceConfig.get().generalConfig.keepInventory){
             return Boolean.TRUE;
         }
         return instance.get(rule);

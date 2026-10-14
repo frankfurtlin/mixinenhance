@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.enchantment;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -57,7 +57,7 @@ public abstract class ReplaceDiskEnchantmentEffectMixin {
     // 冰霜行者可以在熔岩上行走
     @Inject(method = "apply", at = @At("HEAD"))
     private void changeEnchantments(ServerLevel world, int level, EnchantedItemInUse context, Entity user, Vec3 pos, CallbackInfo ci) {
-        if (MixinEnhanceClient.getConfig().blockConfig.enableFrostWalkerWorkOnLava) {
+        if (MixinEnhanceConfig.get().blockConfig.enableFrostWalkerWorkOnLava) {
             BlockPos blockPos = BlockPos.containing(pos).offset(this.offset);
             RandomSource random = user.getRandom();
             int i = (int) this.radius.calculate(level);

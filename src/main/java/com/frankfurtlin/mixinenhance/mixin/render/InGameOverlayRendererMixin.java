@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.render;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.ScreenEffectRenderer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
@@ -23,7 +23,7 @@ public abstract class InGameOverlayRendererMixin {
     @Inject(method = "submitFire", at = @At(value = "HEAD"), cancellable = true)
     private static void removeFireOverlay(PoseStack poseStack, SubmitNodeCollector submitNodeCollector,
                                          TextureAtlasSprite sprite, CallbackInfo ci) {
-        if (MixinEnhanceClient.getConfig().playerConfig.noOverlay) {
+        if (MixinEnhanceConfig.get().playerConfig.noOverlay) {
             ci.cancel();
         }
     }

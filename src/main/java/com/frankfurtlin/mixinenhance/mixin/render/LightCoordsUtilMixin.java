@@ -1,6 +1,6 @@
 package com.frankfurtlin.mixinenhance.mixin.render;
 
-import com.frankfurtlin.mixinenhance.MixinEnhanceClient;
+import com.frankfurtlin.mixinenhance.MixinEnhanceConfig;
 import com.frankfurtlin.mixinenhance.client.DynamicLightHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.LightCoordsUtil;
@@ -24,7 +24,7 @@ public class LightCoordsUtilMixin {
         cancellable = true
     )
     private static void addDynamicLight(LightCoordsUtil.BrightnessGetter getter, BlockAndLightGetter level, BlockState state, BlockPos pos, CallbackInfoReturnable<Integer> cir) {
-        if (!MixinEnhanceClient.getConfig().playerConfig.enableDynamicLight) {
+        if (!MixinEnhanceConfig.get().playerConfig.enableDynamicLight) {
             return;
         }
 
